@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>LilCTF2025-crypto个人wp | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>LilCTF2025-crypto个人wp</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/7/30
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #00bcd4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #03a9f4">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #ffa2c4">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="LilCTF2025-crypto个人wp"><a href="#LilCTF2025-crypto个人wp" class="headerlink" title="LilCTF2025-crypto个人wp"></a>LilCTF2025-crypto个人wp</h1><h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Liner"><a href="#Liner" class="headerlink" title="Liner"></a>Liner</h3><pre><code>import os
+import random
+import signal
+
+signal.alarm(10)
+
+flag = os.getenv(&quot;LILCTF_FLAG&quot;, &quot;LILCTF&#123;default&#125;&quot;)
+
+nrows = 16
+ncols = 32
+
+A = [[random.randint(1, 1919810) for _ in range(ncols)] for _ in range(nrows)]
+x = [random.randint(1, 114514) for _ in range(ncols)]
+
+b = [sum(A[i][j] * x[j] for j in range(ncols)) for i in range(nrows)]
+print(A)
+print(b)
+
+xx = list(map(int, input(&quot;Enter your solution: &quot;).strip().split()))
+if xx != x:
+    print(&quot;Oh, your linear algebra needs to be practiced.&quot;)
+else:
+    print(&quot;Bravo! Here is your flag:&quot;)
+    print(flag)
+</code></pre><p>就是求$Ax=b$方程的x，官方wp的思路是，找到Ax的左核，Ax的左核就是b的左核，就是$ker(Ax)=ker(b)$,$ker(b)Ax=O$,这样x就是ker(b)A的右核，使用LLL算法规约最短向量就是</p>
+<p>举个例子比如：</p>
+<script type="math/tex; mode=display">
+A = \begin{bmatrix}
+2 & 3 \\
+5 & 7
+\end{bmatrix}，b=\begin{bmatrix}
+1 \\
+4
+\end{bmatrix}</script><p>找到所有$y=(y_1,y_2)$,$y_1<em>1+y_2</em>4=0$,比如y=(4,-1)</p>
+<p>找出A的左核空间$y^T$,并计算$y^TA=4<em>(2,3)-1</em>(5,7)=(8,12)-(5,7)=(3,5)$,</p>
+<p>$(3,5)x=0$,$3x_1+5x_2=0$,然后使用LLL向量找到最短的x=(5,-3)或(-5,3)</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><pre><code>from pwn import *
+from sage.all import *
+
+conn = process([&quot;python3&quot;, &quot;task.py&quot;])
+A = eval(conn.recvline().decode().strip())
+b = eval(conn.recvline().decode().strip())
+
+A = Matrix(ZZ, A)
+b = Matrix(ZZ, b).T
+
+ker_b = b.kernel().basis_matrix()
+A = ker_b*A
+ker_A = A.transpose().kernel().basis_matrix()
+ker_A = ker_A.LLL()
+
+solution = [abs(int(i)) for i in ker_A[0]]
+conn.sendline(&#39; &#39;.join(map(str, solution)).encode())
+conn.recvline()
+flag = conn.recvline().decode(&#39;utf-8&#39;).strip()
+print(flag)
+
+conn.close()
+</code></pre><p>我自己解的思路是这样的，</p>
+<p>采用增广矩阵解线性方程,引入s表示b的系数，那么式子将会是</p>
+<script type="math/tex; mode=display">
+[A|b][x_1,x_2,...,x_{32},s]^T=0</script><script type="math/tex; mode=display">
+A[x_1,x_2,...,x_{32}]+b*s=0</script><script type="math/tex; mode=display">
+A*x'+b*s=0</script><p>增广矩阵的右零空间是</p>
+<script type="math/tex; mode=display">
+[x_1,x_2,...x_{32},s]</script><p>存在等式</p>
+<script type="math/tex; mode=display">
+A(\frac{x}{-s})=b</script><p>所以我们要求的解$x=-\frac{x}{s}$,所以要求我们在零空间找到一个向量满足s不等于0，并且x/-s 在[1,114514]区间</p>
+<p>我们对右零空间BKZ规约找到范数小的右零空间，得到短向量就可以求解了</p>
+<h4 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h4><pre><code>from sage.all import *
+from Pwn4Sage.pwn import remote
+import ast
+import time
+
+def solve_problem():
+    # 建立网络连接
+    try:
+        connection_str = f&quot;[+] 连接到服务器: challenge.xinshi.fun:43767&quot;
+        print(connection_str)
+        network_io = remote(&quot;challenge.xinshi.fun&quot;, 43767)
+    except Exception as connection_error:
+        print(f&quot;[-] 连接错误: &#123;connection_error&#125;&quot;)
+        return
+
+    # 获取输入数据
+    try:
+        recv_data = network_io.recvuntil(b&quot;Enter your solution:&quot;).decode().split(&#39;\n&#39;)
+        print(&quot;[+] 接收数据完成:&quot;)
+        print(recv_data)
+    except Exception as recv_error:
+        print(f&quot;[-] 数据接收异常: &#123;recv_error&#125;&quot;)
+        network_io.close()
+        return
+
+    # 矩阵向量解析
+    try:
+        coefficient_matrix = matrix(ZZ, ast.literal_eval(recv_data[0].strip()))
+        target_vector = vector(ZZ, ast.literal_eval(recv_data[1].strip()))
+        print(&quot;[+] 系数矩阵和向量解析成功&quot;)
+        print(f&quot;[+] 系数矩阵: &#123;coefficient_matrix&#125;&quot;)
+        print(f&quot;[+] 目标向量: &#123;target_vector&#125;&quot;)
+    except Exception as parse_error:
+        print(f&quot;[-] 解析错误: &#123;parse_error&#125;&quot;)
+        network_io.close()
+        return
+
+    # 构造增广矩阵
+    augmented_mat = coefficient_matrix.augment(target_vector, subdivide=True)
+
+    # 计算零空间
+    start_timer = time.time()
+    nullspace = augmented_mat.right_kernel()
+    print(f&quot;[+] 零空间维度: &#123;nullspace.dimension()&#125;&quot;)
+    print(f&quot;[+] 零空间计算耗时: &#123;time.time() - start_timer&#125; 秒&quot;)
+
+    if nullspace.dimension() == 0:
+        print(&quot;[-] 零空间为空&quot;)
+        network_io.close()
+        return
+
+    # 基约简过程
+    base_vectors = matrix(ZZ, nullspace.basis())
+    start_timer = time.time()
+    reduced_base = base_vectors.BKZ(block_size=30)  # BKZ参数设置
+    print(f&quot;[+] 基约简耗时: &#123;time.time() - start_timer&#125; 秒&quot;)
+
+    # 搜索最优解向量
+    best_norm_value = None
+    optimal_vector = None
+    for current_vec in reduced_base:
+        constant_term = current_vec[-1]  # 最后一项是常数项
+        if constant_term == 0:
+            continue
+        norm_value = current_vec.norm()
+        print(f&quot;[+] 向量检查: &#123;current_vec&#125;, 范数: &#123;norm_value&#125;, 常数项: &#123;constant_term&#125;&quot;)
+        if best_norm_value is None or norm_value &lt; best_norm_value:
+            best_norm_value = norm_value
+            optimal_vector = current_vec
+
+    if optimal_vector is None:
+        print(&quot;[-] 未发现有效解向量&quot;)
+        network_io.close()
+        return
+
+    # 计算特解
+    scalar = optimal_vector[-1]
+    solution_vector = (-vector(optimal_vector[:-1])).apply_map(lambda element: element / scalar)
+
+    # 验证解
+    print(f&quot;[+] 计算解: &#123;solution_vector&#125;&quot;)
+    if coefficient_matrix * solution_vector == target_vector:
+        print(&quot;[+] 解验证通过&quot;)
+        # 检查范围约束
+        int_solution = [int(num) for num in solution_vector]
+        if all(1 &lt;= val &lt;= 114514 for val in int_solution):
+            print(&quot;[+] 解满足约束条件&quot;)
+            # 格式化输出
+            solution_str = &quot; &quot;.join(map(str, int_solution))
+            print(f&quot;[+] 提交解: &#123;solution_str&#125;&quot;)
+            try:
+                network_io.sendline(solution_str.encode())
+                # 获取响应
+                server_response = &quot;&quot;
+                response_timer = time.time()
+                while time.time() - response_timer &lt; 5:
+                    data_chunk = network_io.recv(4096).decode()
+                    if not data_chunk:
+                        break
+                    server_response += data_chunk
+                print(&quot;[+] 服务端响应:&quot;, server_response)
+            except Exception as io_error:
+                print(f&quot;[-] 通信错误: &#123;io_error&#125;&quot;)
+        else:
+            print(&quot;[-] 解超出允许范围&quot;)
+    else:
+        print(&quot;[-] 解验证失败&quot;)
+
+    network_io.close()
+
+if __name__ == &quot;__main__&quot;:
+    solve_problem()
+#LILCTF&#123;9344030e-7ce1-4f31-bf82-5627b4fe8765&#125;
+</code></pre><p>还有一种方法，就是<a target="_blank" rel="noopener" href="https://seandictionary.top/lilctf-2025/">LilCTF 2025 - SeanDictionary | 折腾日记</a>用背包密码解法</p>
+<pre><code>from fpylll import IntegerMatrix, LLL, FPLLL
+from Crypto.Util.number import *
+import random
+from pwn import *
+import ast
+
+# import re
+
+
+def process_matrices(matrix1, matrix2):
+    nrows = 16
+    ncols = 32
+
+    # A = [[random.randint(1, 1919810) for _ in range(ncols)] for _ in range(nrows)]
+    # x = [random.randint(1, 114514) for _ in range(ncols)]
+    # b = [sum(A[i][j] * x[j] for j in range(ncols)) for i in range(nrows)]
+    A = matrix1
+    b = matrix2
+    K = 1000000
+
+    # print(f&quot;A = &#123;A&#125;&quot;)
+    # print(f&quot;b = &#123;b&#125;&quot;)
+    # print(f&quot;x = &#123;x&#125;&quot;)
+    dim = nrows + ncols
+
+    M = IntegerMatrix(dim, dim)
+
+    for i in range(ncols):
+        M[i, i] = 1
+        for j in range(nrows):
+            M[i, ncols + j] = A[j][i] * K
+
+    for j in range(nrows):
+        M[ncols, ncols + j] = -b[j] * K
+
+    L = LLL.reduction(M)
+
+    for line in M:
+        line = list(line)
+        if all(x == 0 for x in line[ncols:]) and all(x != 0 for x in line[:ncols]):
+            # print(f&quot;x = &#123;line[:ncols]&#125;&quot;)
+            return line[:ncols]
+
+
+def parse_matrix(matrix_str):
+    &quot;&quot;&quot;将字符串形式的矩阵解析为二维列表&quot;&quot;&quot;
+    # 去除空行并分割每行
+    lines = [line.strip() for line in matrix_str.strip().split(&quot;\n&quot;) if line.strip()]
+    # 分割每行元素并转换为整数
+    return [list(map(int, line.split())) for line in lines]
+
+
+def format_matrix(matrix):
+    &quot;&quot;&quot;将二维列表格式化为字符串形式的矩阵&quot;&quot;&quot;
+    return &quot;\n&quot;.join([&quot; &quot;.join(map(str, row)) for row in matrix]) + &quot;\n&quot;
+
+
+def main():
+    # 配置连接信息
+    host = &quot;challenge.xinshi.fun&quot;  # 替换为目标主机地址
+    port = 42749  # 替换为目标端口
+
+    # 建立连接
+    try:
+        io = remote(host, port)
+        print(f&quot;成功连接到 &#123;host&#125;:&#123;port&#125;&quot;)
+    except Exception as e:
+        print(f&quot;连接失败: &#123;e&#125;&quot;)
+        return
+
+    try:
+        # io.interactive()
+        # 接收第一个矩阵
+        print(&quot;接收第一个矩阵...&quot;)
+        matrix1_str = io.recvline().decode().strip()
+        matrix1 = ast.literal_eval(matrix1_str)
+
+        # 接收第二个矩阵
+        print(&quot;接收第二个矩阵...&quot;)
+        matrix2_str = io.recvline().decode().strip()
+        matrix2 = ast.literal_eval(matrix2_str)
+
+        # 等待服务器提示
+        print(io.recvuntil(&quot;:&quot;).decode().strip())
+
+        # 处理矩阵
+        print(&quot;处理矩阵中...&quot;)
+        result_matrix = process_matrices(matrix1, matrix2)
+        print(result_matrix)
+
+        # 发送结果矩阵
+        print(&quot;发送结果矩阵...&quot;)
+        result_str = &quot; &quot;.join(map(str, result_matrix))
+        io.sendline(result_str.encode())
+
+        # 等待服务器提示
+        print(io.recvline())
+        io.interactive()
+
+        # 可以根据需要接收服务器的响应
+        # response = p.recvall().decode()
+        # print(f&quot;服务器响应: &#123;response&#125;&quot;)
+
+    except Exception as e:
+        print(f&quot;处理过程中出错: &#123;e&#125;&quot;)
+    finally:
+        # 关闭连接
+        io.close()
+        print(&quot;\n连接已关闭&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre><h3 id="mid-math"><a href="#mid-math" class="headerlink" title="mid_math"></a>mid_math</h3><pre><code>from sage.all import *
+from Crypto.Util.number import *
+
+flag = b&#39;LILCTF&#123;test_flag&#125;&#39;[7:-1]
+lambda1 = bytes_to_long(flag[:len(flag)//2])
+lambda2 = bytes_to_long(flag[len(flag)//2:])
+p = getPrime(512)
+def mul(vector, c):
+    return [vector[0]*c, vector[1]*c]
+
+v1 = [getPrime(128), getPrime(128)]
+v2 = [getPrime(128), getPrime(128)]
+
+A = matrix(GF(p), [v1, v2])
+B = matrix(GF(p), [mul(v1,lambda1), mul(v2,lambda2)])
+C = A.inverse() * B
+
+print(f&#39;p = &#123;p&#125;&#39;)
+print(f&#39;C = &#123;str(C).replace(&quot; &quot;, &quot;,&quot;).replace(&quot;\n&quot;, &quot;,&quot;).replace(&quot;[,&quot;, &quot;[&quot;)&#125;&#39;)
+</code></pre><script type="math/tex; mode=display">
+D=diag(\lambda_1,\lambda_2)</script><script type="math/tex; mode=display">
+C=A^{-1}B=A^{-1}DA</script><p>所以C和D相似，所以它们的特征值相等，所以求C的特征值就是flag</p>
+<h3 id="mid-math-1"><a href="#mid-math-1" class="headerlink" title="mid_math"></a>mid_math</h3><p>task.py</p>
+<pre><code>from sage.all import *
+from Crypto.Util.number import *
+from tqdm import tqdm
+from random import randint
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+
+flag = b&#39;LILCTF&#123;test_flag&#125;&#39;
+
+p = getPrime(64)
+P = GF(p)
+
+key = randint(2**62, p)
+
+def mul(vector, c):
+    return [vector[0]*c, vector[1]*c, vector[2]*c, vector[3]*c, vector[4]*c]
+
+v1 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]
+v2 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]
+v3 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]
+v4 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]
+v5 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]
+a, b, c, d, e = getPrime(64), getPrime(64), getPrime(64), getPrime(64),  0
+
+A = matrix(P, [v1, v2, v3, v4, v5])
+B = matrix(P, [mul(v1,a), mul(v2,b), mul(v3, c), mul(v4, d), mul(v5, e)])
+C = A.inverse() * B
+D = C**key
+
+key = pad(long_to_bytes(key), 16)
+aes = AES.new(key,AES.MODE_ECB)
+msg = aes.encrypt(pad(flag, 64))
+
+print(f&quot;p = &#123;p&#125;&quot;)
+print(f&#39;C = &#123;[i for i in C]&#125;&#39;.replace(&#39;(&#39;, &#39;[&#39;).replace(&#39;)&#39;, &#39;]&#39;))
+print(f&#39;D = &#123;[i for i in D]&#125;&#39;.replace(&#39;(&#39;, &#39;[&#39;).replace(&#39;)&#39;, &#39;]&#39;))
+print(f&quot;msg = &#123;msg&#125;&quot;)
+
+#p = 14668080038311483271
+#C = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]
+#D = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]
+#msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#39;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;
+</code></pre><p>和ez_math一样，只不过这里增加了$D=C^{key}$，也就是矩阵的离散对数问题</p>
+<h4 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h4><pre><code># 文件名: calculate_keys.sage
+# 运行方式: sage calculate_keys.sage
+from sage.all import *
+
+# --- 已知信息 ---
+p = 14668080038311483271
+C_list = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]
+D_list = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]
+
+# 1. 设置 SageMath 的有限域和矩阵
+P = GF(p)
+C_mat = matrix(P, C_list)
+D_mat = matrix(P, D_list)
+
+print(&quot;[SAGE] 正在计算矩阵 C 和 D 的特征值...&quot;)
+# 2. 计算特征值并过滤掉 0
+C_eigenvalues = [v for v in C_mat.eigenvalues() if v != 0]
+D_eigenvalues = [v for v in D_mat.eigenvalues() if v != 0]
+
+print(f&quot;[SAGE] C 的非零特征值: &#123;C_eigenvalues&#125;&quot;)
+print(f&quot;[SAGE] D 的非零特征值: &#123;D_eigenvalues&#125;&quot;)
+
+# 3. 遍历所有可能的特征值配对，求解离散对数
+potential_keys = set() # 使用集合来自动去重
+for c_eig in C_eigenvalues:
+    for d_eig in D_eigenvalues:
+        try:
+            # 求解离散对数: d_eig = c_eig ^ key
+            key_candidate = d_eig.log(c_eig)
+            potential_keys.add(int(key_candidate))
+        except (ValueError, TypeError):
+            # 如果配对不正确，log 会失败
+            continue
+ # 文件名: decrypt_flag.py
+# 运行方式: python decrypt_flag.py
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+from Crypto.Util.number import long_to_bytes
+
+# --- 已知信息 ---
+msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#39;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;
+
+# --- 开始解密 ---
+print(&quot;[PYTHON] 开始尝试使用候选 Key 进行解密...&quot;)
+found = False
+for key_int in potential_keys:
+    try:
+        print(f&quot;\n[*] 正在尝试 Key: &#123;key_int&#125;&quot;)
+
+        # 1. 准备 AES 密钥
+        aes_key = pad(long_to_bytes(key_int), 16)
+
+        # 2. 创建解密器并解密
+        cipher = AES.new(aes_key, AES.MODE_ECB)
+        decrypted_padded = cipher.decrypt(msg)
+
+        # 3. 反填充
+        # 原始脚本使用 pad(flag, 64)，所以 unpad 时 block_size 也是 64
+        decrypted = unpad(decrypted_padded, 64)
+
+        # 4. 验证解密结果
+        if decrypted.startswith(b&#39;LILCTF&#123;&#39;):
+            print(&quot;\n&quot; + &quot;=&quot;*50)
+            print(f&quot;[SUCCESS] 找到正确的 Key: &#123;key_int&#125;&quot;)
+            print(f&quot;[SUCCESS] 解密成功! Flag 是: &#123;decrypted.decode()&#125;&quot;)
+            print(&quot;=&quot;*50)
+            found = True
+            break
+        else:
+            print(f&quot;[-] 解密内容不正确: &#123;decrypted&#125;&quot;)
+
+    except Exception as e:
+        # 可能是 unpad 错误，说明 key 不正确
+        print(f&quot;[-] 解密或反填充失败: &#123;e&#125;&quot;)
+        continue
+
+if not found:
+    print(&quot;\n[FAIL] 遍历了所有候选 Key，但未能解密 Flag。&quot;)
+</code></pre><p>后面发现还是做麻烦了</p>
+<p>直接使用矩阵DLP板子</p>
+<pre><code>from Crypto.Util.number import *
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+
+p = 14668080038311483271
+C = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]
+D = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]
+msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#39;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;
+n = 5
+
+
+G = matrix(GF(p), n, n, C)
+H = matrix(GF(p), n, n, D)
+
+G_Jor, P = G.jordan_form(transformation=True)
+H_Jor = ~P * H * P
+
+
+print(G_Jor, H_Jor)
+key = discrete_log(H_Jor[1][1], G_Jor[1][1], p-1)
+key = pad(long_to_bytes(key), 16)
+aes = AES.new(key,AES.MODE_ECB)
+flag = aes.decrypt(pad(msg, 64))
+print(flag)
+# b&#39;LILCTF&#123;Are_y0u_5till_4wake_que5t1on_m4ker!&#125;\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b&#39;
+</code></pre><h3 id="Space-Travel"><a href="#Space-Travel" class="headerlink" title="Space Travel"></a>Space Travel</h3><p>task.py</p>
+<pre><code>from Crypto.Cipher import AES
+from hashlib import md5
+from params import vecs
+from os import urandom
+
+key = int(&quot;&quot;.join([vecs[int.from_bytes(urandom(2)) &amp; 0xfff] for _ in range(50)]), 2)
+
+print(&quot;🎁 :&quot;, [[nonce := int(urandom(50*2).hex(), 16), (bin(nonce &amp; key).count(&quot;1&quot;)) % 2] for _ in range(600)])
+print(&quot;🚩 :&quot;, AES.new(key=md5(str(key).encode()).digest(), nonce=b&quot;Tiffany&quot;, mode=AES.MODE_CTR).encrypt(open(&quot;flag.txt&quot;, &quot;rb&quot;).read()))
+</code></pre><p>还没弄懂..</p>
+<hr>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
