@@ -1,170 +1,693 @@
-<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Ink's blog</title><meta name="author" content="Ink Lin"><meta name="copyright" content="Ink Lin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="Ink&#39;s blog">
-<meta property="og:url" content="https://ink5725.github.io/index.html">
-<meta property="og:site_name" content="Ink&#39;s blog">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ink5725.github.io/img/butterfly-icon.png">
-<meta property="article:author" content="Ink Lin">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ink5725.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Ink's blog",
-  "alternateName": [
-    "ink5725.github.io"
-  ],
-  "url": "https://ink5725.github.io/"
-}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ink5725.github.io/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
+<!DOCTYPE html>
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+
+<html lang="en">
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
-
-      const theme = saveToLocal.get('theme')
-    
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+    <head>
+      <meta charset="utf-8" />
         
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> Ink&#39;s blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
       
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
     
       
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Ink&#39;s blog</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
     }
-    detectApple()
+  </script>
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: 'Copy Successful',
-    error: 'Copy Failed',
-    noSupport: 'Browser Not Supported'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: 'Just now',
-    min: 'minutes ago',
-    hour: 'hours ago',
-    day: 'days ago',
-    month: 'months ago'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: 'Load More'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'Ink\'s blog',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
-</head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Ink's blog</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Ink's blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/12/NepCTF2025-%E4%B8%AA%E4%BA%BAwriteup/" title="Untitled">Untitled</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-11T16:56:34.054Z" title="Created 2025-09-12 00:56:34">2025-09-12</time></span></div><div class="content">NepCTF2025-个人writeupCryptoezRSA2task.py 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253from Crypto.Util.number import getStrongPrime, getRandomNBitInteger, GCD, inverse, long_to_bytes, bytes_to_long, sieve_basefrom flag import flagdef gen_parameters(gamma=0.33, beta=0.33):    p = getStrongPrime(1024)    q = getStrongPrime(1024)    N = p*q    phi = (p-1)*(q-1)    while True:        d = getRandomNBitInteger(int(2048*beta))        if GCD(d, phi) ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/12/LilCTF2025_/" title="Untitled">Untitled</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-11T16:55:56.817Z" title="Created 2025-09-12 00:55:56">2025-09-12</time></span></div><div class="content">LilCTF2025-crypto个人wpCryptoLiner12345678910111213141516171819202122232425import osimport randomimport signalsignal.alarm(10)flag = os.getenv(&quot;LILCTF_FLAG&quot;, &quot;LILCTF&#123;default&#125;&quot;)nrows = 16ncols = 32A = [[random.randint(1, 1919810) for _ in range(ncols)] for _ in range(nrows)]x = [random.randint(1, 114514) for _ in range(ncols)]b = [sum(A[i][j] * x[j] for j in range(ncols)) for i in range(nrows)]print(A)print(b)xx = list(map(int, input(&quot;Enter your solution: &quot...</div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Ink Lin</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/12/NepCTF2025-%E4%B8%AA%E4%BA%BAwriteup/" title="Untitled">Untitled</a><time datetime="2025-09-11T16:56:34.054Z" title="Created 2025-09-12 00:56:34">2025-09-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/12/LilCTF2025_/" title="Untitled">Untitled</a><time datetime="2025-09-11T16:55:56.817Z" title="Created 2025-09-12 00:55:56">2025-09-12</time></div></div></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>Archives</span>
+<div id="main">
+  <section class="outer">
+  
+  <ul class="ads">
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://curl.qcloud.com/kvO7hb43">
+                <img src="https://pic.imgdb.cn/item/62174b452ab3f51d912a5ccc.jpg" width="300" alt="云服务器限时秒杀">
+            </a>
+        </li>
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8630075">
+                <img src="https://pic.imgdb.cn/item/62174b452ab3f51d912a5cd7.png" width="300" alt="vultr优惠vps">
+            </a>
+        </li>
+    
+</ul>
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-NepCTF2025-个人writeup"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2025/09/12/NepCTF2025-%E4%B8%AA%E4%BA%BAwriteup/" class="article-date">
+  <time datetime="2025-09-11T16:56:34.054Z" itemprop="datePublished">2025-09-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="NepCTF2025-个人writeup"><a href="#NepCTF2025-个人writeup" class="headerlink" title="NepCTF2025-个人writeup"></a>NepCTF2025-个人writeup</h1><h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="ezRSA2"><a href="#ezRSA2" class="headerlink" title="ezRSA2"></a>ezRSA2</h3><p>task.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import getStrongPrime, getRandomNBitInteger, GCD, inverse, long_to_bytes, bytes_to_long, sieve_base</span><br><span class="line">from flag import flag</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def gen_parameters(gamma=0.33, beta=0.33):</span><br><span class="line">    p = getStrongPrime(1024)</span><br><span class="line">    q = getStrongPrime(1024)</span><br><span class="line">    N = p*q</span><br><span class="line">    phi = (p-1)*(q-1)</span><br><span class="line">    while True:</span><br><span class="line">        d = getRandomNBitInteger(int(2048*beta))</span><br><span class="line">        if GCD(d, phi) == 1:</span><br><span class="line">            break</span><br><span class="line">    e = inverse(d, phi)</span><br><span class="line">    </span><br><span class="line">    hints = []</span><br><span class="line">    M = 1</span><br><span class="line">    for i in range(1, len(sieve_base)):</span><br><span class="line">        li = sieve_base[i]</span><br><span class="line">        hints.append(d%li)</span><br><span class="line">        M *= li</span><br><span class="line">        if M.bit_length() &gt;= 1024*gamma:</span><br><span class="line">            break</span><br><span class="line">    </span><br><span class="line">    return e, N, hints</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    e,N,hints = gen_parameters()</span><br><span class="line">    print(f&#x27;e=&#123;hex(e)&#125;&#x27;)</span><br><span class="line">    print(f&#x27;N=&#123;hex(N)&#125;\n&#x27;)</span><br><span class="line">    print(f&#x27;hints=&#123;hints&#125;\n&#x27;)</span><br><span class="line">    </span><br><span class="line">    flag_prefix = b&#x27;NepCTF&#123;&#x27;</span><br><span class="line">    assert flag.startswith(flag_prefix)</span><br><span class="line">    assert flag.endswith(b&#x27;&#125;&#x27;)</span><br><span class="line">    </span><br><span class="line">    pt = bytes_to_long(flag[len(flag_prefix):-1])</span><br><span class="line">    ct = pow(pt, e, N)</span><br><span class="line">    print(f&#x27;ct=&#123;hex(ct)&#125;&#x27;)</span><br><span class="line">    </span><br><span class="line">main()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">e=0x73915608ed64c9cf1a2279684cab4f4a78fba229d45d4f860971a241481363470a19cb0dc0d00f816b5befdaca017cf71483e96ef17b36179012f5194a0e6bf481bb06c2644f74c6812efb65d05c00631f282d6aa55c0bc140a1830b95a1cf4b6024cb0db53f2c2189897c41f22e2eec773723f531ec4bfa537fae6de5fe480cf46fe17850f7eb47df08194d95db3d26ac923b26e110ee645239ab586bbc546ddc5906f280a106edbb727ccb05536b5a3f5c0ebcf865c95ce58be54f7f3547aa53baa218b0dfa98e42d925fa341e45f94a3b16b0c83802660c7f34de3336cb21f219073cf8e9f5e39d47f0a9a9ee7c255f09a6add9a2f7a47960f4a853183d29</span><br><span class="line">N=0xba8956e81394f3f1265ca5d9c4ad1ab0078bb43c4b80a231ab2cc62246ae45f66a562252622aed2cbbfc08647ef2fec0f97a632bf2242845f4b3af0c427cec3d90f42e90278a5a0feeed0922a8cd2278074ac54e9cfc0e96ff68f8d8f266dd87dc1cc59c2895ec884de2022311767f6a9a7e0bd288c79620e28b83bb3c8d8ad1047c839d6ccf5544eaf434a5f00b951769ab3121298d04b63a162757beb3d49917cd0c9e02ee1ac29398c8130961d5a2f2833aba1e538edb7bb97071f40fae543d1622f0c9206c6d4d8abb2ac1b93ebfb603c2f3a909ede357ade4043550fe540d13a4e87db8d731fe130f15a43a1a00364f5da2d87f7b660c3a04e734218a11</span><br><span class="line"></span><br><span class="line">hints=[1, 3, 0, 3, 9, 16, 10, 14, 5, 11, 21, 18, 30, 30, 38, 2, 20, 62, 66, 1, 22, 56, 41, 13, 78, 59, 51, 6, 57, 117, 73, 75, 96, 112, 50, 93, 158, 97, 146, 8, 65, 96, 186, 161, 90, 131, 46, 32, 140, 133, 50, 43, 151, 234]</span><br><span class="line"></span><br><span class="line">ct=0x101b284ad196b5bbd3d3df00a7d3577caeb29c681bdd122582b705afc671febf45d4f3786640e55aadd6a31ecc49175f97b772720f1735f8555f768b137a4643cd6958f80a3dfca4d0270ad463d6dde93429940bd2abb5ad8408b0906fa8d776544a1c50cc0d95939bef4c3fb64d0b52dca81ff0f244fc265bfc0bc147435d05f8f1a146e963a1403b3c123b4d6e73d1fd897109995009be1673212607f0ea7ae33d23f3158448b05c28ea6636382eee9436c4a6c09023ead7182ecd55ac73a68d458d726e1abc208810468591e63f4b4c2c1f3ce27c4800b52f7421ccab432c03e88b3b255740d719e40e0226eabb7633d97ed210e32071e2ac36ed17ef442e</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>这里可以采用中国剩余定理求出d的低位，设为$d_0$</p>
+<script type="math/tex; mode=display">
+d_0=d\ mod\ M</script><p>即</p>
+<script type="math/tex; mode=display">
+d=k_0M+d_0</script><script type="math/tex; mode=display">
+e(k_0M+d_0)=1+k(N+1-(p+q))</script><p>设r=p+q</p>
+<p>所以</p>
+<script type="math/tex; mode=display">
+k_0eM+ed_0-k(N+1)=1-kr</script><p>使用Wiener攻击的格构造思想，这里我们是构造三维格</p>
+<p>我们对于规约的目标总是希望它位数小的,所以造格</p>
+<script type="math/tex; mode=display">
+(k_0 \quad 1 \quad -k )
+\begin{pmatrix}
+X_1 & 0  & eM \\
+0 & X_2 & ed_0 \\
+0 & 0&  N+1
+\end{pmatrix}
+= (1-kr\quad X_2\quad k_0X_1)</script><p>我们要让v的各个分量位数一致，比如$X_2$,我们的r应该是1025位，根据等式$ed=1+k*phi$测算了一下e是2047位，而d是675位，所以k大概是675位，所以$X_2=2^{1025+675}$,$X_1=2^{1025+675-(675-341)}=2^{1366}$</p>
+<p>算了一下$|v|=2^{1701}$,而$det(L)^{\frac{1}{3}}=2^{1716}$</p>
+<p>满足海默尔定理</p>
+<p>试了一下，X1是要1360才会输出正确字符串</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">e=0x73915608ed64c9cf1a2279684cab4f4a78fba229d45d4f860971a241481363470a19cb0dc0d00f816b5befdaca017cf71483e96ef17b36179012f5194a0e6bf481bb06c2644f74c6812efb65d05c00631f282d6aa55c0bc140a1830b95a1cf4b6024cb0db53f2c2189897c41f22e2eec773723f531ec4bfa537fae6de5fe480cf46fe17850f7eb47df08194d95db3d26ac923b26e110ee645239ab586bbc546ddc5906f280a106edbb727ccb05536b5a3f5c0ebcf865c95ce58be54f7f3547aa53baa218b0dfa98e42d925fa341e45f94a3b16b0c83802660c7f34de3336cb21f219073cf8e9f5e39d47f0a9a9ee7c255f09a6add9a2f7a47960f4a853183d29</span><br><span class="line">N=0xba8956e81394f3f1265ca5d9c4ad1ab0078bb43c4b80a231ab2cc62246ae45f66a562252622aed2cbbfc08647ef2fec0f97a632bf2242845f4b3af0c427cec3d90f42e90278a5a0feeed0922a8cd2278074ac54e9cfc0e96ff68f8d8f266dd87dc1cc59c2895ec884de2022311767f6a9a7e0bd288c79620e28b83bb3c8d8ad1047c839d6ccf5544eaf434a5f00b951769ab3121298d04b63a162757beb3d49917cd0c9e02ee1ac29398c8130961d5a2f2833aba1e538edb7bb97071f40fae543d1622f0c9206c6d4d8abb2ac1b93ebfb603c2f3a909ede357ade4043550fe540d13a4e87db8d731fe130f15a43a1a00364f5da2d87f7b660c3a04e734218a11</span><br><span class="line">ct=0x101b284ad196b5bbd3d3df00a7d3577caeb29c681bdd122582b705afc671febf45d4f3786640e55aadd6a31ecc49175f97b772720f1735f8555f768b137a4643cd6958f80a3dfca4d0270ad463d6dde93429940bd2abb5ad8408b0906fa8d776544a1c50cc0d95939bef4c3fb64d0b52dca81ff0f244fc265bfc0bc147435d05f8f1a146e963a1403b3c123b4d6e73d1fd897109995009be1673212607f0ea7ae33d23f3158448b05c28ea6636382eee9436c4a6c09023ead7182ecd55ac73a68d458d726e1abc208810468591e63f4b4c2c1f3ce27c4800b52f7421ccab432c03e88b3b255740d719e40e0226eabb7633d97ed210e32071e2ac36ed17ef442e</span><br><span class="line">hints = [1, 3, 0, 3, 9, 16, 10, 14, 5, 11, 21, 18, 30, 30, 38, 2, 20, 62, 66, 1, 22, 56, 41, 13, 78, 59, 51, 6, 57, 117, 73, 75, 96, 112, 50, 93, 158, 97, 146, 8, 65, 96, 186, 161, 90, 131, 46, 32, 140, 133, 50, 43, 151, 234]</span><br><span class="line">d0 = CRT(hints, list(sieve_base)[1:len(hints)+1])</span><br><span class="line">M = prod(list(sieve_base)[1:len(hints)+1])</span><br><span class="line">print(d0)</span><br><span class="line">X1 = 2 ** 1360</span><br><span class="line">X2 = 2 ** 1700</span><br><span class="line">G = Matrix(ZZ, 3, 3)</span><br><span class="line">G[0, 0] = K1</span><br><span class="line">G[1, 1] = K2</span><br><span class="line">G[0, 2] = e*M</span><br><span class="line">G[1, 2] = e*d0</span><br><span class="line">G[2, 2] = N+1</span><br><span class="line">L = G.BKZ()</span><br><span class="line">for row in L:</span><br><span class="line">    d = d0 + row[0]//X1*tmp</span><br><span class="line">    print(int(d).bit_length(), row[1]==X2)</span><br><span class="line">    if int(d).bit_length() == int(2048*0.33):</span><br><span class="line">        m = pow(ct, d, N)</span><br><span class="line">        print(long_to_bytes(int(m)))</span><br></pre></td></tr></table></figure>
+<h3 id="latticebros"><a href="#latticebros" class="headerlink" title="latticebros"></a>latticebros</h3><p>task.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#已知α的极小多项式为三次多项式f(x),即f(α)=0,且α≈54236.606188881754809671280151541781895183337725393</span><br><span class="line">#上述极小多项式的常数项为a0</span><br><span class="line"></span><br><span class="line">from secret import a0,alpha</span><br><span class="line">import gmpy2</span><br><span class="line">from Crypto.Util.number import long_to_bytes</span><br><span class="line">import random</span><br><span class="line">from math import sqrt,log2</span><br><span class="line"></span><br><span class="line">d=981020902672546902438782010902608140583199504862558032616415</span><br><span class="line">p = d - a0</span><br><span class="line"></span><br><span class="line">k=sqrt(log2(p))+log2(log2(p))</span><br><span class="line">B = 2**30</span><br><span class="line">assert B &lt; p/2**k</span><br><span class="line"></span><br><span class="line">m = 30</span><br><span class="line">assert m &gt; 2*sqrt(log2(p))</span><br><span class="line"></span><br><span class="line">samples = []</span><br><span class="line">betas = []</span><br><span class="line"></span><br><span class="line">f = open(&quot;samples.txt&quot;,&#x27;w&#x27;)</span><br><span class="line">for _ in range(m):</span><br><span class="line">    t = random.randint(1, p-1)</span><br><span class="line">    beta = random.randint(-B + 1, B - 1)</span><br><span class="line">    a = (t * alpha - beta) % p</span><br><span class="line">    samples.append((t, a))</span><br><span class="line">    betas.append(beta)</span><br><span class="line"></span><br><span class="line">f.write(str(samples))</span><br><span class="line"></span><br><span class="line">for i in range(0,30):</span><br><span class="line">    assert (betas[i]-samples[i][0]*alpha+samples[i][1])%p == 0</span><br><span class="line"></span><br><span class="line">#flag = long_to_bytes(alpha)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>首先是这行注释</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#已知α的极小多项式为三次多项式f(x),即f(α)=0,且α≈54236.606188881754809671280151541781895183337725393</span><br><span class="line">#上述极小多项式的常数项为a0</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://eprint.iacr.org/2023/032">https://eprint.iacr.org/2023/032</a></p>
+<p>这里就是一个极小多项式的问题，这个可以求出a0,从而求出p</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from sage.all import *</span><br><span class="line">from Crypto.Util.number import long_to_bytes</span><br><span class="line">#step1 求a0</span><br><span class="line">beta = 54236.606188881754809671280151541781895183337725393</span><br><span class="line"># 构造基矩阵</span><br><span class="line">M = matrix(ZZ, [[10**50, 1, 0, 0], [10**50 * beta, 0, 1, 0],</span><br><span class="line">[10**50 * beta ^ 2, 0, 0, 1], [10**50 * beta ^ 3, 0, 0, 0]])</span><br><span class="line">M_reduced = M.LLL()</span><br><span class="line">a0, a1, a2 = M_reduced[0][1], M_reduced[0][2], M_reduced[0][3]</span><br></pre></td></tr></table></figure>
+<p>接着就是一个HNP问题</p>
+<script type="math/tex; mode=display">
+t_i \alpha-a_i=\beta_i+k_ip</script><script type="math/tex; mode=display">
+t_i\alpha+k_ip=\beta +a_i</script><p>构造格</p>
+<script type="math/tex; mode=display">
+
+B = \begin{pmatrix}
+p & 0 & \cdots & 0 & 0 \\
+0 & p & \cdots & 0 & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & p & 0 \\
+t_1 & t_2 & \cdots & t_m & \frac{1}{p}
+\end{pmatrix}</script><p>归约的目标向量就是$(\beta_1+a_1,…,\beta_i+a_i,\frac{\alpha}{p})$,但是对B使用LLL后我们不知道哪个向量合适，所以这里要进一步思考。回顾一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">B = 2**30</span><br><span class="line">beta = random.randint(-B + 1, B - 1)</span><br></pre></td></tr></table></figure>
+<p>由于这里的beta很小，所以我们就要找到一个最小的$\beta$,就比较接近我们目标向量，这里就需要babai 算法了</p>
+<p>babai算法是找到在格基中，寻找一个与某个向量最近的格点，在这里就是我们找到一个点v，使得它离a最近</p>
+<h4 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">from sage.all import *</span><br><span class="line">from Crypto.Util.number import long_to_bytes</span><br><span class="line">def babai_cvp(B_reduced, t):</span><br><span class="line">	G = B_reduced.gram_schmidt()[0]</span><br><span class="line">	t_proj = t</span><br><span class="line">	v = 0</span><br><span class="line">	for i in reversed(range(B_reduced.nrows())):</span><br><span class="line">		c = (t_proj * G[i]) / (G[i] * G[i])</span><br><span class="line">		c = round(c)</span><br><span class="line">		v += c * B_reduced[i]</span><br><span class="line">		t_proj -= c * B_reduced[i]</span><br><span class="line">	return v</span><br><span class="line">d = 981020902672546902438782010902608140583199504862558032616415</span><br><span class="line">p = d - a0</span><br><span class="line">f = open(r&quot;samples.txt&quot;)</span><br><span class="line">samples = f.readlines()</span><br><span class="line">samples = eval(samples[0])</span><br><span class="line">m = 30</span><br><span class="line"># 构造格基矩阵 B（m+1 维）</span><br><span class="line">B_matrix = [[0 for _ in range(m + 1)] for _ in range(m + 1)]</span><br><span class="line">for i in range(m):</span><br><span class="line">	B_matrix[i][i] = p</span><br><span class="line">for j in range(m):</span><br><span class="line">	B_matrix[m][j] = samples[j][0]</span><br><span class="line">B_matrix[m][m] = 1 / p</span><br><span class="line">#构造⽬标向量</span><br><span class="line">target = [samples[i][1] for i in range(m)]</span><br><span class="line">target.append(0) # 补上最后⼀位⽬标（α所在维度是第 m+1 位）</span><br><span class="line">B = matrix(B_matrix)</span><br><span class="line">a = vector(target)</span><br><span class="line">B_reduced = B.LLL()</span><br><span class="line">v = babai_cvp(B_reduced, a)</span><br><span class="line">u = v - a</span><br><span class="line">flag = u[m] * p</span><br><span class="line">print(long_to_bytes(int(flag)%p))</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
   
-    <ul class="card-archive-list">
+</article>
+
+    
+    <article
+  id="post-LilCTF2025_"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+     
+    <div class="article-meta">
+      <a href="/2025/09/12/LilCTF2025_/" class="article-date">
+  <time datetime="2025-09-11T16:55:56.817Z" itemprop="datePublished">2025-09-12</time>
+</a>    
+    </div>
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/09/">
-            <span class="card-archive-list-date">
-              September 2025
-            </span>
-            <span class="card-archive-list-count">2</span>
-          </a>
-        </li>
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="LilCTF2025-crypto个人wp"><a href="#LilCTF2025-crypto个人wp" class="headerlink" title="LilCTF2025-crypto个人wp"></a>LilCTF2025-crypto个人wp</h1><h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="Liner"><a href="#Liner" class="headerlink" title="Liner"></a>Liner</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import random</span><br><span class="line">import signal</span><br><span class="line"></span><br><span class="line">signal.alarm(10)</span><br><span class="line"></span><br><span class="line">flag = os.getenv(&quot;LILCTF_FLAG&quot;, &quot;LILCTF&#123;default&#125;&quot;)</span><br><span class="line"></span><br><span class="line">nrows = 16</span><br><span class="line">ncols = 32</span><br><span class="line"></span><br><span class="line">A = [[random.randint(1, 1919810) for _ in range(ncols)] for _ in range(nrows)]</span><br><span class="line">x = [random.randint(1, 114514) for _ in range(ncols)]</span><br><span class="line"></span><br><span class="line">b = [sum(A[i][j] * x[j] for j in range(ncols)) for i in range(nrows)]</span><br><span class="line">print(A)</span><br><span class="line">print(b)</span><br><span class="line"></span><br><span class="line">xx = list(map(int, input(&quot;Enter your solution: &quot;).strip().split()))</span><br><span class="line">if xx != x:</span><br><span class="line">    print(&quot;Oh, your linear algebra needs to be practiced.&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;Bravo! Here is your flag:&quot;)</span><br><span class="line">    print(flag)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>就是求$Ax=b$方程的x，官方wp的思路是，找到Ax的左核，Ax的左核就是b的左核，就是$ker(Ax)=ker(b)$,$ker(b)Ax=O$,这样x就是ker(b)A的右核，使用LLL算法规约最短向量就是</p>
+<p>举个例子比如：</p>
+<script type="math/tex; mode=display">
+A = \begin{bmatrix}
+2 & 3 \\
+5 & 7
+\end{bmatrix}，b=\begin{bmatrix}
+1 \\
+4
+\end{bmatrix}</script><p>找到所有$y=(y_1,y_2)$,$y_1<em>1+y_2</em>4=0$,比如y=(4,-1)</p>
+<p>找出A的左核空间$y^T$,并计算$y^TA=4<em>(2,3)-1</em>(5,7)=(8,12)-(5,7)=(3,5)$,</p>
+<p>$(3,5)x=0$,$3x_1+5x_2=0$,然后使用LLL向量找到最短的x=(5,-3)或(-5,3)</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from pwn import *</span><br><span class="line">from sage.all import *</span><br><span class="line"></span><br><span class="line">conn = process([&quot;python3&quot;, &quot;task.py&quot;])</span><br><span class="line">A = eval(conn.recvline().decode().strip())</span><br><span class="line">b = eval(conn.recvline().decode().strip())</span><br><span class="line"></span><br><span class="line">A = Matrix(ZZ, A)</span><br><span class="line">b = Matrix(ZZ, b).T</span><br><span class="line"></span><br><span class="line">ker_b = b.kernel().basis_matrix()</span><br><span class="line">A = ker_b*A</span><br><span class="line">ker_A = A.transpose().kernel().basis_matrix()</span><br><span class="line">ker_A = ker_A.LLL()</span><br><span class="line"></span><br><span class="line">solution = [abs(int(i)) for i in ker_A[0]]</span><br><span class="line">conn.sendline(&#x27; &#x27;.join(map(str, solution)).encode())</span><br><span class="line">conn.recvline()</span><br><span class="line">flag = conn.recvline().decode(&#x27;utf-8&#x27;).strip()</span><br><span class="line">print(flag)</span><br><span class="line"></span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+<p>我自己解的思路是这样的，</p>
+<p>采用增广矩阵解线性方程,引入s表示b的系数，那么式子将会是</p>
+<script type="math/tex; mode=display">
+[A|b][x_1,x_2,...,x_{32},s]^T=0</script><script type="math/tex; mode=display">
+A[x_1,x_2,...,x_{32}]+b*s=0</script><script type="math/tex; mode=display">
+A*x'+b*s=0</script><p>增广矩阵的右零空间是</p>
+<script type="math/tex; mode=display">
+[x_1,x_2,...x_{32},s]</script><p>存在等式</p>
+<script type="math/tex; mode=display">
+A(\frac{x}{-s})=b</script><p>所以我们要求的解$x=-\frac{x}{s}$,所以要求我们在零空间找到一个向量满足s不等于0，并且x/-s 在[1,114514]区间</p>
+<p>我们对右零空间BKZ规约找到范数小的右零空间，得到短向量就可以求解了</p>
+<h4 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">from sage.all import *</span><br><span class="line">from Pwn4Sage.pwn import remote</span><br><span class="line">import ast</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">def solve_problem():</span><br><span class="line">    # 建立网络连接</span><br><span class="line">    try:</span><br><span class="line">        connection_str = f&quot;[+] 连接到服务器: challenge.xinshi.fun:43767&quot;</span><br><span class="line">        print(connection_str)</span><br><span class="line">        network_io = remote(&quot;challenge.xinshi.fun&quot;, 43767)</span><br><span class="line">    except Exception as connection_error:</span><br><span class="line">        print(f&quot;[-] 连接错误: &#123;connection_error&#125;&quot;)</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    # 获取输入数据</span><br><span class="line">    try:</span><br><span class="line">        recv_data = network_io.recvuntil(b&quot;Enter your solution:&quot;).decode().split(&#x27;\n&#x27;)</span><br><span class="line">        print(&quot;[+] 接收数据完成:&quot;)</span><br><span class="line">        print(recv_data)</span><br><span class="line">    except Exception as recv_error:</span><br><span class="line">        print(f&quot;[-] 数据接收异常: &#123;recv_error&#125;&quot;)</span><br><span class="line">        network_io.close()</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    # 矩阵向量解析</span><br><span class="line">    try:</span><br><span class="line">        coefficient_matrix = matrix(ZZ, ast.literal_eval(recv_data[0].strip()))</span><br><span class="line">        target_vector = vector(ZZ, ast.literal_eval(recv_data[1].strip()))</span><br><span class="line">        print(&quot;[+] 系数矩阵和向量解析成功&quot;)</span><br><span class="line">        print(f&quot;[+] 系数矩阵: &#123;coefficient_matrix&#125;&quot;)</span><br><span class="line">        print(f&quot;[+] 目标向量: &#123;target_vector&#125;&quot;)</span><br><span class="line">    except Exception as parse_error:</span><br><span class="line">        print(f&quot;[-] 解析错误: &#123;parse_error&#125;&quot;)</span><br><span class="line">        network_io.close()</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    # 构造增广矩阵</span><br><span class="line">    augmented_mat = coefficient_matrix.augment(target_vector, subdivide=True)</span><br><span class="line">    </span><br><span class="line">    # 计算零空间</span><br><span class="line">    start_timer = time.time()</span><br><span class="line">    nullspace = augmented_mat.right_kernel()</span><br><span class="line">    print(f&quot;[+] 零空间维度: &#123;nullspace.dimension()&#125;&quot;)</span><br><span class="line">    print(f&quot;[+] 零空间计算耗时: &#123;time.time() - start_timer&#125; 秒&quot;)</span><br><span class="line">    </span><br><span class="line">    if nullspace.dimension() == 0:</span><br><span class="line">        print(&quot;[-] 零空间为空&quot;)</span><br><span class="line">        network_io.close()</span><br><span class="line">        return</span><br><span class="line">    </span><br><span class="line">    # 基约简过程</span><br><span class="line">    base_vectors = matrix(ZZ, nullspace.basis())</span><br><span class="line">    start_timer = time.time()</span><br><span class="line">    reduced_base = base_vectors.BKZ(block_size=30)  # BKZ参数设置</span><br><span class="line">    print(f&quot;[+] 基约简耗时: &#123;time.time() - start_timer&#125; 秒&quot;)</span><br><span class="line">    </span><br><span class="line">    # 搜索最优解向量</span><br><span class="line">    best_norm_value = None</span><br><span class="line">    optimal_vector = None</span><br><span class="line">    for current_vec in reduced_base:</span><br><span class="line">        constant_term = current_vec[-1]  # 最后一项是常数项</span><br><span class="line">        if constant_term == 0:</span><br><span class="line">            continue</span><br><span class="line">        norm_value = current_vec.norm()</span><br><span class="line">        print(f&quot;[+] 向量检查: &#123;current_vec&#125;, 范数: &#123;norm_value&#125;, 常数项: &#123;constant_term&#125;&quot;)</span><br><span class="line">        if best_norm_value is None or norm_value &lt; best_norm_value:</span><br><span class="line">            best_norm_value = norm_value</span><br><span class="line">            optimal_vector = current_vec</span><br><span class="line">    </span><br><span class="line">    if optimal_vector is None:</span><br><span class="line">        print(&quot;[-] 未发现有效解向量&quot;)</span><br><span class="line">        network_io.close()</span><br><span class="line">        return</span><br><span class="line">    </span><br><span class="line">    # 计算特解</span><br><span class="line">    scalar = optimal_vector[-1]</span><br><span class="line">    solution_vector = (-vector(optimal_vector[:-1])).apply_map(lambda element: element / scalar)</span><br><span class="line">    </span><br><span class="line">    # 验证解</span><br><span class="line">    print(f&quot;[+] 计算解: &#123;solution_vector&#125;&quot;)</span><br><span class="line">    if coefficient_matrix * solution_vector == target_vector:</span><br><span class="line">        print(&quot;[+] 解验证通过&quot;)</span><br><span class="line">        # 检查范围约束</span><br><span class="line">        int_solution = [int(num) for num in solution_vector]</span><br><span class="line">        if all(1 &lt;= val &lt;= 114514 for val in int_solution):</span><br><span class="line">            print(&quot;[+] 解满足约束条件&quot;)</span><br><span class="line">            # 格式化输出</span><br><span class="line">            solution_str = &quot; &quot;.join(map(str, int_solution))</span><br><span class="line">            print(f&quot;[+] 提交解: &#123;solution_str&#125;&quot;)</span><br><span class="line">            try:</span><br><span class="line">                network_io.sendline(solution_str.encode())</span><br><span class="line">                # 获取响应</span><br><span class="line">                server_response = &quot;&quot;</span><br><span class="line">                response_timer = time.time()</span><br><span class="line">                while time.time() - response_timer &lt; 5:</span><br><span class="line">                    data_chunk = network_io.recv(4096).decode()</span><br><span class="line">                    if not data_chunk:</span><br><span class="line">                        break</span><br><span class="line">                    server_response += data_chunk</span><br><span class="line">                print(&quot;[+] 服务端响应:&quot;, server_response)</span><br><span class="line">            except Exception as io_error:</span><br><span class="line">                print(f&quot;[-] 通信错误: &#123;io_error&#125;&quot;)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;[-] 解超出允许范围&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;[-] 解验证失败&quot;)</span><br><span class="line">    </span><br><span class="line">    network_io.close()</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    solve_problem()</span><br><span class="line">#LILCTF&#123;9344030e-7ce1-4f31-bf82-5627b4fe8765&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一种方法，就是<a target="_blank" rel="noopener" href="https://seandictionary.top/lilctf-2025/">LilCTF 2025 - SeanDictionary | 折腾日记</a>用背包密码解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line">from fpylll import IntegerMatrix, LLL, FPLLL</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line">import random</span><br><span class="line">from pwn import *</span><br><span class="line">import ast</span><br><span class="line"> </span><br><span class="line"># import re</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def process_matrices(matrix1, matrix2):</span><br><span class="line">    nrows = 16</span><br><span class="line">    ncols = 32</span><br><span class="line"> </span><br><span class="line">    # A = [[random.randint(1, 1919810) for _ in range(ncols)] for _ in range(nrows)]</span><br><span class="line">    # x = [random.randint(1, 114514) for _ in range(ncols)]</span><br><span class="line">    # b = [sum(A[i][j] * x[j] for j in range(ncols)) for i in range(nrows)]</span><br><span class="line">    A = matrix1</span><br><span class="line">    b = matrix2</span><br><span class="line">    K = 1000000</span><br><span class="line"> </span><br><span class="line">    # print(f&quot;A = &#123;A&#125;&quot;)</span><br><span class="line">    # print(f&quot;b = &#123;b&#125;&quot;)</span><br><span class="line">    # print(f&quot;x = &#123;x&#125;&quot;)</span><br><span class="line">    dim = nrows + ncols</span><br><span class="line"> </span><br><span class="line">    M = IntegerMatrix(dim, dim)</span><br><span class="line"> </span><br><span class="line">    for i in range(ncols):</span><br><span class="line">        M[i, i] = 1</span><br><span class="line">        for j in range(nrows):</span><br><span class="line">            M[i, ncols + j] = A[j][i] * K</span><br><span class="line"> </span><br><span class="line">    for j in range(nrows):</span><br><span class="line">        M[ncols, ncols + j] = -b[j] * K</span><br><span class="line"> </span><br><span class="line">    L = LLL.reduction(M)</span><br><span class="line"> </span><br><span class="line">    for line in M:</span><br><span class="line">        line = list(line)</span><br><span class="line">        if all(x == 0 for x in line[ncols:]) and all(x != 0 for x in line[:ncols]):</span><br><span class="line">            # print(f&quot;x = &#123;line[:ncols]&#125;&quot;)</span><br><span class="line">            return line[:ncols]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def parse_matrix(matrix_str):</span><br><span class="line">    &quot;&quot;&quot;将字符串形式的矩阵解析为二维列表&quot;&quot;&quot;</span><br><span class="line">    # 去除空行并分割每行</span><br><span class="line">    lines = [line.strip() for line in matrix_str.strip().split(&quot;\n&quot;) if line.strip()]</span><br><span class="line">    # 分割每行元素并转换为整数</span><br><span class="line">    return [list(map(int, line.split())) for line in lines]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def format_matrix(matrix):</span><br><span class="line">    &quot;&quot;&quot;将二维列表格式化为字符串形式的矩阵&quot;&quot;&quot;</span><br><span class="line">    return &quot;\n&quot;.join([&quot; &quot;.join(map(str, row)) for row in matrix]) + &quot;\n&quot;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def main():</span><br><span class="line">    # 配置连接信息</span><br><span class="line">    host = &quot;challenge.xinshi.fun&quot;  # 替换为目标主机地址</span><br><span class="line">    port = 42749  # 替换为目标端口</span><br><span class="line"> </span><br><span class="line">    # 建立连接</span><br><span class="line">    try:</span><br><span class="line">        io = remote(host, port)</span><br><span class="line">        print(f&quot;成功连接到 &#123;host&#125;:&#123;port&#125;&quot;)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(f&quot;连接失败: &#123;e&#125;&quot;)</span><br><span class="line">        return</span><br><span class="line"> </span><br><span class="line">    try:</span><br><span class="line">        # io.interactive()</span><br><span class="line">        # 接收第一个矩阵</span><br><span class="line">        print(&quot;接收第一个矩阵...&quot;)</span><br><span class="line">        matrix1_str = io.recvline().decode().strip()</span><br><span class="line">        matrix1 = ast.literal_eval(matrix1_str)</span><br><span class="line"> </span><br><span class="line">        # 接收第二个矩阵</span><br><span class="line">        print(&quot;接收第二个矩阵...&quot;)</span><br><span class="line">        matrix2_str = io.recvline().decode().strip()</span><br><span class="line">        matrix2 = ast.literal_eval(matrix2_str)</span><br><span class="line"> </span><br><span class="line">        # 等待服务器提示</span><br><span class="line">        print(io.recvuntil(&quot;:&quot;).decode().strip())</span><br><span class="line"> </span><br><span class="line">        # 处理矩阵</span><br><span class="line">        print(&quot;处理矩阵中...&quot;)</span><br><span class="line">        result_matrix = process_matrices(matrix1, matrix2)</span><br><span class="line">        print(result_matrix)</span><br><span class="line"> </span><br><span class="line">        # 发送结果矩阵</span><br><span class="line">        print(&quot;发送结果矩阵...&quot;)</span><br><span class="line">        result_str = &quot; &quot;.join(map(str, result_matrix))</span><br><span class="line">        io.sendline(result_str.encode())</span><br><span class="line"> </span><br><span class="line">        # 等待服务器提示</span><br><span class="line">        print(io.recvline())</span><br><span class="line">        io.interactive()</span><br><span class="line"> </span><br><span class="line">        # 可以根据需要接收服务器的响应</span><br><span class="line">        # response = p.recvall().decode()</span><br><span class="line">        # print(f&quot;服务器响应: &#123;response&#125;&quot;)</span><br><span class="line"> </span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(f&quot;处理过程中出错: &#123;e&#125;&quot;)</span><br><span class="line">    finally:</span><br><span class="line">        # 关闭连接</span><br><span class="line">        io.close()</span><br><span class="line">        print(&quot;\n连接已关闭&quot;)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="mid-math"><a href="#mid-math" class="headerlink" title="mid_math"></a>mid_math</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">from sage.all import *</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line"></span><br><span class="line">flag = b&#x27;LILCTF&#123;test_flag&#125;&#x27;[7:-1]</span><br><span class="line">lambda1 = bytes_to_long(flag[:len(flag)//2])</span><br><span class="line">lambda2 = bytes_to_long(flag[len(flag)//2:])</span><br><span class="line">p = getPrime(512)</span><br><span class="line">def mul(vector, c):</span><br><span class="line">    return [vector[0]*c, vector[1]*c]</span><br><span class="line"></span><br><span class="line">v1 = [getPrime(128), getPrime(128)]</span><br><span class="line">v2 = [getPrime(128), getPrime(128)]</span><br><span class="line"></span><br><span class="line">A = matrix(GF(p), [v1, v2])</span><br><span class="line">B = matrix(GF(p), [mul(v1,lambda1), mul(v2,lambda2)])</span><br><span class="line">C = A.inverse() * B</span><br><span class="line"></span><br><span class="line">print(f&#x27;p = &#123;p&#125;&#x27;)</span><br><span class="line">print(f&#x27;C = &#123;str(C).replace(&quot; &quot;, &quot;,&quot;).replace(&quot;\n&quot;, &quot;,&quot;).replace(&quot;[,&quot;, &quot;[&quot;)&#125;&#x27;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+D=diag(\lambda_1,\lambda_2)</script><script type="math/tex; mode=display">
+C=A^{-1}B=A^{-1}DA</script><p>所以C和D相似，所以它们的特征值相等，所以求C的特征值就是flag</p>
+<h3 id="mid-math-1"><a href="#mid-math-1" class="headerlink" title="mid_math"></a>mid_math</h3><p>task.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">from sage.all import *</span><br><span class="line">from Crypto.Util.number import *</span><br><span class="line">from tqdm import tqdm</span><br><span class="line">from random import randint</span><br><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from Crypto.Util.Padding import pad</span><br><span class="line"></span><br><span class="line">flag = b&#x27;LILCTF&#123;test_flag&#125;&#x27;</span><br><span class="line"></span><br><span class="line">p = getPrime(64)</span><br><span class="line">P = GF(p)</span><br><span class="line"></span><br><span class="line">key = randint(2**62, p)</span><br><span class="line"></span><br><span class="line">def mul(vector, c):</span><br><span class="line">    return [vector[0]*c, vector[1]*c, vector[2]*c, vector[3]*c, vector[4]*c]</span><br><span class="line"></span><br><span class="line">v1 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]</span><br><span class="line">v2 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]</span><br><span class="line">v3 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]</span><br><span class="line">v4 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]</span><br><span class="line">v5 = [getPrime(64), getPrime(64), getPrime(64), getPrime(64), getPrime(64)]</span><br><span class="line">a, b, c, d, e = getPrime(64), getPrime(64), getPrime(64), getPrime(64),  0</span><br><span class="line"></span><br><span class="line">A = matrix(P, [v1, v2, v3, v4, v5])</span><br><span class="line">B = matrix(P, [mul(v1,a), mul(v2,b), mul(v3, c), mul(v4, d), mul(v5, e)])</span><br><span class="line">C = A.inverse() * B</span><br><span class="line">D = C**key</span><br><span class="line"></span><br><span class="line">key = pad(long_to_bytes(key), 16)</span><br><span class="line">aes = AES.new(key,AES.MODE_ECB)</span><br><span class="line">msg = aes.encrypt(pad(flag, 64))</span><br><span class="line"></span><br><span class="line">print(f&quot;p = &#123;p&#125;&quot;)</span><br><span class="line">print(f&#x27;C = &#123;[i for i in C]&#125;&#x27;.replace(&#x27;(&#x27;, &#x27;[&#x27;).replace(&#x27;)&#x27;, &#x27;]&#x27;))</span><br><span class="line">print(f&#x27;D = &#123;[i for i in D]&#125;&#x27;.replace(&#x27;(&#x27;, &#x27;[&#x27;).replace(&#x27;)&#x27;, &#x27;]&#x27;))</span><br><span class="line">print(f&quot;msg = &#123;msg&#125;&quot;)</span><br><span class="line"></span><br><span class="line">#p = 14668080038311483271</span><br><span class="line">#C = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]</span><br><span class="line">#D = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]</span><br><span class="line">#msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#x27;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>和ez_math一样，只不过这里增加了$D=C^{key}$，也就是矩阵的离散对数问题</p>
+<h4 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"># 文件名: calculate_keys.sage</span><br><span class="line"># 运行方式: sage calculate_keys.sage</span><br><span class="line">from sage.all import *</span><br><span class="line"> </span><br><span class="line"># --- 已知信息 ---</span><br><span class="line">p = 14668080038311483271</span><br><span class="line">C_list = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]</span><br><span class="line">D_list = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]</span><br><span class="line"> </span><br><span class="line"># 1. 设置 SageMath 的有限域和矩阵</span><br><span class="line">P = GF(p)</span><br><span class="line">C_mat = matrix(P, C_list)</span><br><span class="line">D_mat = matrix(P, D_list)</span><br><span class="line"> </span><br><span class="line">print(&quot;[SAGE] 正在计算矩阵 C 和 D 的特征值...&quot;)</span><br><span class="line"># 2. 计算特征值并过滤掉 0</span><br><span class="line">C_eigenvalues = [v for v in C_mat.eigenvalues() if v != 0]</span><br><span class="line">D_eigenvalues = [v for v in D_mat.eigenvalues() if v != 0]</span><br><span class="line"> </span><br><span class="line">print(f&quot;[SAGE] C 的非零特征值: &#123;C_eigenvalues&#125;&quot;)</span><br><span class="line">print(f&quot;[SAGE] D 的非零特征值: &#123;D_eigenvalues&#125;&quot;)</span><br><span class="line"> </span><br><span class="line"># 3. 遍历所有可能的特征值配对，求解离散对数</span><br><span class="line">potential_keys = set() # 使用集合来自动去重</span><br><span class="line">for c_eig in C_eigenvalues:</span><br><span class="line">    for d_eig in D_eigenvalues:</span><br><span class="line">        try:</span><br><span class="line">            # 求解离散对数: d_eig = c_eig ^ key</span><br><span class="line">            key_candidate = d_eig.log(c_eig)</span><br><span class="line">            potential_keys.add(int(key_candidate))</span><br><span class="line">        except (ValueError, TypeError):</span><br><span class="line">            # 如果配对不正确，log 会失败</span><br><span class="line">            continue</span><br><span class="line"> # 文件名: decrypt_flag.py</span><br><span class="line"># 运行方式: python decrypt_flag.py</span><br><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from Crypto.Util.Padding import pad, unpad</span><br><span class="line">from Crypto.Util.number import long_to_bytes</span><br><span class="line"> </span><br><span class="line"># --- 已知信息 ---</span><br><span class="line">msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#x27;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;</span><br><span class="line"> </span><br><span class="line"># --- 开始解密 ---</span><br><span class="line">print(&quot;[PYTHON] 开始尝试使用候选 Key 进行解密...&quot;)</span><br><span class="line">found = False</span><br><span class="line">for key_int in potential_keys:</span><br><span class="line">    try:</span><br><span class="line">        print(f&quot;\n[*] 正在尝试 Key: &#123;key_int&#125;&quot;)</span><br><span class="line">        </span><br><span class="line">        # 1. 准备 AES 密钥</span><br><span class="line">        aes_key = pad(long_to_bytes(key_int), 16)</span><br><span class="line">        </span><br><span class="line">        # 2. 创建解密器并解密</span><br><span class="line">        cipher = AES.new(aes_key, AES.MODE_ECB)</span><br><span class="line">        decrypted_padded = cipher.decrypt(msg)</span><br><span class="line">        </span><br><span class="line">        # 3. 反填充</span><br><span class="line">        # 原始脚本使用 pad(flag, 64)，所以 unpad 时 block_size 也是 64</span><br><span class="line">        decrypted = unpad(decrypted_padded, 64)</span><br><span class="line"> </span><br><span class="line">        # 4. 验证解密结果</span><br><span class="line">        if decrypted.startswith(b&#x27;LILCTF&#123;&#x27;):</span><br><span class="line">            print(&quot;\n&quot; + &quot;=&quot;*50)</span><br><span class="line">            print(f&quot;[SUCCESS] 找到正确的 Key: &#123;key_int&#125;&quot;)</span><br><span class="line">            print(f&quot;[SUCCESS] 解密成功! Flag 是: &#123;decrypted.decode()&#125;&quot;)</span><br><span class="line">            print(&quot;=&quot;*50)</span><br><span class="line">            found = True</span><br><span class="line">            break</span><br><span class="line">        else:</span><br><span class="line">            print(f&quot;[-] 解密内容不正确: &#123;decrypted&#125;&quot;)</span><br><span class="line"> </span><br><span class="line">    except Exception as e:</span><br><span class="line">        # 可能是 unpad 错误，说明 key 不正确</span><br><span class="line">        print(f&quot;[-] 解密或反填充失败: &#123;e&#125;&quot;)</span><br><span class="line">        continue</span><br><span class="line"> </span><br><span class="line">if not found:</span><br><span class="line">    print(&quot;\n[FAIL] 遍历了所有候选 Key，但未能解密 Flag。&quot;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>后面发现还是做麻烦了</p>
+<p>直接使用矩阵DLP板子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Util.number import *</span><br><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from Crypto.Util.Padding import pad</span><br><span class="line"> </span><br><span class="line">p = 14668080038311483271</span><br><span class="line">C = [[11315841881544731102, 2283439871732792326, 6800685968958241983, 6426158106328779372, 9681186993951502212], [4729583429936371197, 9934441408437898498, 12454838789798706101, 1137624354220162514, 8961427323294527914], [12212265161975165517, 8264257544674837561, 10531819068765930248, 4088354401871232602, 14653951889442072670], [6045978019175462652, 11202714988272207073, 13562937263226951112, 6648446245634067896, 13902820281072641413], [1046075193917103481, 3617988773170202613, 3590111338369894405, 2646640112163975771, 5966864698750134707]]</span><br><span class="line">D = [[1785348659555163021, 3612773974290420260, 8587341808081935796, 4393730037042586815, 10490463205723658044], [10457678631610076741, 1645527195687648140, 13013316081830726847, 12925223531522879912, 5478687620744215372], [9878636900393157276, 13274969755872629366, 3231582918568068174, 7045188483430589163, 5126509884591016427], [4914941908205759200, 7480989013464904670, 5860406622199128154, 8016615177615097542, 13266674393818320551], [3005316032591310201, 6624508725257625760, 7972954954270186094, 5331046349070112118, 6127026494304272395]]</span><br><span class="line">msg = b&quot;\xcc]B:\xe8\xbc\x91\xe2\x93\xaa\x88\x17\xc4\xe5\x97\x87@\x0fd\xb5p\x81\x1e\x98,Z\xe1n`\xaf\xe0%:\xb7\x8aD\x03\xd2Wu5\xcd\xc4#m&#x27;\xa7\xa4\x80\x0b\xf7\xda8\x1b\x82k#\xc1gP\xbd/\xb5j&quot;</span><br><span class="line">n = 5</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">G = matrix(GF(p), n, n, C)</span><br><span class="line">H = matrix(GF(p), n, n, D)</span><br><span class="line"> </span><br><span class="line">G_Jor, P = G.jordan_form(transformation=True)</span><br><span class="line">H_Jor = ~P * H * P</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">print(G_Jor, H_Jor)</span><br><span class="line">key = discrete_log(H_Jor[1][1], G_Jor[1][1], p-1)</span><br><span class="line">key = pad(long_to_bytes(key), 16)</span><br><span class="line">aes = AES.new(key,AES.MODE_ECB)</span><br><span class="line">flag = aes.decrypt(pad(msg, 64))</span><br><span class="line">print(flag)</span><br><span class="line"># b&#x27;LILCTF&#123;Are_y0u_5till_4wake_que5t1on_m4ker!&#125;\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\x15\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b\xd5\x98\x0f\xd7\xa1\x05\xe8%b:\xb7\x96\xc6\xaf\x05\x1b&#x27;</span><br></pre></td></tr></table></figure>
+<h3 id="Space-Travel"><a href="#Space-Travel" class="headerlink" title="Space Travel"></a>Space Travel</h3><p>task.py</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Cipher import AES</span><br><span class="line">from hashlib import md5</span><br><span class="line">from params import vecs</span><br><span class="line">from os import urandom</span><br><span class="line"></span><br><span class="line">key = int(&quot;&quot;.join([vecs[int.from_bytes(urandom(2)) &amp; 0xfff] for _ in range(50)]), 2)</span><br><span class="line"></span><br><span class="line">print(&quot;🎁 :&quot;, [[nonce := int(urandom(50*2).hex(), 16), (bin(nonce &amp; key).count(&quot;1&quot;)) % 2] for _ in range(600)])</span><br><span class="line">print(&quot;🚩 :&quot;, AES.new(key=md5(str(key).encode()).digest(), nonce=b&quot;Tiffany&quot;, mode=AES.MODE_CTR).encrypt(open(&quot;flag.txt&quot;, &quot;rb&quot;).read()))</span><br></pre></td></tr></table></figure>
+<p>还没弄懂..</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+  
+</article>
+
+    
+  </article>
+  
+
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2025
+        <i class="ri-heart-fill heart_icon"></i> Ink Lin
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-12T05:14:11.922Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By Ink Lin</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Ink&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
