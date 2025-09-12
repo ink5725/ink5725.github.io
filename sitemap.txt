@@ -1,5 +1,6 @@
+https://ink5725.github.io/categories/index.html
+https://ink5725.github.io/2025/08/30/LilCTF2025_/
 https://ink5725.github.io/2025/07/30/NepCTF2025-%E4%B8%AA%E4%BA%BAwriteup/
-https://ink5725.github.io/2025/07/30/LilCTF2025_/
 https://ink5725.github.io/
 https://ink5725.github.io/tags/CTF/
 https://ink5725.github.io/tags/Crypto/
