@@ -190,21 +190,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/CTF/" style="color: #ff7d73">
+                <a href="/tags/CTF/" style="color: #00a596">
                     CTF
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Writeup/" style="color: #00bcd4">
+                <a href="/tags/Writeup/" style="color: #03a9f4">
                     Writeup
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/AI/" style="color: #00a596">
+                <a href="/tags/AI/" style="color: #00bcd4">
                     AI
                 </a>
             </span>
@@ -216,7 +216,7 @@
     <div class="content" v-pre>
         <h1 id="第五届京津冀蒙长城杯初赛个人wp"><a href="#第五届京津冀蒙长城杯初赛个人wp" class="headerlink" title="第五届京津冀蒙长城杯初赛个人wp"></a>第五届京津冀蒙长城杯初赛个人wp</h1><h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>这周末打了个比赛。这一届小长城杯题型和以往五常不一样了。只有Web，AI和数据安全。AI三题也都算简单，其实是利用AI解AI题（）</p>
 <h2 id="easy-poison"><a href="#easy-poison" class="headerlink" title="easy_poison"></a><strong>easy_poison</strong></h2><p>直接在trace CN上面问AI，就可以正确写出脚本</p>
-<p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task1.png" alt="image-20250914092621874"><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task2.png" alt="image-20250914092621874"></p>
+<p><img src="https://i.postimg.cc/15QrM2Df/task1.png" alt="image-20250914092621874"><img src="https://i.postimg.cc/j5yJ7qgv/task2.png" alt="image-20250914092621874"></p>
 <h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><pre><code>import torch
 import numpy as np
 from src.model import TextClassifier
@@ -438,7 +438,7 @@ print(&quot;现在可以运行评测脚本验证攻击效果。&quot;)
 </code></pre><p>可以根据输入和输出确定线性模型，我们选择最简单的y=2x+1</p>
 <p>把题目的提示给AI，告诉我搞个签名函数，把/flag读出来</p>
 <p>用deepseek写个脚本</p>
-<p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task3.png" alt="image-20250914151152818"></p>
+<p><img src="https://postimg.cc/941mYkqX" alt="image-20250914151152818"></p>
 <pre><code>
 
 import tensorflow as tf
@@ -511,7 +511,7 @@ with zipfile.ZipFile(&#39;model.zip&#39;, &#39;w&#39;, zipfile.ZIP_DEFLATED) as 
 print(&quot;模型已创建并打包为 model.zip&quot;)
 print(&quot;模型结构: y = 2x + 1&quot;)
 print(&quot;自定义签名: 读取 /flag 文件并返回其内容&quot;)
-</code></pre><p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/image-20250914145842579.png" alt="image-20250914145842579"></p>
+</code></pre><p><img src="https://i.postimg.cc/MphTm2jL/end.png" alt="image-20250914145842579"></p>
 <p>flag{cf7ebcd6-8e36-4b42-9419-7bce30b50541}</p>
 
     </div>
