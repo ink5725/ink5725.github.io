@@ -1,0 +1,1256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>XYCTF2025-crypto | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>XYCTF2025-crypto</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/12
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #ff7d73">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #00a596">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #ffa2c4">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="复复复数"><a href="#复复复数" class="headerlink" title="复复复数"></a>复复复数</h3><p>task.py</p>
+<pre><code>class ComComplex:
+    def __init__(self, value=[0,0,0,0]):
+        self.value = value
+    def __str__(self):
+        s = str(self.value[0])
+        for k,i in enumerate(self.value[1:]):
+            if i &gt;= 0:
+                s += &#39;+&#39;
+            s += str(i) +&#39;ijk&#39;[k]
+        return s
+    def __add__(self,x):
+        return ComComplex([i+j for i,j in zip(self.value,x.value)])
+    def __mul__(self,x):
+        a = self.value[0]*x.value[0]-self.value[1]*x.value[1]-self.value[2]*x.value[2]-self.value[3]*x.value[3]
+        b = self.value[0]*x.value[1]+self.value[1]*x.value[0]+self.value[2]*x.value[3]-self.value[3]*x.value[2]
+        c = self.value[0]*x.value[2]-self.value[1]*x.value[3]+self.value[2]*x.value[0]+self.value[3]*x.value[1]
+        d = self.value[0]*x.value[3]+self.value[1]*x.value[2]-self.value[2]*x.value[1]+self.value[3]*x.value[0]
+        return ComComplex([a,b,c,d])
+    def __mod__(self,x):
+        return ComComplex([i % x for i in self.value])
+    def __pow__(self, x, n=None):
+        tmp = ComComplex(self.value)
+        a = ComComplex([1,0,0,0])
+        while x:
+            if x &amp; 1:
+                a *= tmp
+            tmp *= tmp
+            if n:
+                a %= n
+                tmp %= n
+            x &gt;&gt;= 1
+        return a
+
+from Crypto.Util.number import *
+from secret import flag, hint
+
+p = getPrime(256)
+q = getPrime(256)
+r = getPrime(256)
+n = p * q * r
+
+P = getPrime(512)
+assert len(hint) == 20
+hints = ComComplex([bytes_to_long(hint[i:i+5]) for i in range(0,20,5)])
+keys = ComComplex([0, p, q, r])
+print(&#39;hint =&#39;,hints)
+print(&#39;gift =&#39;,hints*keys%P)
+print(&#39;P =&#39;,P)
+
+e = 65547
+m = ComComplex([bytes_to_long(flag[i:i+len(flag)//4+1]) for i in range(0,len(flag),len(flag)//4+1)])
+c = pow(m, e, n)
+print(&#39;n =&#39;, n)
+print(&#39;c =&#39;, c)
+
+&#39;&#39;&#39;
+hint = 375413371936+452903063925i+418564633198j+452841062207k
+gift = 8123312244520119413231609191866976836916616973013918670932199631084038015924368317077919454611785179950870055560079987034735836668109705445946887481003729+20508867471664499348708768798854433383217801696267611753941328714877299161068885700412171i+22802458968832151777449744120185122420871929971817937643641589637402679927558503881707868j+40224499597522456323122179021760594618350780974297095023316834212332206526399536884102863k
+P = 8123312244520119413231609191866976836916616973013918670932199631182724263362174895104545305364960781233690810077210539091362134310623408173268475389315109
+n = 408713495380933615345467409596399184629824932933932227692519320046890365817329617301604051766392980053993030281090124694858194866782889226223493799859404283664530068697313752856923001112586828837146686963124061670340088332769524367
+c = 212391106108596254648968182832931369624606731443797421732310126161911908195602305474921714075911012622738456373731638115041135121458776339519085497285769160263024788009541257401354037620169924991531279387552806754098200127027800103+24398526281840329222660628769015610312084745844610670698920371305353888694519135578269023873988641161449924124665731242993290561874625654977013162008430854786349580090169988458393820787665342793716311005178101342140536536153873825i+45426319565874516841189981758358042952736832934179778483602503215353130229731883231784466068253520728052302138781204883495827539943655851877172681021818282251414044916889460602783324944030929987991059211909160860125047647337380125j+96704582331728201332157222706704482771142627223521415975953255983058954606417974983056516338287792260492498273014507582247155218239742778886055575426154960475637748339582574453542182586573424942835640846567809581805953259331957385k
+&#39;&#39;&#39;
+</code></pre><p>用Grok可以一把梭出来p,q,r。</p>
+<pre><code>from Crypto.Util.number import *
+
+# Given values
+h0 = 375413371936
+h1 = 452903063925
+h2 = 418564633198
+h3 = 452841062207
+P = 8123312244520119413231609191866976836916616973013918670932199631182724263362174895104545305364960781233690810077210539091362134310623408173268475389315109
+g0 = 8123312244520119413231609191866976836916616973013918670932199631084038015924368317077919454611785179950870055560079987034735836668109705445946887481003729
+g1 = 20508867471664499348708768798854433383217801696267611753941328714877299161068885700412171
+g2 = 22802458968832151777449744120185122420871929971817937643641589637402679927558503881707868
+g3 = 40224499597522456323122179021760594618350780974297095023316834212332206526399536884102863
+
+# Compute right-hand side
+b0 = P - g0
+b1 = g1
+b2 = g2
+
+# Compute determinant
+s = h0**2 + h1**2 + h2**2 + h3**2
+det_A = h3 * s
+
+# Compute numerators using adj(A) * b
+num_p = (h3 * h1 - h2 * h0) * b0 + (h2 * h1 + h3 * h0) * b1 + (h2**2 + h3**2) * b2
+num_q = (h0 * h1 + h2 * h3) * b0 - (h1**2 + h3**2) * b1 + (h3 * h0 - h1 * h2) * b2
+num_r = (h0**2 + h3**2) * b0 + (h2 * h3 - h1 * h0) * b1 - (h1 * h3 + h2 * h0) * b2
+
+# Compute p, q, r
+p = num_p // det_A
+q = num_q // det_A
+r = num_r // det_A
+
+# Verify with fourth equation
+assert -h2 * p + h1 * q + h0 * r == g3, &quot;Solution inconsistent&quot;
+print(f&quot;p = &#123;p&#125;&quot;)
+print(f&quot;q = &#123;q&#125;&quot;)
+print(f&quot;r = &#123;r&#125;&quot;)
+
+# Verify n
+n_computed = p * q * r
+n_given = 408713495380933615345467409596399184629824932933932227692519320046890365817329617301604051766392980053993030281090124694858194866782889226223493799859404283664530068697313752856923001112586828837146686963124061670340088332769524367
+assert n_computed == n_given, &quot;n does not match&quot;
+</code></pre><p>然后就是四元复数的phi求解,这个比较难崩，之前没见过。</p>
+<p>模n同余类的阶就是phi，这里的phi(p)=(p-1) <em> p </em> (p+1)</p>
+<p>由于gcd(e,phi(p))=3,所以用phi//3作为模数算d_p</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><pre><code>from Crypto.Util.number import inverse, long_to_bytes
+from Crypto.Util.number import GCD as gcd
+
+n = 408713495380933615345467409596399184629824932933932227692519320046890365817329617301604051766392980053993030281090124694858194866782889226223493799859404283664530068697313752856923001112586828837146686963124061670340088332769524367
+p = 63173373914948586508761871207488662566773264479285518327131522282352053209317
+q = 80952808249768431401135151583780334402187954631449426293287427758105419709409
+r = 79919542113632340528743451299804406313559069843835295267846968468567030982339
+e = 65547
+c = [
+    212391106108596254648968182832931369624606731443797421732310126161911908195602305474921714075911012622738456373731638115041135121458776339519085497285769160263024788009541257401354037620169924991531279387552806754098200127027800103,
+    24398526281840329222660628769015610312084745844610670698920371305353888694519135578269023873988641161449924124665731242993290561874625654977013162008430854786349580090169988458393820787665342793716311005178101342140536536153873825,
+    45426319565874516841189981758358042952736832934179778483602503215353130229731883231784466068253520728052302138781204883495827539943655851877172681021818282251414044916889460602783324944030929987991059211909160860125047647337380125,
+    96704582331728201332157222706704482771142627223521415975953255983058954606417974983056516338287792260492498273014507582247155218239742778886055575426154960475637748339582574453542182586573424942835640846567809581805953259331957385
+]
+
+c = ComComplex(c)
+
+def crt(shares):
+    &quot;&quot;&quot;中国剩余定理合并&quot;&quot;&quot;
+    res = []
+    for i in range(4):
+        a = [s.value[i] for s, _ in shares]
+        m = [mod for _, mod in shares]
+        res.append(int(crt_r(a, m)))
+    return ComComplex(res)
+
+def crt_r(a, m):
+    &quot;&quot;&quot;中国剩余定理单个分量&quot;&quot;&quot;
+    M = 1
+    for mi in m:
+        M *= mi
+    res = 0
+    for ai, mi in zip(a, m):
+        Mi = M // mi
+        inv = inverse(Mi, mi)
+        res = (res + ai * Mi * inv) % M
+    return res
+
+# 计算每个素数的d_s
+def compute_d(s):
+    phi_s = s * (s - 1) * (s**2 - 1)
+    g_s = gcd(e, phi_s)
+    phi_prime = phi_s // g_s
+    d = inverse(e, phi_prime)
+    return d
+
+d_p = compute_d(p)
+d_q = compute_d(q)
+d_r = compute_d(r)
+
+# 计算密文模每个素数后的值
+c_p = c % p
+c_q = c % q
+c_r = c % r
+
+# 解密每个素数对应的密文
+m_p = pow(c_p, d_p, p)
+m_q = pow(c_q, d_q, q)
+m_r = pow(c_r, d_r, r)
+
+# 应用中国剩余定理合并结果
+m = crt([(m_p, p), (m_q, q), (m_r, r)])
+
+# 转换四元数为字节
+flag_parts = []
+for component in m.value:
+    flag_parts.append(long_to_bytes(component))
+
+# 拼接各部分得到flag
+flag = b&#39;&#39;.join(flag_parts)
+print(flag.decode())
+</code></pre><p>看了下官方WP这是非预期解，在模p群中的这个m的阶没有3的因⼦，直接⽤phi=(p-1)p(p+1)//3</p>
+<p>正解的话是gcd(e,phi)=9  先用e//9求逆得到m^9,再开根</p>
+<h3 id="reed"><a href="#reed" class="headerlink" title="reed"></a>reed</h3><p>task.py</p>
+<pre><code>import string
+import random
+from secret import flag
+
+assert flag.startswith(&#39;XYCTF&#123;&#39;) and flag.endswith(&#39;&#125;&#39;)
+flag = flag.rstrip(&#39;&#125;&#39;).lstrip(&#39;XYCTF&#123;&#39;)
+
+table = string.ascii_letters + string.digits
+assert all(i in table for i in flag)
+r = random.Random()
+
+class PRNG:
+    def __init__(self, seed):
+        self.a = 1145140
+        self.b = 19198100
+        random.seed(seed)
+
+    def next(self):
+        x = random.randint(self.a, self.b)
+        random.seed(x ** 2 + 1)
+        return x
+
+    def round(self, k):
+        for _ in range(k):
+            x = self.next()
+        return x
+
+def encrypt(msg, a, b):
+    c = [(a * table.index(m) + b) % 19198111 for m in msg]
+    return c
+
+seed = int(input(&#39;give me seed: &#39;))
+prng = PRNG(seed)
+a = prng.round(r.randrange(2**16))
+b = prng.round(r.randrange(2**16))
+enc = encrypt(flag, a, b)
+print(enc)
+</code></pre><p>这题应该也是非预期，爆破求解</p>
+<h4 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h4><pre><code>import string
+from pwn import *
+from gmpy2 import invert, gcd
+
+# 字符表
+table = string.ascii_letters + string.digits
+r = remote(&quot;gz.imxbt.cn&quot;, 20141)
+m = 19198111 # 注意检查此处模数是否应该与解密函数一致
+res = []
+
+def decrypt(enc):
+    n = len(enc)
+    pos = [(i, i+1) for i in range(n-1)]  # 相邻位置对
+    for p1, p2 in pos:
+        if p1 &gt;= len(enc) or p2 &gt;= len(enc):
+            continue  # 避免越
+        c0, c1 = enc[p1], enc[p2]
+        for x0 in range(len(table)):
+            for x1 in range(len(table)):
+                if x0 == x1:
+                    continue
+                delta_x = x0 - x1
+                try:
+                    delta_x_inv = invert(delta_x, m)
+                except ZeroDivisionError:
+                    continue  # 不可逆时跳过
+
+                a = ((c0 - c1) * delta_x_inv) % m
+                # 检查a是否可逆
+                if gcd(a, m) != 1:
+                    continue
+
+                b = (c0 - a * x0) % m
+                # 计算a的逆
+                try:
+                    a_inv = invert(a, m)
+                except ZeroDivisionError:
+                    continue  # 确保不会出错
+
+                plain = []
+                valid = True
+                for c in enc:
+                    x = (c - b) * a_inv % m
+                    if not (0 &lt;= x &lt; len(table)):
+                        valid = False
+                        break
+                    plain.append(table[x])
+                if valid:
+                    res.append(&#39;&#39;.join(plain))
+    return res
+
+r.recvuntil(b&#39;give me seed: &#39;)
+r.sendline(b&#39;0&#39;)
+enc = eval(r.recvline().strip())
+print(&quot;Received ciphertext:&quot;, enc)
+flag= decrypt(enc)
+print(set(flag))
+</code></pre><p>结合一下AI,写的脚本</p>
+<h3 id="Division"><a href="#Division" class="headerlink" title="Division"></a>Division</h3><p>task.py</p>
+<pre><code># -*- encoding: utf-8 -*-
+&#39;&#39;&#39;
+@File    :   server.py
+@Time    :   2025/03/20 12:25:03
+@Author  :   LamentXU 
+&#39;&#39;&#39;
+import random 
+print(&#39;----Welcome to my division calc----&#39;)
+print(&#39;&#39;&#39;
+menu:
+      [1]  Division calc
+      [2]  Get flag
+&#39;&#39;&#39;)
+while True:
+    choose = input(&#39;: &gt;&gt;&gt; &#39;)
+    if choose == &#39;1&#39;:
+        try:
+            denominator = int(input(&#39;input the denominator: &gt;&gt;&gt; &#39;))
+        except:
+            print(&#39;INPUT NUMBERS&#39;)
+            continue
+        nominator = random.getrandbits(32)
+        if denominator == &#39;0&#39;:
+            print(&#39;NO YOU DONT&#39;)
+            continue
+        else:
+            print(f&#39;&#123;nominator&#125;//&#123;denominator&#125; = &#123;nominator//denominator&#125;&#39;)
+    elif choose == &#39;2&#39;:
+        try:
+            ans = input(&#39;input the answer: &gt;&gt;&gt; &#39;)
+            rand1 = random.getrandbits(11000)
+            rand2 = random.getrandbits(10000)
+            correct_ans = rand1 // rand2
+            if correct_ans == int(ans):
+                print(&#39;WOW&#39;)
+                with open(&#39;flag&#39;, &#39;r&#39;) as f:
+                    print(f&#39;Here is your flag: &#123;f.read()&#125;&#39;)
+            else:
+                print(f&#39;NOPE, the correct answer is &#123;correct_ans&#125;&#39;)
+        except:
+            print(&#39;INPUT NUMBERS&#39;)
+    else:
+        print(&#39;Invalid choice&#39;)
+</code></pre><p>简单顶真一下，就是MT19937的基础款式，你需要向它输入624次，它每次就会生成个随机值与你输入的相除，于是我每次就输入1，这样就获得624个值了，如果有了624个值就可以预测后面所有的随机数</p>
+<p>然后脚本直接OpenAI一把梭就行。</p>
+<h4 id="exp-2"><a href="#exp-2" class="headerlink" title="exp"></a>exp</h4><pre><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+&quot;&quot;&quot;
+@File    :   solve_remote_socket.py
+@Time    :   2025/04/09
+@Author  :   LamentXU
+@Desc    :   使用 socket 实现 telnet 交互，利用 MT19937 状态恢复进行漏洞利用
+&quot;&quot;&quot;
+
+import socket
+import time
+import re
+import random
+
+# ----------------------------
+# Telnet-like 交互类（使用 socket 实现）
+# ----------------------------
+class TelnetLike:
+    def __init__(self, host: str, port: int, timeout: float = 5.0):
+        self.sock = socket.create_connection((host, port))
+        self.sock.settimeout(timeout)
+
+    def read_until(self, delimiter: bytes, timeout: float = 5.0) -&gt; bytes:
+        data = b&#39;&#39;
+        end_time = time.time() + timeout
+        while not data.endswith(delimiter) and time.time() &lt; end_time:
+            try:
+                chunk = self.sock.recv(4096)
+                if not chunk:
+                    break
+                data += chunk
+            except socket.timeout:
+                break
+        return data
+
+    def send(self, msg: str):
+        self.sock.sendall((msg + &quot;\n&quot;).encode(&#39;utf-8&#39;))
+
+    def read_line(self) -&gt; str:
+        data = b&quot;&quot;
+        while not data.endswith(b&quot;\n&quot;):
+            try:
+                chunk = self.sock.recv(1)
+                if not chunk:
+                    break
+                data += chunk
+            except socket.timeout:
+                break
+        return data.decode(&#39;utf-8&#39;, errors=&#39;ignore&#39;)
+
+    def read_all(self) -&gt; str:
+        try:
+            return self.sock.recv(8192).decode(&#39;utf-8&#39;, errors=&#39;ignore&#39;)
+        except socket.timeout:
+            return &#39;&#39;
+
+    def close(self):
+        self.sock.close()
+
+# ----------------------------
+# MT19937 逆 tempering 实现
+# ----------------------------
+def unshift_right(y, shift):
+    result = 0
+    # 从高位到低位逐步恢复
+    for i in range(32):
+        # 每次处理最高未计算位
+        part = y ^ (result &gt;&gt; shift)
+        mask = 1 &lt;&lt; (31 - i)
+        result |= part &amp; mask
+    return result
+
+def unshift_left(y, shift, mask):
+    result = 0
+    # 从低位到高位逐步恢复
+    for i in range(32):
+        part = y ^ ((result &lt;&lt; shift) &amp; mask)
+        bit = (part &gt;&gt; i) &amp; 1
+        result |= bit &lt;&lt; i
+    return result
+
+def untemper(y):
+    # 恢复的顺序需要与 tempering 操作的逆序一致
+    y = unshift_right(y, 18)           # 逆转 y ^= (y &gt;&gt; 18)
+    y = unshift_left(y, 15, 0xEFC60000)  # 逆转 y ^= (y &lt;&lt; 15) &amp; 0xEFC60000
+    y = unshift_left(y, 7, 0x9D2C5680)   # 逆转 y ^= (y &lt;&lt; 7) &amp; 0x9D2C5680
+    y = unshift_right(y, 11)           # 逆转 y ^= (y &gt;&gt; 11)
+    return y
+
+# ----------------------------
+# 主要利用流程
+# ----------------------------
+def main():
+    # 修改为实际靶机 IP 和端口
+    HOST = &quot;gz.imxbt.cn&quot;
+    PORT = 20246
+
+    print(f&quot;[+] 连接到 &#123;HOST&#125;:&#123;PORT&#125;&quot;)
+    tn = TelnetLike(HOST, PORT)
+
+    # 读取欢迎信息及菜单
+    banner = tn.read_until(b&#39;menu:&#39;)
+    print(&quot;[+] 收到信息:&quot;)
+    print(banner.decode(&#39;utf-8&#39;, errors=&#39;ignore&#39;))
+
+    # ----------------------------
+    # 1. 利用选项1采集624个随机输出
+    # ----------------------------
+    NUM_COLLECT = 624
+    outputs = []
+    print(&quot;[+] 开始采集 624 个随机数……&quot;)
+    for i in range(NUM_COLLECT):
+        # 发送选项 1
+        tn.send(&quot;1&quot;)
+        # 等待提示输入除数
+        tn.read_until(b&#39;input the denominator: &gt;&gt;&gt; &#39;)
+        # 输入数字 1
+        tn.send(&quot;1&quot;)
+        # 读取返回行，格式示例: &quot;123456789//1 = 123456789&quot;
+        line = tn.read_line().strip()
+        # 尝试提取“//1 =”前面的数字作为随机数
+        m = re.search(r&#39;(\d+)\s*//\s*1\s*=&#39;, line)
+        if m:
+            num_str = m.group(1)
+            try:
+                num = int(num_str)
+                outputs.append(num)
+                print(f&quot;[&#123;i+1:03d&#125;/&#123;NUM_COLLECT&#125;] 得到: &#123;num&#125;&quot;)
+            except ValueError:
+                print(f&quot;[-] 解析错误: &#123;line&#125;&quot;)
+                tn.close()
+                return
+        else:
+            print(f&quot;[-] 未能解析输出行: &#123;line&#125;&quot;)
+            tn.close()
+            return
+
+    if len(outputs) != NUM_COLLECT:
+        print(&quot;[-] 采集的随机数数量不足！&quot;)
+        tn.close()
+        return
+
+    # ----------------------------
+    # 2. 通过逆 tempering恢复 MT19937 内部状态
+    # ----------------------------
+    print(&quot;[+] 开始恢复内部状态……&quot;)
+    state = [untemper(y) for y in outputs]
+    # Python 内置随机数模块的状态格式为: (version, (MT[0], ..., MT[623], index), gaussian_state)
+    # 其中 index 设置为 624 表示下次生成随机数时将进行 twist
+    py_state = (3, tuple(state + [624]), None)
+    random.setstate(py_state)
+    print(&quot;[+] 内部状态恢复完毕，状态已同步。&quot;)
+
+    # ----------------------------
+    # 3. 预测选项2 中的随机输出，并计算正确答案
+    # ----------------------------
+    # 题目中选项2先调用 getrandbits(11000)，再调用 getrandbits(10000)
+    print(&quot;[+] 预测选项2 的输出……&quot;)
+    predicted_rand1 = random.getrandbits(11000)
+    predicted_rand2 = random.getrandbits(10000)
+    correct_ans = predicted_rand1 // predicted_rand2
+    print(f&quot;[+] 预测答案为: &#123;correct_ans&#125;&quot;)
+
+    # ----------------------------
+    # 4. 提交选项2并获得 flag
+    # ----------------------------
+    # 读取可能的菜单提示（具体提示请根据服务实际情况调整）
+    tn.read_until(b&#39;menu:&#39;)
+    tn.send(&quot;2&quot;)
+    tn.read_until(b&#39;input the answer: &gt;&gt;&gt; &#39;)
+    tn.send(str(correct_ans))
+    print(&quot;[+] 答案提交完毕，等待服务器响应 flag……&quot;)
+
+    # 给服务一些响应时间
+    time.sleep(1)
+    response = tn.read_all()
+    print(&quot;----- 服务器响应 -----&quot;)
+    print(response)
+    print(&quot;-----------------------&quot;)
+
+    tn.close()
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre><p>输出</p>
+<pre><code>[624/624] 得到: 2753415149
+[+] 开始恢复内部状态……
+[+] 内部状态恢复完毕，状态已同步。
+[+] 预测选项2 的输出……
+[+] 预测答案为: 2305887170558549180889868174723054828896373652953012476213566588974740311492554548136057564576668866652354201737517516721225135993798134252009965058404335449408858675937873421951145921114243695521952906175741615778154051588709475685883857588124422167642986077747009940931957286497406583096868103486903
+[+] 答案提交完毕，等待服务器响应 flag……
+----- 服务器响应 -----
+WOW
+Here is your flag: flag&#123;I_do_not_want_any_CTFER_get_0_solve_in_Crypto_bad_bad_adwa&#125;
+</code></pre><p>这AI写的太啰嗦了，还是看我的</p>
+<pre><code>from pwn import *
+
+# context.log_level = &#39;debug&#39;
+from tqdm import trange
+import sys
+sys.path.append(&#39;./MT19937-Symbolic-Execution-and-Solver-master/source&#39;)
+
+from MT19937 import MT19937
+
+# r = process([&quot;python3&quot;, &quot;server.py&quot;])
+r = remote(&quot;47.94.172.18&quot;, 36871)
+
+data = []
+
+for _ in trange(624):
+    r.recvuntil(b&#39;&gt;&gt;&gt; &#39;)
+    r.sendline(b&#39;1&#39;)
+    r.recvuntil(b&#39;&gt;&gt;&gt; &#39;)
+    r.sendline(b&#39;1&#39;)
+    r.recvuntil(b&#39;= &#39;)
+    data.append(int(r.recvline().strip()))
+
+print(len(data))
+
+rng = MT19937(state_from_data = (data, 32))
+
+# for _ in range(624):
+#     rng()
+recover = [rng() for _ in range(624)]
+assert recover == data, f&quot;Recover failed: &#123;recover&#125; != &#123;data&#125;&quot;
+
+def getrandbits(n):
+    num = 0
+    for i in range(n//32):
+        num = (rng() &lt;&lt; (32 * i)) | num
+    num = rng() &gt;&gt; (32 - (n % 32)) &lt;&lt; n//32*32 | num
+    return num
+
+rand1 = getrandbits(11000)
+rand2 = getrandbits(10000)
+
+correct_ans = rand1 // rand2
+
+r.recvuntil(b&#39;&gt;&gt;&gt; &#39;)
+r.sendline(b&#39;2&#39;)
+r.recvuntil(b&#39;&gt;&gt;&gt; &#39;)
+r.sendline(str(correct_ans).encode())
+r.interactive()
+</code></pre><h4 id="Complex-signin"><a href="#Complex-signin" class="headerlink" title="Complex_signin"></a>Complex_signin</h4><p>task.py</p>
+<pre><code>from Crypto.Util.number import *
+from Crypto.Cipher import ChaCha20
+import hashlib
+from secret import flag
+
+
+class Complex:
+    def __init__(self, re, im):
+        self.re = re
+        self.im = im
+
+    def __mul__(self, c):
+        re_ = self.re * c.re - self.im * c.im
+        im_ = self.re * c.im + self.im * c.re
+        return Complex(re_, im_)
+
+    def __eq__(self, c):
+        return self.re == c.re and self.im == c.im
+
+    def __rshift__(self, m):
+        return Complex(self.re &gt;&gt; m, self.im &gt;&gt; m)
+
+    def __lshift__(self, m):
+        return Complex(self.re &lt;&lt; m, self.im &lt;&lt; m)
+
+    def __str__(self):
+        if self.im == 0:
+            return str(self.re)
+        elif self.re == 0:
+            if abs(self.im) == 1:
+                return f&quot;&#123;&#39;-&#39; if self.im &lt; 0 else &#39;&#39;&#125;i&quot;
+            else:
+                return f&quot;&#123;self.im&#125;i&quot;
+        else:
+            return f&quot;&#123;self.re&#125; &#123;&#39;+&#39; if self.im &gt; 0 else &#39;-&#39;&#125; &#123;abs(self.im)&#125;i&quot;
+
+    def tolist(self):
+        return [self.re, self.im]
+
+
+def complex_pow(c, exp, n):
+    result = Complex(1, 0)
+    while exp &gt; 0:
+        if exp &amp; 1:
+            result = result * c
+            result.re = result.re % n
+            result.im = result.im % n
+        c = c * c
+        c.re = c.re % n
+        c.im = c.im % n
+        exp &gt;&gt;= 1
+    return result
+
+bits = 128
+p = getPrime(1024)
+q = getPrime(1024)
+n = p * q
+m = Complex(getRandomRange(1, n), getRandomRange(1, n))
+e = 3
+c = complex_pow(m, e, n)
+print(f&quot;n = &#123;n&#125;&quot;)
+print(f&quot;mh = &#123;(m &gt;&gt; bits &lt;&lt; bits).tolist()&#125;&quot;)
+print(f&quot;C = &#123;c.tolist()&#125;&quot;)
+print(f&quot;enc = &#123;ChaCha20.new(key=hashlib.sha256(str(m.re + m.im).encode()).digest(), nonce=b&#39;Pr3d1ctmyxjj&#39;).encrypt(flag)&#125;&quot;)
+
+&#39;&#39;&#39;
+n = 24240993137357567658677097076762157882987659874601064738608971893024559525024581362454897599976003248892339463673241756118600994494150721789525924054960470762499808771760690211841936903839232109208099640507210141111314563007924046946402216384360405445595854947145800754365717704762310092558089455516189533635318084532202438477871458797287721022389909953190113597425964395222426700352859740293834121123138183367554858896124509695602915312917886769066254219381427385100688110915129283949340133524365403188753735534290512113201932620106585043122707355381551006014647469884010069878477179147719913280272028376706421104753
+mh = [3960604425233637243960750976884707892473356737965752732899783806146911898367312949419828751012380013933993271701949681295313483782313836179989146607655230162315784541236731368582965456428944524621026385297377746108440938677401125816586119588080150103855075450874206012903009942468340296995700270449643148025957527925452034647677446705198250167222150181312718642480834399766134519333316989347221448685711220842032010517045985044813674426104295710015607450682205211098779229647334749706043180512861889295899050427257721209370423421046811102682648967375219936664246584194224745761842962418864084904820764122207293014016, 15053801146135239412812153100772352976861411085516247673065559201085791622602365389885455357620354025972053252939439247746724492130435830816513505615952791448705492885525709421224584364037704802923497222819113629874137050874966691886390837364018702981146413066712287361010611405028353728676772998972695270707666289161746024725705731676511793934556785324668045957177856807914741189938780850108643929261692799397326838812262009873072175627051209104209229233754715491428364039564130435227582042666464866336424773552304555244949976525797616679252470574006820212465924134763386213550360175810288209936288398862565142167552]
+C = [5300743174999795329371527870190100703154639960450575575101738225528814331152637733729613419201898994386548816504858409726318742419169717222702404409496156167283354163362729304279553214510160589336672463972767842604886866159600567533436626931810981418193227593758688610512556391129176234307448758534506432755113432411099690991453452199653214054901093242337700880661006486138424743085527911347931571730473582051987520447237586885119205422668971876488684708196255266536680083835972668749902212285032756286424244284136941767752754078598830317271949981378674176685159516777247305970365843616105513456452993199192823148760, 21112179095014976702043514329117175747825140730885731533311755299178008997398851800028751416090265195760178867626233456642594578588007570838933135396672730765007160135908314028300141127837769297682479678972455077606519053977383739500664851033908924293990399261838079993207621314584108891814038236135637105408310569002463379136544773406496600396931819980400197333039720344346032547489037834427091233045574086625061748398991041014394602237400713218611015436866842699640680804906008370869021545517947588322083793581852529192500912579560094015867120212711242523672548392160514345774299568940390940653232489808850407256752]
+enc = b&#39;\x9c\xc4n\x8dF\xd9\x9e\xf4\x05\x82!\xde\xfe\x012$\xd0\x8c\xaf\xfb\rEb(\x04)\xa1\xa6\xbaI2J\xd2\xb2\x898\x11\xe6x\xa9\x19\x00pn\xf6rs- \xd2\xd1\xbe\xc7\xf51.\xd4\xd2 \xe7\xc6\xca\xe5\x19\xbe&#39;
+&#39;&#39;&#39;
+</code></pre><p>AI梭一下也能出思路就是二元copper。把泄露剩余部分解出来</p>
+<pre><code>from Crypto.Util.number import*
+import itertools 
+from Crypto.Cipher import ChaCha20
+import hashlib
+n = 24240993137357567658677097076762157882987659874601064738608971893024559525024581362454897599976003248892339463673241756118600994494150721789525924054960470762499808771760690211841936903839232109208099640507210141111314563007924046946402216384360405445595854947145800754365717704762310092558089455516189533635318084532202438477871458797287721022389909953190113597425964395222426700352859740293834121123138183367554858896124509695602915312917886769066254219381427385100688110915129283949340133524365403188753735534290512113201932620106585043122707355381551006014647469884010069878477179147719913280272028376706421104753
+mh = [3960604425233637243960750976884707892473356737965752732899783806146911898367312949419828751012380013933993271701949681295313483782313836179989146607655230162315784541236731368582965456428944524621026385297377746108440938677401125816586119588080150103855075450874206012903009942468340296995700270449643148025957527925452034647677446705198250167222150181312718642480834399766134519333316989347221448685711220842032010517045985044813674426104295710015607450682205211098779229647334749706043180512861889295899050427257721209370423421046811102682648967375219936664246584194224745761842962418864084904820764122207293014016, 15053801146135239412812153100772352976861411085516247673065559201085791622602365389885455357620354025972053252939439247746724492130435830816513505615952791448705492885525709421224584364037704802923497222819113629874137050874966691886390837364018702981146413066712287361010611405028353728676772998972695270707666289161746024725705731676511793934556785324668045957177856807914741189938780850108643929261692799397326838812262009873072175627051209104209229233754715491428364039564130435227582042666464866336424773552304555244949976525797616679252470574006820212465924134763386213550360175810288209936288398862565142167552]
+C = [5300743174999795329371527870190100703154639960450575575101738225528814331152637733729613419201898994386548816504858409726318742419169717222702404409496156167283354163362729304279553214510160589336672463972767842604886866159600567533436626931810981418193227593758688610512556391129176234307448758534506432755113432411099690991453452199653214054901093242337700880661006486138424743085527911347931571730473582051987520447237586885119205422668971876488684708196255266536680083835972668749902212285032756286424244284136941767752754078598830317271949981378674176685159516777247305970365843616105513456452993199192823148760, 21112179095014976702043514329117175747825140730885731533311755299178008997398851800028751416090265195760178867626233456642594578588007570838933135396672730765007160135908314028300141127837769297682479678972455077606519053977383739500664851033908924293990399261838079993207621314584108891814038236135637105408310569002463379136544773406496600396931819980400197333039720344346032547489037834427091233045574086625061748398991041014394602237400713218611015436866842699640680804906008370869021545517947588322083793581852529192500912579560094015867120212711242523672548392160514345774299568940390940653232489808850407256752]
+enc = b&#39;\x9c\xc4n\x8dF\xd9\x9e\xf4\x05\x82!\xde\xfe\x012$\xd0\x8c\xaf\xfb\rEb(\x04)\xa1\xa6\xbaI2J\xd2\xb2\x898\x11\xe6x\xa9\x19\x00pn\xf6rs- \xd2\xd1\xbe\xc7\xf51.\xd4\xd2 \xe7\xc6\xca\xe5\x19\xbe&#39;
+
+
+def small_roots(f, bounds, m=1, d=None):
+    if not d:
+        d = f.degree()
+
+    R = f.base_ring()
+    N = R.cardinality()
+
+    f /= f.coefficients().pop(0)
+    f = f.change_ring(ZZ)
+
+    G = Sequence([], f.parent())
+    for i in range(m + 1):
+        base = N ^ (m - i) * f ^ i
+        for shifts in itertools.product(range(d), repeat=f.nvariables()):
+            g = base * prod(map(power, f.variables(), shifts))
+            G.append(g)
+
+    B, monomials = G.coefficient_matrix()
+    monomials = vector(monomials)
+
+    factors = [monomial(*bounds) for monomial in monomials]
+    for i, factor in enumerate(factors):
+        B.rescale_col(i, factor)
+
+    B = B.dense_matrix().LLL()
+
+    B = B.change_ring(QQ)
+    for i, factor in enumerate(factors):
+        B.rescale_col(i, 1 / factor)
+
+    H = Sequence([], f.parent().change_ring(QQ))
+    for h in filter(None, B * monomials):
+        H.append(h)
+        I = H.ideal()
+        if I.dimension() == -1:
+            H.pop()
+        elif I.dimension() == 0:
+            roots = []
+            for root in I.variety(ring=ZZ):
+                root = tuple(R(root[var]) for var in f.variables())
+                roots.append(root)
+            return roots
+
+    return []
+a=mh[0]
+b=mh[1]
+PR.&lt;x,y&gt; = PolynomialRing(Zmod(n))
+f = (a+x)^3-3*(a+x)*(b+y)^2-C[0]
+roots = small_roots(f, (2^128, 2^128))
+#print(roots)
+#[(200140573956551184845123803212115015633, 62109784561410747979732334460991877433)]
+A=roots[0][0]+a
+B=roots[0][1]+b
+s = str(A + B).encode()  # 注意一定要使用字符串形式
+key = hashlib.sha256(s).digest()
+
+# 固定的 nonce 值（题目中给定）
+nonce = b&#39;Pr3d1ctmyxjj&#39;
+
+# 填入你的密文，格式可以是 bytes 类型或者十六进制字符串转 bytes
+# 注意：示例中密文数据就是任务里给出的 enc 数据
+enc = b&#39;\x9c\xc4n\x8dF\xd9\x9e\xf4\x05\x82!\xde\xfe\x012$\xd0\x8c\xaf\xfb\rEb(\x04)\xa1\xa6\xbaI2J\xd2\xb2\x898\x11\xe6x\xa9\x19\x00pn\xf6rs- \xd2\xd1\xbe\xc7\xf51.\xd4\xd2 \xe7\xc6\xca\xe5\x19\xbe&#39;
+
+# 使用 ChaCha20 构造解密器
+cipher = ChaCha20.new(key=key, nonce=nonce)
+plaintext = cipher.decrypt(enc)
+
+print(&quot;Decrypted flag:&quot;, plaintext.decode())
+</code></pre><h3 id="choice"><a href="#choice" class="headerlink" title="choice"></a>choice</h3><p>choice.py</p>
+<pre><code>from Crypto.Util.number import bytes_to_long
+from random import Random
+from secret import flag
+
+assert flag.startswith(b&#39;XYCTF&#123;&#39;) and flag.endswith(b&#39;&#125;&#39;)
+flag = flag[6:-1]
+
+msg = bytes_to_long(flag)
+rand = Random()
+test = bytes([i for i in range(255, -1, -1)])
+open(&#39;output.py&#39;, &#39;w&#39;).write(f&#39;enc = &#123;msg ^ rand.getrandbits(msg.bit_length())&#125;\nr = &#123;[rand.choice(test) for _ in range(2496)]&#125;&#39;)
+</code></pre><p>后面就是ouput和random的源码，太长了就不放了。</p>
+<p>这题其实和WKCTF的easy_random几乎一样的<a target="_blank" rel="noopener" href="https://wbuildings.github.io/Crypto/MT19937实战/">MT19937实战 | W’Blog</a></p>
+<p>注意看random.py里面的这几个函数，首先我们肯定是搜索choice，然后发现它使用一个_randbelow 把len(test)传去</p>
+<pre><code>   def choice(self, seq):
+        &quot;&quot;&quot;Choose a random element from a non-empty sequence.&quot;&quot;&quot;
+
+        # As an accommodation for NumPy, we don&#39;t use &quot;if not seq&quot;
+        # because bool(numpy.array()) raises a ValueError.
+        if not len(seq):
+            raise IndexError(&#39;Cannot choose from an empty sequence&#39;)
+        return seq[self._randbelow(len(seq))]
+
+    _randbelow = _randbelow_with_getrandbits
+
+   def _randbelow_with_getrandbits(self, n):
+        &quot;Return a random int in the range [0,n).  Defined for n &gt; 0.&quot;
+
+        getrandbits = self.getrandbits
+        k = n.bit_length() - 1
+        r = getrandbits(k)  # 0 &lt;= r &lt; 2**k
+        while r &gt;= n:
+            r = getrandbits(k)
+        return r
+</code></pre><p>其实就是把len(test).bit_length()-1，我们的test长度是256，比特位是9，减一就是8，于是又是经典的</p>
+<pre><code>getrandbits(8)
+</code></pre><p>每一个 8bit 是对应 32bit 的前八位，如何得来？也就是先生成 一个 32bit 的，再右移 24bit，得到 8 bit，而且我们在生成随机数的时候，后生成的数在高位，先生成的在低位</p>
+<p>现在这情况也就是给了高8位的MSB问题</p>
+<pre><code>import sys
+# Use raw string for the path to avoid Unicode escape issues
+sys.path.append(r&#39;D:\10DASCTF\xyctf2025\choice\MT19937-Symbolic-Execution-and-Solver-master\source&#39;)
+from Crypto.Util.number import *
+from MT19937 import MT19937
+from output import r, enc
+
+r = [255-i for i in r]#注意这里要逆序，我们生成test时候是从255到0的，要逆序才能把生成的随机数找到对应的序号从而找到对应的值
+rng = MT19937(state_from_data = (r, 8))
+
+def getrandbits(n):
+    num = 0
+    for i in range(n//32):
+        num = (rng() &lt;&lt; (32 * i)) | num
+    num = rng() &gt;&gt; (32 - (n % 32)) &lt;&lt; n//32*32 | num
+    return num
+
+rng.reverse_states(enc.bit_length()//32+1)
+
+randnum = getrandbits(175)  # 密文是 172 位，不是8的倍数，于是再去8位是176位，但是由于第一位是0，所以只需要175位
+flag = enc ^ randnum
+flag = long_to_bytes(flag)
+print(flag)
+#b&#39;___0h_51mple_r@nd0m___&#39;
+</code></pre><h3 id="勒索病毒"><a href="#勒索病毒" class="headerlink" title="勒索病毒"></a>勒索病毒</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/FlammeYHJ/article/details/140356724">超实用简单的exe文件反编译成Python源码（可网页在线实现）！_反编译exe文件成源码-CSDN博客</a></p>
+<p>这是一个python打包成exe的文件，需要解包一下</p>
+<p>task.sage</p>
+<pre><code># @author: Crypto0
+
+import re
+import base64
+import os
+import sys
+from gmssl import sm4
+from Crypto.Util.Padding import pad
+import binascii
+from random import shuffle, randrange
+
+N = 49 
+p = 3
+q = 128  
+d = 3
+assert q &gt; (6 * d + 1) * p
+R.&lt;x&gt; = ZZ[]
+def generate_T(d1, d2):
+    assert N &gt;= d1 + d2
+    s = [1] * d1 + [-1] * d2 + [0] * (N - d1 - d2)
+    shuffle(s)
+    return R(s)
+
+def invert_mod_prime(f, p):
+    Rp = R.change_ring(Integers(p)).quotient(x^N - 1)
+    return R(lift(1 / Rp(f)))
+
+def convolution(f, g):
+    return (f * g) % (x^N - 1)
+
+def lift_mod(f, q):
+    return R([((f[i] + q // 2) % q) - q // 2 for i in range(N)])
+
+def poly_mod(f, q):
+    return R([f[i] % q for i in range(N)])
+
+def invert_mod_pow2(f, q):
+    assert q.is_power_of(2)
+    g = invert_mod_prime(f, 2)
+    while True:
+        r = lift_mod(convolution(g, f), q)
+        if r == 1:
+            return g
+        g = lift_mod(convolution(g, 2 - r), q)
+
+def generate_message():
+    return R([randrange(p) - 1 for _ in range(N)])
+
+def generate_key():
+    while True:
+        try:
+            f = generate_T(d + 1, d)
+            g = generate_T(d, d)
+            Fp = poly_mod(invert_mod_prime(f, p), p)
+            Fq = poly_mod(invert_mod_pow2(f, q), q)
+            break
+        except:
+            continue
+    h = poly_mod(convolution(Fq, g), q)
+    return h, (f, g)
+
+def encrypt_message(m, h):
+    e = lift_mod(p * convolution(h, generate_T(d, d)) + m, q)
+    return e
+
+def save_ntru_keys():
+    h, secret = generate_key()
+    with open(&quot;pub_key.txt&quot;, &quot;w&quot;) as f:
+        f.write(str(h))
+    m = generate_message()
+    with open(&quot;priv_key.txt&quot;, &quot;w&quot;) as f:
+        f.write(str(m))
+    e = encrypt_message(m, h)
+    with open(&quot;enc.txt&quot;, &quot;w&quot;) as f:
+        f.write(str(e))
+
+def terms(poly_str):
+    terms = []
+    pattern = r&#39;([+-]?\s*x\^?\d*|[-+]?\s*\d+)&#39;
+    matches = re.finditer(pattern, poly_str.replace(&#39; &#39;, &#39;&#39;))
+
+    for match in matches:
+        term = match.group()
+        if term == &#39;+x&#39; or term == &#39;x&#39;:
+            terms.append(1)
+        elif term == &#39;-x&#39;:
+            terms.append(-1)
+        elif &#39;x^&#39; in term:
+            coeff_part = term.split(&#39;x^&#39;)[0]
+            exponent = int(term.split(&#39;x^&#39;)[1])
+            if not coeff_part or coeff_part == &#39;+&#39;:
+                coeff = 1
+            elif coeff_part == &#39;-&#39;:
+                coeff = -1
+            else:
+                coeff = int(coeff_part)
+            terms.append(coeff * exponent)
+        elif &#39;x&#39; in term:
+            coeff_part = term.split(&#39;x&#39;)[0]
+            if not coeff_part or coeff_part == &#39;+&#39;:
+                terms.append(1)
+            elif coeff_part == &#39;-&#39;:
+                terms.append(-1)
+            else:
+                terms.append(int(coeff_part))
+        else:
+            if term == &#39;+1&#39; or term == &#39;1&#39;:
+                terms.append(0)
+                terms.append(-0)
+    return terms
+
+def gen_key(poly_terms):
+    binary = [0] * 128
+    for term in poly_terms:
+        exponent = abs(term)
+        if term &gt; 0 and exponent &lt;= 127:  
+            binary[127 - exponent] = 1
+    binary_str = &#39;&#39;.join(map(str, binary))
+    hex_key = hex(int(binary_str, 2))[2:].upper().zfill(32)
+    return hex_key
+
+def read_polynomial_from_file(filename):
+    with open(filename, &#39;r&#39;) as file:
+        return file.read().strip()
+
+
+def sm4_encrypt(key, plaintext):
+    assert len(key) == 16, &quot;SM4 key must be 16 bytes&quot;
+    cipher = sm4.CryptSM4()
+    cipher.set_key(key, sm4.SM4_ENCRYPT)
+    padded_plaintext = pad(plaintext, 16)
+    return cipher.crypt_ecb(padded_plaintext)
+
+def sm4_encrypt_file(input_path, output_path, key):
+    with open(input_path, &#39;rb&#39;) as f:
+        plaintext = f.read()
+
+    ciphertext = sm4_encrypt(key, plaintext)
+
+    with open(output_path, &#39;wb&#39;) as f:
+        f.write(ciphertext)
+
+def resource_path(relative_path):
+    if getattr(sys, &#39;frozen&#39;, False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(&quot;.&quot;)
+    return os.path.join(base_path, relative_path)
+
+def encrypt_directory(directory, sm4_key, extensions=[&quot;.txt&quot;]):
+    if not os.path.exists(directory):
+        print(f&quot;Directory does not exist: &#123;directory&#125;&quot;)
+        return
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if any(file.endswith(ext) for ext in extensions):
+                input_path = os.path.join(root, file)
+                output_path = input_path + &quot;.enc&quot;
+
+                try:
+                    sm4_encrypt_file(input_path, output_path, sm4_key)
+                    os.remove(input_path)
+                    print(f&quot;Encrypted: &#123;input_path&#125; -&gt; &#123;output_path&#125;&quot;)
+                except Exception as e:
+                    print(f&quot;Error encrypting &#123;input_path&#125;: &#123;str(e)&#125;&quot;)
+
+def main():
+    try:
+        save_ntru_keys()
+        poly_str = read_polynomial_from_file(&quot;priv_key.txt&quot;)
+        poly_terms = terms(poly_str)
+        sm4_key = binascii.unhexlify(poly_terms)
+        user_name = os.getlogin()
+        target_dir = os.path.join(&quot;C:\Users&quot;, user_name, &quot;Desktop&quot;, &quot;test_files&quot;)
+
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir, exist_ok=True)
+            print(f&quot;Created directory: &#123;target_dir&#125;&quot;)
+            return
+
+        txt_files = [f for f in os.listdir(target_dir) 
+                    if f.endswith(&#39;.txt&#39;) and os.path.isfile(os.path.join(target_dir, f))]
+
+        if not txt_files:
+            print(&quot;No .txt files found in directory&quot;)
+            return
+
+        for txt_file in txt_files:
+            file_path = os.path.join(target_dir, txt_file)
+            try:
+                with open(file_path, &#39;rb&#39;) as f:
+                    test_data = f.read()
+
+                ciphertext = sm4_encrypt(sm4_key, test_data)
+                encrypted_path = file_path + &#39;.enc&#39;
+
+                with open(encrypted_path, &#39;wb&#39;) as f:
+                    f.write(ciphertext)
+            except Exception as e:
+                print(f&quot;Error processing &#123;txt_file&#125;: &#123;str(e)&#125;&quot;)
+
+    except Exception as e:
+        print(f&quot;Fatal error: &#123;str(e)&#125;&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

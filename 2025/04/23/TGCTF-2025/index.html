@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TGCTF2025-crypto个人wp | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>TGCTF2025-crypto个人wp</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/23
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #ffa2c4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #03a9f4">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #00bcd4">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><p>其他题用AI梭，这里就分享两</p>
+<h3 id="EZRSA"><a href="#EZRSA" class="headerlink" title="EZRSA"></a>EZRSA</h3><p>task.py</p>
+<pre><code>from Crypto.Util.number import *
+
+def genarate_emojiiiiii_prime(nbits, base=0):
+    while True:
+        p = getPrime(base // 32 * 32) if base &gt;= 3 else 0
+        for i in range(nbits // 8 // 4 - base // 32):
+            p = (p &lt;&lt; 32) + get_random_emojiiiiii() # 猜一猜
+        if isPrime(p):
+            return p
+
+m = bytes_to_long(flag.encode()+ &quot;&quot;.join([long_to_bytes(get_random_emojiiiiii()).decode() for _ in range(5)]).encode())
+p = genarate_emojiiiiii_prime(512, 224)
+q = genarate_emojiiiiii_prime(512)
+
+n = p * q
+e = &quot;💯&quot;
+c = pow(m, bytes_to_long(e.encode()), n)
+
+print(&quot;p0 =&quot;, long_to_bytes(p % 2 ** 256).decode())
+print(&quot;n =&quot;, n)
+print(&quot;c =&quot;, c)
+
+p0 = &#39;😘😾😂😋😶😾😳😷&#39;
+n = 156583691355552921614631145152732482393176197132995684056861057354110068341462353935267384379058316405283253737394317838367413343764593681931500132616527754658531492837010737718142600521325345568856010357221012237243808583944390972551218281979735678709596942275013178851539514928075449007568871314257800372579
+c = 47047259652272336203165844654641527951135794808396961300275905227499051240355966018762052339199047708940870407974724853429554168419302817757183570945811400049095628907115694231183403596602759249583523605700220530849961163557032168735648835975899744556626132330921576826526953069435718888223260480397802737401
+</code></pre><p>注意到这个p，它是512位的，其中emoji有9位，而且都在低位，由于每个emoji是32位。所以p的高位是224位，题目给出了p的低256位，也就是8个emoji，所以，思路是爆破那个emoji，然后用cooper，</p>
+<p>已知288位可copper得到p,(之前我在试能不能出个非预期，就是爆破8位和已知的256位看下copper能不能出，发现不行，可能这题低位泄露那样做不行)</p>
+<p>由于emoji的十进制只有最后两位不一样于是只要爆破100位即可，打头是：4036991100</p>
+<pre><code>from Crypto.Util.number import *
+from tqdm import tqdm 
+p0 = 108837065531980906150333850570890620719343963272506332719822248235755953428663
+n = 156583691355552921614631145152732482393176197132995684056861057354110068341462353935267384379058316405283253737394317838367413343764593681931500132616527754658531492837010737718142600521325345568856010357221012237243808583944390972551218281979735678709596942275013178851539514928075449007568871314257800372579
+c = 47047259652272336203165844654641527951135794808396961300275905227499051240355966018762052339199047708940870407974724853429554168419302817757183570945811400049095628907115694231183403596602759249583523605700220530849961163557032168735648835975899744556626132330921576826526953069435718888223260480397802737401
+e = &quot;💯&quot;
+init=4036991100
+for i in tqdm(range(100)):
+    PR.&lt;x&gt; = PolynomialRing(Zmod(n))
+    f=x*2^288+(init+i)*2^256+p0
+    f=f.monic()
+    roots = f.small_roots(X=2^225, beta=0.4,epsilon=0.04)
+    if roots:
+        if n%p==0:
+            print(int(roots[0]*2**288+(init+i)*2**256+p0))
+            break
+</code></pre><p>会发现e和phi不互素</p>
+<pre><code>from Crypto.Util.number import *
+from gmpy2 import gcd
+p=467451634968209241106415317231027845482508518719063451615026255829305974692566892177271
+n = 156583691355552921614631145152732482393176197132995684056861057354110068341462353935267384379058316405283253737394317838367413343764593681931500132616527754658531492837010737718142600521325345568856010357221012237243808583944390972551218281979735678709596942275013178851539514928075449007568871314257800372579
+q=n//p
+e=4036989615
+phi=(p-1)*(q-1)
+print(gcd(e,phi))
+#15
+</code></pre><p>于是有限域开根，利用中国剩余定理</p>
+<pre><code>from Crypto.Util.number import long_to_bytes
+from gmpy2 import gcd, invert  # &#39;invert&#39; is typically used for computing inverses in gmpy2
+p =12424840247075830662687097292458444573014198016321428995092662043898159667123240573630892907827505266982898641483333170032514244713840745287869771915696311
+n = 156583691355552921614631145152732482393176197132995684056861057354110068341462353935267384379058316405283253737394317838367413343764593681931500132616527754658531492837010737718142600521325345568856010357221012237243808583944390972551218281979735678709596942275013178851539514928075449007568871314257800372579
+c = 47047259652272336203165844654641527951135794808396961300275905227499051240355966018762052339199047708940870407974724853429554168419302817757183570945811400049095628907115694231183403596602759249583523605700220530849961163557032168735648835975899744556626132330921576826526953069435718888223260480397802737401
+q = n // p
+print(q)
+e = 4036989615
+
+phi = (p - 1) * (q - 1)
+sea = gcd(e, phi)
+e0 = e // sea
+d = invert(e0, phi)  # Alternatively, you could use: d = inverse(e0, phi) if using Sage&#39;s inverse function
+
+# Recover mx
+mx = pow(c, d, n)
+
+# For modulus p
+R_p.&lt;y&gt; = Zmod(p)[]
+mx_p = Zmod(p)(mx)  # Explicitly cast mx to Zmod(p)
+f_p = y**15 - mx_p
+f_p = f_p.monic()
+m1 = f_p.roots()
+
+# For modulus q
+R_q.&lt;z&gt; = Zmod(q)[]
+mx_q = Zmod(q)(mx)  # Explicitly cast mx to Zmod(q)
+f_q = z**15 - mx_q
+f_q = f_q.monic()
+m2 = f_q.roots()
+print(m2)
+# Reconstruct the message via Chinese Remainder Theorem
+for root_p, _ in m1:
+    for root_q, _ in m2:
+        m = solve_crt([int(root_p), int(root_q)], [int(p), int(q)])
+        message = long_to_bytes(int(m))
+        print(message)
+        if b&#39;TGCTF&#39; in message:
+            print(message.decode())
+#TGCTF&#123;🙇🏮🤟_🫡🫡🫡_🚩🚩🚩&#125;😃😖😘😨😢
+</code></pre><h3 id="LLLCG"><a href="#LLLCG" class="headerlink" title="LLLCG"></a>LLLCG</h3><p>task.py</p>
+<pre><code>from hashlib import sha256
+from Crypto.Util.number import getPrime, inverse, bytes_to_long, isPrime
+from random import randint
+import socketserver
+from secret import flag, dsa_p, dsa_q
+
+class TripleLCG:
+    def __init__(self, seed1, seed2, seed3, a, b, c, d, n):
+        self.state = [seed1, seed2, seed3]
+        self.a = a
+        self.b = b
+        self.c = c
+        self.d = d
+        self.n = n
+
+    def next(self):
+        new = (self.a * self.state[-3] + self.b * self.state[-2] + self.c * self.state[-1] + self.d) % self.n
+        self.state.append(new)
+        return new
+
+
+class DSA:
+    def __init__(self):
+        # while True:
+            # self.q = getPrime(160)
+            # t = 2 * getPrime(1024 - 160) * self.q
+            # if isPrime(t + 1):
+            #    self.p = t + 1
+            #    break
+        self.p = dsa_p
+        self.q = dsa_q
+        self.g = pow(2, (self.p - 1) // self.q, self.p)
+        self.x = randint(1, self.q - 1)
+        self.y = pow(self.g, self.x, self.p)
+
+    def sign(self, msg, k):
+        h = bytes_to_long(sha256(msg).digest())
+        r = pow(self.g, k, self.p) % self.q
+        s = (inverse(k, self.q) * (h + self.x * r)) % self.q
+        return (r, s)
+
+    def verify(self, msg, r, s):
+        if not (0 &lt; r &lt; self.q and 0 &lt; s &lt; self.q):
+            return False
+        h = bytes_to_long(sha256(msg).digest())
+        w = inverse(s, self.q)
+        u1 = (h * w) % self.q
+        u2 = (r * w) % self.q
+        v = ((pow(self.g, u1, self.p) * pow(self.y, u2, self.p)) % self.p) % self.q
+        return v == r
+
+
+class Task(socketserver.BaseRequestHandler):
+    def _recvall(self):
+        BUFF_SIZE = 2048
+        data = b&#39;&#39;
+        while True:
+            part = self.request.recv(BUFF_SIZE)
+            data += part
+            if len(part) &lt; BUFF_SIZE:
+                break
+        return data.strip()
+
+    def send(self, msg, newline=True):
+        if newline:
+            msg += b&#39;\n&#39;
+        self.request.sendall(msg)
+
+    def recv(self, prompt=b&#39;[-] &#39;):
+        self.send(prompt, newline=False)
+        return self._recvall()
+
+    def handle(self):
+        n = getPrime(128)
+        a, b, c, d = [randint(1, n - 1) for _ in range(4)]
+        seed1, seed2, seed3 = [randint(1, n - 1) for _ in range(3)]
+
+        lcg = TripleLCG(seed1, seed2, seed3, a, b, c, d, n)
+        dsa = DSA()
+
+        self.send(b&quot;Welcome to TGCTF Challenge!\n&quot;)
+        self.send(f&quot;p = &#123;dsa.p&#125;, q = &#123;dsa.q&#125;, g = &#123;dsa.g&#125;, y = &#123;dsa.y&#125;&quot;.encode())
+
+        small_primes = [59093, 65371, 37337, 43759, 52859, 39541, 60457, 61469, 43711]
+        used_messages = set()
+        for o_v in range(3):
+            self.send(b&quot;Select challenge parts: 1, 2, 3\n&quot;)
+            parts = self.recv().decode().split()
+
+            if &#39;1&#39; in parts:
+                self.send(b&quot;Part 1\n&quot;)
+                for i in range(12):
+                    self.send(f&quot;Message &#123;i + 1&#125;: &quot;.encode())
+                    msg = self.recv()
+                    used_messages.add(msg)
+                    k = lcg.next()
+                    r, s = dsa.sign(msg, k)
+                    self.send(f&quot;r = &#123;r&#125;, ks = &#123;[k % p for p in small_primes]&#125;\n&quot;.encode())
+
+            if &#39;2&#39; in parts:
+                self.send(b&quot;Part 2\n&quot;)
+                for _ in range(307):
+                    k = lcg.next()
+                for i in range(10):
+                    self.send(f&quot;Message &#123;i + 1&#125;: &quot;.encode())
+                    msg = self.recv()
+                    k = lcg.next() % dsa.q
+                    r, s = dsa.sign(msg, k)
+                    self.send(f&quot;Signature: r = &#123;r&#125;, s = &#123;s&#125;\n&quot;.encode())
+                    used_messages.add(msg)
+
+            if &#39;3&#39; in parts:
+                self.send(b&quot;Part 3\n&quot;)
+                self.send(b&quot;Forged message: &quot;)
+                final_msg = self.recv()
+                self.send(b&quot;Forged r: &quot;)
+                r = int(self.recv())
+                self.send(b&quot;Forged s: &quot;)
+                s = int(self.recv())
+
+                if final_msg in used_messages:
+                    self.send(b&quot;Message already signed!\n&quot;)
+                elif dsa.verify(final_msg, r, s):
+                    self.send(f&quot;Good! Your flag: &#123;flag&#125;\n&quot;.encode())
+                else:
+                    self.send(b&quot;Invalid signature.\n&quot;)
+</code></pre><p>在多组签名中，我们的私钥是一样的，所以我们可以利用多组r,s构造格，就是HNP问题，LCG部分可以不用，算是非预期吧</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><pre><code>from Crypto.Util.number import long_to_bytes
+from gmpy2 import gcd, invert  # &#39;invert&#39; is typically used for computing inverses in gmpy2
+from pwn import*
+sh=remote(&quot;127.0.0.1&quot;,59003)
+sh.recvuntil(b&#39;!\n&#39;)
+sh.recvuntil(b&#39;\n&#39;)
+
+sh.recvuntil(b&#39;p = &#39;)
+p=int(sh.recvuntil(b&#39;,&#39;).decode()[:-1])
+print(&#39;p = &#39;,p)
+sh.recvuntil(b&#39;q = &#39;)
+q=int(sh.recvuntil(b&#39;,&#39;).decode()[:-1])
+print(&#39;q = &#39;,q)
+sh.recvuntil(b&#39;g = &#39;)
+g=int(sh.recvuntil(b&#39;,&#39;).decode()[:-1])
+print(&#39;g = &#39;,g)
+sh.recvuntil(b&#39;y = &#39;)
+y=int(sh.recvuntil(b&#39;\n&#39;).decode()[:-1])
+print(&#39;y = &#39;,y)
+sh.recvuntil(b&#39;] &#39;)
+sh.sendline(b&#39;2&#39;)
+R=[]
+S=[]
+for i in range(10):
+    sh.recvuntil(b&#39;] &#39;)
+    sh.sendline(b&#39;a&#39;)
+
+    sh.recvuntil(b&#39;r = &#39;)
+    r=int(sh.recvuntil(b&#39;,&#39;).decode()[:-1])
+    sh.recvuntil(b&#39;s = &#39;)
+    s=int(sh.recvuntil(b&#39;\n&#39;).decode()[:-1])
+    R.append(r)
+    S.append(s)
+print(R,S)
+print(len(R),len(S))
+</code></pre><p>然后进行HNP，可以参考<a target="_blank" rel="noopener" href="https://dexterjie.github.io/2024/07/26/DSA/?highlight=hnp#一类基于DSA的HNP问题">DSA数字签名 | DexterJie’Blog</a></p>
+<pre><code>from Crypto.Util.number import long_to_bytes
+from gmpy2 import gcd, invert  # &#39;invert&#39; is typically used for computing inverses in gmpy2
+R=[1021770883701960511201640510248080619540924006035, 939980824533482680071891371385459446417446481575, 321734702046585082499549250057285024121364050648, 590137946580634585425699916726669391077275435190, 389010470607883185570459729637848331362368697588, 1267566333105232950079636588484087666832425168485, 661447467307577463017118086868012137924145398407, 529403064158334841058264011428420779654337823871, 1106580011000751081816782060668695678730882806284, 231243816276112071490230542024917875432952301703] 
+S=[976289560224399246814179592627217361363606715460, 564075443563819608133729682604966315181766060038, 176492046611389625475944186436593241474903505221, 418702694170005727492996057810310565725866192577, 939492702905681412613217422286443740989487169290, 572233333315427970630247607847915555163210662283, 114921765547548492840109993041777558505058882618, 1286663188240954069077017764113323165750281939960, 559181084332499718142035179645661096802685815385, 113637958382403127180167384659270018402064396431]
+import hashlib
+from Crypto.Util.number import *
+
+p =  184352699172192576270535944394450689601424152593934253476634864667530549943623545663040121406222033469867822007490624607150449533351028007649079671823930639894259153639431593427418637301705583834256344087212849054820629604266938603002612952530534395948672534275310804229044744624757608906107492972246321630467
+q =  1427475768627039429244287846531087092897981204933
+g =  179483243075904419855912998377411172058265425529332248345132802466991524049692135618377118498301129461020930474539980424661227889497234584809425572665861532126589551010542468047939006056449514768312598585142121764108071687257917794156000007175743318015987068492602701013540262918705248846831651675444456948643
+y =  21091748292290526471555817007802280265346796219876888467762454268134814091273317992821975006174684323984671010080915673195420537285518300367950163468121475755024858761243585366476146847633249721847637924491721703590108964391014720328881200066815781813425008805252191522393702003656562568284814395007242535164
+H = [int(hashlib.sha256(&#39;a&#39;.encode()).hexdigest(),16) for i in range(10)]
+def get_k():
+    n = len(R)
+    r0 = R[0]
+    h0 = H[0]
+    s0 = S[0]
+    A = []
+    B = []
+
+    for i in range(n):
+        a = inverse((r0 * S[i]),q) * (R[i] * s0) % q
+        b = inverse((r0 * S[i]),q) * (H[i]*r0 - h0 * R[i])
+        A.append(a)
+        B.append(b)
+
+    Ge = Matrix(ZZ,n+2,n+2)
+    for i in range(n):
+        Ge[i,i] = q
+        Ge[-2,i] = A[i]
+        Ge[-1,i] = B[i]
+    K = 2**160
+    Ge[-2,-2] = 1
+    Ge[-1,-1] = K
+
+    for line in Ge.LLL():
+        if abs(line[-1]) == K:
+            return line[-2]
+h=H[0]
+k= get_k()
+print(k)
+inv_r=inverse(R[0],q)
+x = ((S[0]*k%q-h)*inv_r) % q
+print(x)
+</code></pre><p>最后与提交签名</p>
+<pre><code>
+from Crypto.Util.number import *
+from hashlib import sha256
+from gmpy2 import gcd, invert  # &#39;invert&#39; is typically used for computing inverses in gmpy2
+from pwn import*
+sh=remote(&quot;127.0.0.1&quot;,59003)
+p =  184352699172192576270535944394450689601424152593934253476634864667530549943623545663040121406222033469867822007490624607150449533351028007649079671823930639894259153639431593427418637301705583834256344087212849054820629604266938603002612952530534395948672534275310804229044744624757608906107492972246321630467
+q =  1427475768627039429244287846531087092897981204933
+g =  179483243075904419855912998377411172058265425529332248345132802466991524049692135618377118498301129461020930474539980424661227889497234584809425572665861532126589551010542468047939006056449514768312598585142121764108071687257917794156000007175743318015987068492602701013540262918705248846831651675444456948643
+y =  21091748292290526471555817007802280265346796219876888467762454268134814091273317992821975006174684323984671010080915673195420537285518300367950163468121475755024858761243585366476146847633249721847637924491721703590108964391014720328881200066815781813425008805252191522393702003656562568284814395007242535164
+
+sh.recvuntil(b&#39;!\n&#39;)
+sh.recvuntil(b&#39;\n&#39;)
+x = 1295746761900640917551304835351915400403590832043
+sh.recvuntil(b&#39;] &#39;)
+sh.sendline(b&#39;3&#39;)
+
+end_m=b&#39;b&#39;
+sh.recvuntil(b&#39;]&#39;)
+sh.sendline(end_m)
+
+end_h = bytes_to_long(sha256(b&#39;b&#39;).digest())
+r_ = pow(g,1,p)%q
+s_ = ((end_h+x*r_)*inverse(1,q))%q
+print(r_,s_)
+
+sh.recvuntil(b&#39;]&#39;)
+sh.sendline(str(r_).encode())
+sh.recvuntil(b&#39;]&#39;)
+sh.sendline(str(s_).encode())
+sh.recvlines()
+
+sh.interactive()
+</code></pre>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

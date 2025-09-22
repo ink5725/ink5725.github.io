@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>WKCTF2024 | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>WKCTF2024</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/3
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #00bcd4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #03a9f4">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #00bcd4">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="fl-g"><a href="#fl-g" class="headerlink" title="fl@g"></a>fl@g</h2><p>task.py</p>
+<pre><code>from Crypto.Util.number import *
+from sympy import *
+from tqdm import *
+from secret import flag
+from itertools import *
+from math import factorial
+import string
+
+table = string.ascii_letters + string.digits + &quot;@?!*&quot;
+
+def myprime():
+    num = 0
+    for i in tqdm(permutations(table) , total=factorial(len(table))):
+        temp = &quot;&quot;.join(list(i))
+        if(&quot;flag&quot; in temp or &quot;FLAG&quot; in temp or &quot;f14G&quot; in temp or &quot;7!@9&quot; in temp or &quot;🚩&quot; in temp):
+            num += 1
+    return nextprime(num)
+
+m = bytes_to_long(flag)
+n = myprime()*getPrime(300)
+c = pow(m,65537,n)
+
+print(&quot;n =&quot;,n)
+print(&quot;c =&quot;,c)
+
+
+&#39;&#39;&#39;
+n = 10179374723747373757354331803486491859701644330006662145185130847839571647703918266478112837755004588085165750997749893646933873398734236153637724985137304539453062753420396973717
+c = 1388132475577742501308652898326761622837921103707698682051295277382930035244575886211234081534946870195081797116999020335515058810721612290772127889245497723680133813796299680596
+&#39;&#39;&#39;
+</code></pre><p>容斥原理：</p>
+<p>p=nextprime(4⋅63⋅62!−4⋅60!+57!)</p>
+<p>这是基于包含“flag”、“FLAG”、“f14G”、“7!@9”这四个子串的排列数的容斥公式计算得出的（其中 “f14G” 与 “flag”以及 “FLAG”由于共享某些字符无法同时出现）。</p>
+<p>利用 sympy 计算 factorial 与 nextprime 得到 p。</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><pre><code>from Crypto.Util.number import long_to_bytes, inverse, bytes_to_long
+from sympy import factorial, nextprime
+
+# 已知参数（样例）
+n = 10179374723747373757354331803486491859701644330006662145185130847839571647703918266478112837755004588085165750997749893646933873398734236153637724985137304539453062753420396973717
+c = 1388132475577742501308652898326761622837921103707698682051295277382930035244575886211234081534946870195081797116999020335515058810721612290772127889245497723680133813796299680596
+
+# 根据 myprime() 的数学描述：
+# 对于排列数：总排列数为 66!，单个子串（长度4）出现的排列数为 63 * 62!
+# 设 A = &#123;&quot;flag&quot;&#125;, B = &#123;&quot;FLAG&quot;&#125;, C = &#123;&quot;f14G&quot;&#125;, D = &#123;&quot;7!@9&quot;&#125;
+# 其中 A∩C 以及 B∩C 不可能同时出现
+# 利用容斥原理：
+#   count = |A|+|B|+|C|+|D| - (|A∩B|+|A∩D|+|B∩D|+|C∩D|) + |A∩B∩D|
+# 对于任意出现的单个子串，排列数为 63 * 62! ；
+# 对于两个不相交的固定子串，排列数为 60! ；
+# 对于三个不相交的固定子串，排列数为 57! ；
+# 因此：
+num = 4 * 63 * factorial(62) - 4 * factorial(60) + factorial(57)
+p = nextprime(num)
+
+# 计算 q (注意 n = p * q)
+q = n // p
+
+# 计算 RSA 私钥指数 d
+e = 65537
+phi = (p - 1) * (q - 1)
+d = inverse(e, phi)
+
+# 解密得到 m
+m = pow(c, d, n)
+flag = long_to_bytes(m)
+print(flag)
+</code></pre><h1 id="Meet-me-in-the-summer"><a href="#Meet-me-in-the-summer" class="headerlink" title="Meet me in the summer"></a>Meet me in the summer</h1><p>task.py</p>
+<pre><code>from random import choice, randint
+from Crypto.Util.number import isPrime, sieve_base as primes, getPrime
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+from hashlib import md5
+
+flag = b&#39;WKCTF&#123;&#125;&#39;
+flag = pad(flag,16)
+def myPrime(bits):
+    while True:
+        n = 2
+        while n.bit_length() &lt; bits:
+            n *= choice(primes)
+        if isPrime(n + 1):
+            return n + 1
+
+def encrypt(key, message):
+    return pow(65537, message, key)
+
+p = myPrime(512)
+q = getPrime(512)
+N = p * q
+m = [getPrime(512) for i in range(1024)]
+enc = [encrypt(N, _) for _ in m]
+
+a = [randint(1,2 ** 50) for i in range(70)]
+b = [randint(1,2 ** 50) for i in range(50)]
+secret = randint(2**119, 2**120)
+
+ra = 1
+rb = 1
+for i in range(120):
+    if(i &lt; 70):
+        if (secret &gt;&gt; i) &amp; 1:
+            ra *= a[i]
+            ra %= p
+    else:
+        if (secret &gt;&gt; i) &amp; 1:
+            rb *= b[i-70]
+            rb %= q
+
+
+key = md5(str(secret).encode()).hexdigest()[16:].encode()
+cipher = AES.new(key,AES.MODE_ECB)
+
+with open(&quot;output.txt&quot;,&quot;w&quot;) as f:
+    f.write(f&#39;c = &#123;cipher.encrypt(flag).hex()&#125;\n&#39;)
+    f.write(f&#39;m = &#123;m&#125;\n&#39;)
+    f.write(f&#39;enc = &#123;enc&#125;\n&#39;)
+    f.write(f&#39;a = &#123;a&#125;\n&#39;)
+    f.write(f&#39;b = &#123;b&#125;\n&#39;)
+    f.write(f&#39;ra = &#123;ra&#125;\n&#39;)
+    f.write(f&#39;rb = &#123;rb&#125;\n&#39;)
+</code></pre><p>第一部分：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/maple3142/My-CTF-Challenges/blob/master/ImaginaryCTF/Round 26/no_modulus/chall.py">My-CTF-Challenges/ImaginaryCTF/Round 26/no_modulus/chall.py at master · maple3142/My-CTF-Challenges · GitHub</a></p>
+<script type="math/tex; mode=display">
+enc_i=65537^{m_i}\ mod\ N</script><script type="math/tex; mode=display">
+\sum a_im_i=0</script><script type="math/tex; mode=display">
+\prod_{i=1}^{n} \text{enc}_i^{a_i} = 65537^{m_1 + m_2 + \ldots + m_n} \equiv 65537^0 \mod N</script><p>构造格基</p>
+<script type="math/tex; mode=display">
+(a_1,a_2,...,a_n)
+\begin{pmatrix}
+1 & 0 & \cdots & 0 & m_1 \\
+0 & 1 & \cdots & 0 & m_2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & 1 & m_n 
+\end{pmatrix}
+=
+(a_1, a_2, \ldots, a_n, 0)</script><script type="math/tex; mode=display">
+\prod_{i=1}^{n} 65537^{a_i}</script><script type="math/tex; mode=display">
+\frac{x}{y}\equiv 1(mod\ N)</script><p>所以$N=gcd(x_0-y_0,x_1-y_1)$</p>
+<pre><code>f=open(&#39;output.txt&#39;,&#39;r&#39;).readlines()
+m = eval(f[1].strip().split(&quot;=&quot;)[-1])
+enc = eval(f[2].strip().split(&quot;=&quot;)[-1])
+m=m[:100]
+enc=enc[:100]
+n=len(m)
+K=2**512
+L=Matrix(ZZ,n,n+1)
+for i in range(n):
+    L[i,i]=1
+    L[i,-1]=K*m[i]
+LL=L.LLL()
+print(L[0][:-1])
+print(L[1][:-1])
+xx = product([ZZ(y) ^ x for x, y in zip(L[0][1:], cs)])
+yy = product([ZZ(y) ^ x for x, y in zip(L[1][1:], cs)])
+N= gcd(xx.numer() - xx.denom(), yy.numer() - yy.denom())
+print(N)
+</code></pre><p>然后用Pollard’s p-1方法分解n，因为myPrime这个函数太明显了。</p>
+<pre><code>import gmpy2
+
+N = 3365950545896839807600753681439061096312578337873460615427103468443333055935222147455641892341798604350037357999848711970084367398055755047567367304166808830853176966914407772226194410114093800191521813038405295729046243670270181161836427221727870133145321390846488824416000038564306005700271206427983462394735137
+
+def Pollards_p_1(N):
+    a = 2
+    n = 2
+    while True:
+        a = pow(a, n, N)
+        res = gmpy2.gcd(a - 1, N)
+        if res != 1 and res != N:
+            return res
+        n += 1
+
+p = Pollards_p_1(N)
+q = N // p
+print(f&quot;p = &#123;p&#125;&quot;)
+print(f&quot;q = &#123;q&#125;&quot;)
+&quot;&quot;&quot;
+p = 266239931579101788237217833822346198682539336616234011732898866661722928035386747695230192006141430294833011494452114878744414084025005167432139516382471637567
+q = 12642545864299817932696528548195775137854645688987690739317393212595731628016420449974358672452504599152386464349500792607469701592216257829464295238775711
+
+&quot;&quot;&quot;
+</code></pre><p>接着就是处理这个secret，</p>
+<script type="math/tex; mode=display">
+ra\equiv a_0k_{70}*a_1k_{69}*...a_{69}k_1\mod p</script><p>然后取log，取一个生成元g，根据群论的性质，它们是在mod p-1下的，具体说就是$g^{p-1}\equiv 1\ mod\ p$,p-1是指数周期，g的指数必须在模p-1下，如果$g^{p}\equiv g(mod\ p)$.就是它还可以被压缩</p>
+<script type="math/tex; mode=display">
+\log_g ra \equiv \log_g a_0 k_{r0} + \log_g a_1 k_{r0} + \cdots + \log_g a_6 k_1 \pmod{p-1}</script><p>这里我们的k只取1，所以又可以简化为</p>
+<script type="math/tex; mode=display">
+\log_g ra \equiv \log_g a_0  + \log_g a_1  + \cdots + \log_g a_6  \pmod{p-1}</script><p>就是个背包问题</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+2 & 0 & \cdots & 0 & 0 & \log_g a_0 \\
+0 & 2 & \cdots & 0 & 0 & \log_g a_1 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+0 & 0 & \cdots & 2 & 0 & \log_g a_{69} \\
+0 & 0 & \cdots & 0 & 1 & p-1 \\
+1 & 1 & \cdots & 1 & 1 & \log_g ra
+\end{bmatrix}</script><pre><code>a = [810922431519561, 446272766988725, 167807402211751, 137130339017755, 214986582563833, 141074297736993, 1116944910925939, 827779449967114, 887541522977945, 698795918391810, 180874459256817, 42309568567278, 148563974468327, 43541894027392, 369461465628947, 226728238060977, 902554563386031, 369980733296039, 495826170604031, 202556971656774, 1124261777691439, 533425503636189, 393536945515725, 242107802161603, 506637008093239, 846292038115984, 686372167052341, 923093823276073, 557898577262848, 719859369760663, 51513645433906, 946714837276014, 24336055796632, 302053499607130, 970564601798660, 1082742759743394, 499339281736843, 13407991387893, 667336471542364, 38809146657917, 29069472887681, 420834834946561, 1044601747029985, 854268790341671, 918316968972873, 737863884666895, 1036231016223653, 792781009835942, 142149344663288, 828341073371968, 186470549619656, 279923049419811, 487848895651491, 737257307326881, 1065005635075133, 628186519179693, 554767859759026, 606623194910240, 497855707815081, 88176594691403, 278020899501967, 440746393631841, 921270589876795, 800698974218498, 437669423813782, 717945417305277, 191204872168085, 791101652791845, 772875127585562, 174750251898037]
+ra = 215843182933318975496532456029939484729806294336845406882490936458079210569046120528327121994744424727894554328344229010979127024288283698486557728305231262446
+p = 266239931579101788237217833822346198682539336616234011732898866661722928035386747695230192006141430294833011494452114878744414084025005167432139516382471637567
+
+F = GF(p)
+g = F.primitive_element()     #获取原根g
+
+tmp = discrete_log(mod(ra,p),mod(g,p))
+n = len(a)
+A = [discrete_log(mod(a[i],p),mod(g,p)) for i in range(n)]
+
+d = n / log(max(A), 2)
+print(CDF(d))
+assert CDF(d) &lt; 0.9408
+
+L = Matrix(ZZ,n+2,n+2)
+for i in range(n):
+    L[i,i] = 2
+    L[i,-1] = A[i]
+    L[-1,i] = 1
+
+L[-1,-2] = 1
+L[-2,-2] = 1
+L[-2,-1] = p-1
+L[-1,-1] = tmp
+
+for line in L.BKZ(block_size = 30):    # LLL 也行，
+    if line[-1] == 0:
+        t = &#39;&#39;
+        for i in line[:-2]:
+            if i == 1:
+                t+= &#39;0&#39;  
+            if i == -1:
+                t+= &#39;1&#39;
+    if len(t) == 70:
+        print(t[::-1])
+        break
+
+# 1100100011000011000001010101000010111110000001000010101010100100011011
+</code></pre><p>接下来后50位，因为模的是q，不是光滑的。所以我们要别的方法</p>
+<script type="math/tex; mode=display">
+rb=b_0k_{49}...b_{49}k_0\ mod\ q</script><p>中间相遇攻击：</p>
+<script type="math/tex; mode=display">
+t_1=b_0k_{49}*...b_{24}k_{25}\ (mod\ q)</script><script type="math/tex; mode=display">
+t_2=b_{25}k_{24}*b_{26}k_{23}*...*b_{49}b_0\ (mod\ q)</script><p>$rb*t_2^{-1}=t_1 mod\ q$</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
