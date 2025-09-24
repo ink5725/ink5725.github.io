@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>UDMCTF中的块加密的差分攻击 | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>UDMCTF中的块加密的差分攻击</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/4/25
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #03a9f4">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #00bcd4">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #00a596">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <p>[TOC]</p>
+<p>UMDCTF-2025有这么一题，运用了ARX密码差分攻击</p>
+<p>task.py</p>
+<pre><code>#!/usr/local/bin/python
+from Crypto.Util.number import bytes_to_long
+from Crypto.Util.Padding import pad
+import os
+
+def rot(n, r):
+    return (n &gt;&gt; r) | ((n &lt;&lt; (256 - r) &amp; (2**256 - 1)))
+
+round_constants1 = [3, 141, 59, 26, 53,  58]
+round_constants2 = [2, 7,   18, 28, 182, 8 ]
+
+M = 2**256
+
+def encrypt(key, block):
+    for i in range(6):
+        block = (block + key) &amp; (M-1)
+        block = block ^ rot(block, round_constants1[i]) ^ rot(block, round_constants2[i])
+    return block
+
+key = bytes_to_long(os.urandom(32)) 
+
+for _ in range(2**14):
+    i = input(&quot;Plaintext (hex): &quot;)
+    if i[0] == &#39;q&#39;:
+        break
+    pt = bytes.fromhex(i)
+    pt = pad(pt, block_size=32)
+    blocks = [pt[i:i+32] for i in range(0, len(pt), 32)]
+    if len(blocks) &gt; 300:
+        break
+
+    ct = [hex(encrypt(key, bytes_to_long(b)))[2:].zfill(64) for b in blocks]
+    print(&quot;Ciphertext: &quot; + &#39;&#39;.join(ct))
+
+
+flag = open(&quot;./flag.txt&quot;, &#39;rb&#39;).read()
+assert len(flag) &lt;= 32
+
+print(&quot;Flag: &quot;, hex(encrypt(key, bytes_to_long(flag)))[2:].zfill(64))
+</code></pre><h2 id="加密函数的逆置换"><a href="#加密函数的逆置换" class="headerlink" title="加密函数的逆置换"></a>加密函数的逆置换</h2><p>key是随机生成的32字节密钥。需要我们输入明文，然后对明文进行进行32字节一组的块加密。我们看加密函数</p>
+<pre><code>def rot(n, r):
+    return (n &gt;&gt; r) | ((n &lt;&lt; (256 - r) &amp; (2**256 - 1)))
+
+round_constants1 = [3, 141, 59, 26, 53,  58]
+round_constants2 = [2, 7,   18, 28, 182, 8 ]
+
+def encrypt(key, block):
+    for i in range(6):
+        block = (block + key) &amp; (M-1)
+        block = block ^ rot(block, round_constants1[i]) ^ rot(block, round_constants2[i])
+    return block
+</code></pre><p>这里有旋转移位，异或，是ARX型密码。这里我们的block先加上key，然后将block与两次旋转结果再异或。对于这个rot函数，就是把一个数的低r位拿到前面，也就是</p>
+<script type="math/tex; mode=display">
+i^{'}=(i-r)mod\ 256</script><p>这个算法是可逆的。我这边可以解释一下：</p>
+<p>首先，找到M定义为最小的正整数n这样</p>
+<script type="math/tex; mode=display">
+M^n=M</script><p>让我们从扩展函数squared开始：</p>
+<script type="math/tex; mode=display">
+M^2 = (I + C^{a} + C^{b})(I + C^{a} + C^{c})\\
+= I^2 + I C^{a} + I C^{c} + C^{a} I + C^{a} C^{a} + C^{a} C^{b} + C^{a} C^{c} + C^{b} I + C^{b} C^{a} + C^{b} C^{c}
+\\
+= I + C^{a} + C^{b} + C^{c} + C^{a} C^{a} + C^{a} C^{b} + C^{a} C^{c} + C^{b} C^{a} + C^{b} C^{b}
+
+\\= I + 2C^{a} + 2C^{b} + 2C^{a} C^{b} + C^{c} + C^{a} C^{c} + C^{b} C^{c}
+\\
+= I + C^{2a} + C^{2b}</script><p>比如</p>
+<script type="math/tex; mode=display">
+M^{32}=I+C^{32a}+C^{32b}=3I=I</script><p>我们n有$M^{32}=nI$</p>
+<script type="math/tex; mode=display">
+M^{-1} = M^{31} \\
+= M M^{2}M^{4} M^{8} M^{16} \\
+= (I + C^{a} + C^{b})(I + C^{2a} + C^{2b})(I + C^{b} + C^{c})(I + C^{16a} + C^{16b})</script><p>如果 $n$ 是奇数，则简化为$ I$；如果 $n$ 是偶数，则结果为零。因此，要使其成为可逆函数，$n$必须是奇数。</p>
+<p>这里就是我们通过的逆函数</p>
+<pre><code>uint32_t xor_rot2_inv(uint32_t x, uint32_t a, uint32_t b)
+&#123;
+  // Perform the five steps (and keep &#39;a&#39; and &#39;b&#39; in range given
+  // how &#39;rot&#39; is defined above) as a sequence of transforms.
+  // The order reversed of above (products of powers of M commute).
+  x = x^rot(x,a)^rot(x,b); a = (a+a) &amp; 0x1f; b = (b+b) &amp; 0x1f; // t0 = M x
+  x = x^rot(x,a)^rot(x,b); a = (a+a) &amp; 0x1f; b = (b+b) &amp; 0x1f; // t1 = M^2 t0
+  x = x^rot(x,a)^rot(x,b); a = (a+a) &amp; 0x1f; b = (b+b) &amp; 0x1f; // t2 = M^4 t1
+  x = x^rot(x,a)^rot(x,b); a = (a+a) &amp; 0x1f; b = (b+b) &amp; 0x1f; // t3 = M^8 t2
+  x = x^rot(x,a)^rot(x,b);                                     // x&#39; = M^16 t3
+  return x;
+&#125;
+</code></pre><p>所以我们在这题这部分的逆函数是</p>
+<pre><code>def undo_rotations(block, a, b):
+    &quot;&quot;&quot;
+    逆转 “block ^ rot(block,a) ^ rot(block,b)” 这一步。
+    因其不是单次可逆，需要迭代逼近：x_&#123;t+1&#125; = y ^ rot(x_t,a) ^ rot(x_t,b)
+    重复 8 次足够收敛到原始 block。
+    &quot;&quot;&quot;
+    for _ in range(8):
+        block = block ^ rot(block, a) ^ rot(block, b)
+        # 注意：原加密过程中 a,b 会翻倍，两次迭代时要同步
+        a = (a + a) &amp; 0xff
+        b = (b + b) &amp; 0xff
+    return block
+</code></pre><h2 id="差分攻击"><a href="#差分攻击" class="headerlink" title="差分攻击"></a>差分攻击</h2><p>现在的话我们就要考虑怎么输入明文，进行选择明文攻击。这里就需要用到差分攻击的思想</p>
+<h3 id="什么是差分攻击"><a href="#什么是差分攻击" class="headerlink" title="什么是差分攻击"></a>什么是差分攻击</h3><p>简单的例子，比如一个简单的异或加密算法</p>
+<script type="math/tex; mode=display">
+c=m\oplus k</script><p>c为密文，m是明文，k是密钥</p>
+<script type="math/tex; mode=display">
+c_0\oplus c_1=(m_0\oplus k)\oplus(m_1\oplus k)=m_0\oplus m_1</script><p>我们可以从一对密文中直接得到一对明文的异或，经过一次异或运算消除了密钥</p>
+<h3 id="差分攻击的核心思想"><a href="#差分攻击的核心思想" class="headerlink" title="差分攻击的核心思想"></a>差分攻击的核心思想</h3><ol>
+<li><strong>差分对</strong><br> 选取或构造一对明文$ (P,P^′)$，它们之间满足已知的差分 $ΔP=P⊕P^′$</li>
+<li><strong>差分传播</strong><br> 跟踪 $ΔP$ 在每一轮的非线性／线性层（如加法、XOR、旋转、S-box）中如何变成中间差分 $ΔX_i$;</li>
+<li><strong>轮内统计</strong><br> 某些差分对在某轮后落到特定位时具有较高概率；利用这些高概率特征，对给定密文对 $(C,C^′)$ 统计出现频次，来验证或排除某个子密钥假设；</li>
+</ol>
+<h3 id="ARX密码的差分攻击"><a href="#ARX密码的差分攻击" class="headerlink" title="ARX密码的差分攻击"></a>ARX密码的差分攻击</h3><script type="math/tex; mode=display">
+    X ← (X + K) mod 2^256\\
+    X ← X ⊕ ROT(X, a) ⊕ ROT(X, b)</script><p>我们要恢复K(256位)，则需要</p>
+<p><strong>构造明文差分</strong></p>
+<p>我们先不考虑旋转直接看这段代码如何让明文序列在最低位（bit 0）线性递增</p>
+<p>我们选</p>
+<pre><code>base = 2**246 * j
+</code></pre><p>它在二进制里是什么样子？</p>
+<p>​    $2^{246}$在二进制里就是一个在第 246 位上有一个 1，其它位全是 0</p>
+<pre><code>bit index:  ... 248 247 246 245 ... 3 2 1 0
+2^246      :   ...  0   0   1   0 ... 0 0 0 0
+</code></pre><p>乘以 j（不管 j是 1、2、3……），都只会影响那第 246 及更高位上的排列组合，高达第 ∞ 位都在那一串“高位”里；而低于 246 位的所有位——也就是 bit 0 到 bit 245——<strong>始终都是 0</strong>。</p>
+<p>然后我们做</p>
+<pre><code>P_k = base + k
+</code></pre><p>也就是占据了最低 8 位（bit 0…7）。因为 k&lt;256，做加法 <code>base + k</code>：</p>
+<ol>
+<li>它只会在“低 8 位”上产生进位或翻转，因为最高也就到 bit 7；</li>
+<li>bit 8…bit 245 上仍然是 0，不会被 kkk 干扰（因为 kkk 只能把前 8 位从 00000000 → 11111111）；</li>
+<li>bit 246 及以上保持跟 <code>base</code> 一样，和 <code>k</code> 无关。</li>
+</ol>
+<pre><code>for k in range(samples):      # samples = 256
+    pt = base + k
+</code></pre><p>当k从0到255变化时，base+k只会让最低8bit变化</p>
+<script type="math/tex; mode=display">
+P_k = B \|_ \text{高位} \| k_{8\text{-bit}}</script><script type="math/tex; mode=display">
+P_0 = B_{\text{高}} \| 00000000
+\\
+P_1 = B_{\text{高}} \| 00000001
+\\
+P_2 = B_{\text{高}} \| 00000010
+\\
+\vdots
+\\
+P_{255} = B_{\text{高}} \| 11111111</script><p>它们之间的差分$ΔP_k=P_k\oplus P_{k+1}$</p>
+<p>但这有个问题，就是如果有进位会导致差分异或结果不对</p>
+<p>因为<code>base + k</code> 的差分会落在最低的 8 个比特（bit 0…7）上；而这 8 个比特在加法中都可能触发进位，并影响后续 XOR/rot 层的多个位置</p>
+<p>所以我们要进行旋转</p>
+<pre><code>pt = rot(base + k, 256 - key_index)
+</code></pre><p>旋转后，这些差分就恰好分布在新位置</p>
+<p>$keyindex,  keyindex+1,  …,  keyindex+7(mod256)$</p>
+<p>即 “以 <code>keyindex</code> 为起点、长度 8 的那一段”——而其它 248 位都一样没有差分。</p>
+<p><strong>统计与猜测</strong></p>
+<p>重复多次（25 轮，每轮 256 个样本），累计每个样本的“carry 权重”；</p>
+<p>按奇偶性将样本分成两类：若偶数编号样本的高权重更多，就猜 key 比特为 1，反之为 0；</p>
+<p>这样就能用差分概率偏差把 key 的每一位排除一半（从 2 候选到 1）。</p>
+<p><strong>组合与容错</strong></p>
+<p>前 250 位用上述方法逐 bit 猜出，剩下 6 位由于统计噪声较大，改用暴力枚举；</p>
+<p><strong>举一个例子回顾刚才过程</strong></p>
+<p>我们假设要猜的 <code>key_index = 3</code>（倒数第 3 位，从 0 开始编号），</p>
+<p>在真实脚本里会把最低位的差分旋转到这个位置，这里为了演示直接在明文里操作。</p>
+<p>令两条明文：</p>
+<pre><code>vbnetCopyEditP      = 0b  0 0 0 0 0 0 0 0   = 0x00  
+P&#39;     = P ⊕ (1 &lt;&lt; 3)        = 0b 00001000 = 0x08
+ΔP     = P ⊕ P&#39;              = 0b 00001000
+</code></pre><p>也就是说，只有 <strong>bit 3</strong> 从 0→1。</p>
+<hr>
+<ol>
+<li>经过“加 key”层</li>
+</ol>
+<p>设对应的 <code>key = 0b k₇k₆k₅k₄ k₃k₂k₁k₀</code>，这里我们只关心 k₃（第 3 位）：</p>
+<pre><code>vbnetCopyEditX  = P + key
+X&#39; = P&#39; + key
+</code></pre><p>加法和进位</p>
+<p>用二进制加法列竖式（只看低 5 位以示意）：</p>
+<pre><code>sqlCopyEdit   P        = ... 00000 000  
+ + key      = ... k₄ k₃ k₂ k₁ k₀
+  -----------------------------
+   X        = ...  k₄ k₃ k₂ k₁ k₀    (no carry from P, since P low bits are zero)
+vbnetCopyEdit   P&#39;       = ... 01000 000  
+ + key      = ... k₄ k₃ k₂ k₁ k₀
+  -----------------------------
+   X&#39;       = ...  k₄ k₃ k₂ k₁ k₀
+            + carry_in_from_bit3
+</code></pre><p>对 <code>X&#39;</code>，因为 P’ 在 bit 3 上多了 1，就在加到 key 的那一位上会产生“进位”：</p>
+<ul>
+<li>如果 k₃ = 0，则 1 + 0 → bit 3 变 1，无进位；</li>
+<li>如果 k₃ = 1，则 1 + 1 → bit 3 变 0，并 <strong>向 bit 4 产生进位</strong>。</li>
+</ul>
+<p>于是，<code>X ⊕ X&#39;</code> 在 bit 3、bit 4 会表现出不同：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>k₃ 值</th>
+<th>bit 3 的 Δ</th>
+<th>bit 4 的 Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其它更高位除了进位连锁，也可能被影响，但我们只看最前面几位作为示例。</p>
+<hr>
+<ol>
+<li>经过 “XOR + Rotate” 层，并撤销最后一轮</li>
+</ol>
+<p>真实脚本里，下一步是</p>
+<pre><code>nginxCopyEditY  = X ⊕ rot(X, a) ⊕ rot(X, b)
+Y&#39; = X&#39; ⊕ rot(X&#39;, a) ⊕ rot(X&#39;, b)
+</code></pre><p>我们用 <code>undo_rotations</code> 把最后一轮的这一步撤销，只恢复到 “加 key 后” 的中间态 <code>X</code>、<code>X&#39;</code>。</p>
+<p>这样我们就可以直接对</p>
+<pre><code>ΔX = X ⊕ X&#39;
+</code></pre><p>做分析。</p>
+<ol>
+<li>取出 ΔX（差分异或）并统计 carry 痕迹</li>
+</ol>
+<p>假设我们观察到的 ΔX\Delta XΔX（只列低 6 位）是：</p>
+<pre><code>mathematicaCopyEditΔX = X ⊕ X&#39;
+     = ... 0 0 C₄ C₃ C₂ C₁ C₀
+</code></pre><p>上述表格告诉我们：如果 k₃=0，那么 C3=1,C4=0,C₃=1, C₄=0,C3=1,C4=0；如果 k₃=1，那么 C3=0,C4=1，C₃=0, C₄=1,C3=0,C4=1。</p>
+<p>这就给我们一个“区分”k₃ 的<strong>统计特征</strong>：</p>
+<p>​    k₃=0 时，ΔX 在 bit 3 上更有可能是 1；</p>
+<p>​    k₃=1 时，ΔX 在 bit 4 上更有可能是 1。</p>
+<p>脚本的 <code>get_weight</code> 正是把这些关键位（在 256 bit 里对应到 <code>(172 - key_index)...(176 - key_index)</code>） 抽出来加权累加：</p>
+<pre><code>weight = ΔX[pos0]*2⁶ + ΔX[pos1]*2⁴ + ΔX[pos2]*2³ + ...
+</code></pre><p>累计 25 轮 × 256 个样本后，“正确的 k₃ 假设” 会在这些位置积累明显更大的权重；</p>
+<p>“错误的 k₃ 假设” 则更分散，难以同时满足所有位的高权重。</p>
+<p>最终脚本对这 256 个样本分奇偶号统计高于阈值的次数，就能判断 k₃ 是 0 还是 1。</p>
+<p>我们的脚本是</p>
+<pre><code>def get_weight(key_index, diff):
+    &quot;&quot;&quot;
+    给定解密轮次后相邻两条分组的差分 diff（256位列表），
+    在差分传播的关键位置(172-key_index ... 176-key_index)做加权求和，
+    用来度量第 key_index 位的‘扰动强度’（carry 传播）。
+    &quot;&quot;&quot;
+    return (diff[(172 - key_index) % 256]) * 2**6 + \
+           (diff[(173 - key_index) % 256]) * 2**4 + \
+           (diff[(174 - key_index) % 256]) * 2**3 + \
+           (diff[(175 - key_index) % 256]) * 2**2 + \
+           (diff[(176 - key_index) % 256]) * 2**1这个的* 2**6 怎么理解
+</code></pre><p>这里的选值这样是因为</p>
+<p><code>2**6, 2**4, 2**3, 2**2, 2**1</code> 这些值不是随意选的，它们体现了“越接近起点（bit <code>key_index</code>）的 carry 传播越重要、越可靠”，所以权重越大。</p>
+<p>这段代码里，把第一个位置给了最高权重 <code>2**6=64</code>，下一个给 <code>2**4=16</code>，依次递减到 <code>2**1=2</code>。</p>
+<p>如果某条样本在第一个被关注的位发生了差分，就加 64 分；如果只在更远的位翻了，就只加 2、4、8、16 等较小分。</p>
+<p>所以我们的脚本是</p>
+<h2 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h2><pre><code>from Crypto.Util.number import bytes_to_long, long_to_bytes  # 大整数↔字节串 相互转换
+from pwn import *                                       # pwntools：用于远程/本地进程交互
+import itertools                                        # 方便做笛卡儿积、排列组合
+from tqdm import tqdm                                   # 进度条显示
+
+# 本脚本对 6 轮 ARX 密码做“差分统计”攻击，成功率约 25%。
+
+def rot(n, r):
+    # 256 位循环右移：把 n 的二进制整体向右滚动 r 位
+    # (n &gt;&gt; r) 逻辑右移，高位补 0
+    # (n &lt;&lt; (256-r)) &amp; (2**256-1) 把被右移“丢失”的低 r 位移到高端
+    return (n &gt;&gt; r) | ((n &lt;&lt; (256 - r) &amp; (2**256 - 1)))
+
+# 每一轮的两个旋转常数 (ARX 的 R1, R2)
+round_constants1 = [3, 141, 59, 26, 53, 58]
+round_constants2 = [2, 7, 18, 28, 182, 8]
+
+M = 2**256  # 模数
+N = 6       # 轮数
+
+def encrypt(key, block):
+    # 模拟服务器端的加密函数（客户端也用来验证）
+    for i in range(N):
+        # (1) 加密轮的“加 key”层
+        block = (block + key) &amp; (M-1)
+        # (2) 加密轮的“XOR+rot”层
+        block = block ^ rot(block, round_constants1[i]) ^ rot(block, round_constants2[i])
+    return block
+
+def get_weight(key_index, diff):
+    &quot;&quot;&quot;
+    给定解密轮次后相邻两条分组的差分 diff（256位列表），
+    在差分传播的关键位置(172-key_index ... 176-key_index)做加权求和，
+    用来度量第 key_index 位的‘扰动强度’（carry 传播）。
+    &quot;&quot;&quot;
+    return (diff[(172 - key_index) % 256]) * 2**6 + \
+           (diff[(173 - key_index) % 256]) * 2**4 + \
+           (diff[(174 - key_index) % 256]) * 2**3 + \
+           (diff[(175 - key_index) % 256]) * 2**2 + \
+           (diff[(176 - key_index) % 256]) * 2**1
+
+def undo_rotations(block, a, b):
+    &quot;&quot;&quot;
+    逆转 “block ^ rot(block,a) ^ rot(block,b)” 这一步。
+    因其不是单次可逆，需要迭代逼近：x_&#123;t+1&#125; = y ^ rot(x_t,a) ^ rot(x_t,b)
+    重复 8 次足够收敛到原始 block。
+    &quot;&quot;&quot;
+    for _ in range(8):
+        block = block ^ rot(block, a) ^ rot(block, b)
+        # 注意：原加密过程中 a,b 会翻倍，两次迭代时要同步
+        a = (a + a) &amp; 0xff
+        b = (b + b) &amp; 0xff
+    return block
+
+def decrypt(key, block):
+    &quot;&quot;&quot;
+    完整的解密流程：对 6 轮逆序执行
+      — 先 undo_rotations 还原 XOR+rot
+      — 再减去 key，撤销“加 key”
+    &quot;&quot;&quot;
+    for i in range(N-1, -1, -1):
+        a, b = round_constants1[i], round_constants2[i]
+        block = undo_rotations(block, a, b)
+        block = (block - key) % M
+    return block
+
+def l2n(v):
+    &quot;&quot;&quot;将 0/1 列表拼成大整数（密钥 bit 列表 → key 整数）&quot;&quot;&quot;
+    s = 0
+    for bit in v:
+        s = (s &lt;&lt; 1) | bit
+    return s
+
+def n2l(n):
+    &quot;&quot;&quot;将大整数展开成 256 位 0/1 列表&quot;&quot;&quot;
+    return list(map(int, bin(n)[2:].zfill(256)))
+
+# ==== 主流程：与远程服务交互，逐位猜 key ====
+io = remote(&quot;localhost&quot;, 1447)  # 连接到加密 oracle
+samples = 256                  # 每轮测试构造 256 条明文
+attempts = 25                  # 重复试验次数，累计统计差分
+
+print(&quot;Collecting samples...&quot;)
+guessed_key = [0] * 256       # 最终存放每一位猜测结果
+
+# 逐位猜测 key[255], key[254], ... , key[6]
+for key_index in tqdm(range(250)):  # 最前后 6 位留给后面枚举修正
+    carry_weights = &#123;k: 0 for k in range(samples)&#125;
+
+    # 对每个 key_index 做多轮采样
+    for j in range(attempts):
+        # base 值用于控制差分位置，保证只有第 key_index 位在变动
+        base = 2**246 * j
+        if key_index &gt; 200:
+            base = 2**100 * j
+
+        # 构造一批明文：旋转后让某一 bit 线性递增
+        plaintexts = []
+        for k in range(samples):
+            pt = base + k
+            pt = rot(pt, 256 - key_index)
+            plaintexts.append(hex(pt)[2:].zfill(64))
+
+        # 发送 batch，获取合并的密文
+        io.sendlineafter(b&#39;(hex): &#39;, &#39;&#39;.join(plaintexts).encode())
+        io.recvuntil(b&#39;Ciphertext: &#39;)
+        line = io.recvline(keepends=False).decode()
+        cts = bytes.fromhex(line)
+        # 拆分成 256-bit 块
+        cts = [bytes_to_long(cts[i:i+32]) for i in range(0, len(cts), 32)]
+
+        # 撤销最后一轮的 XOR+rot，得到“加 key”之前的中间状态
+        ucts = [undo_rotations(ct, round_constants1[N-1], round_constants2[N-1])
+                for ct in cts]
+
+        # 分析相邻两条的差分，累加 carry_weights
+        for k in range(samples):
+            u1 = list(map(int, bin(ucts[k])[2:].zfill(256)))
+            u2 = list(map(int, bin(ucts[(k+1)%samples])[2:].zfill(256)))
+            diff = [a ^ b for a, b in zip(u1, u2)]
+            carry_weights[k] += get_weight(key_index, diff)
+
+    # 从统计结果中筛选“权重大于阈值”的样本，看奇偶分布，
+    # 决定该 key_index 是 0 还是 1
+    weights = [(k, w) for k, w in carry_weights.items() if w &gt;= 600]
+    parity_0 = sum(1 for k, _ in weights if k % 2 == 0)
+    parity_1 = sum(1 for k, _ in weights if k % 2 == 1)
+    guess = 1 if parity_0 &gt; parity_1 else 0
+    guessed_key[255 - key_index] = guess
+
+# 通知服务器结束 query，读取 flag 密文
+io.sendline(b&quot;q&quot;)
+io.recvuntil(b&quot;Flag: &quot;)
+flag_ct = bytes_to_long(bytes.fromhex(io.recvline(keepends=False).decode()))
+
+print(&quot;Initial key guess:&quot;, guessed_key)
+
+# 用猜测的 key 解密试试看
+pt = long_to_bytes(decrypt(l2n(guessed_key), flag_ct))
+if b&#39;UMDCTF&#39; in pt:
+    print(&quot;Recovered flag:&quot;, pt)
+    exit()
+
+# 如果前 6 位有错，暴力枚举这 6 位
+new_key_tail = guessed_key[6:]
+for top6 in itertools.product([0,1], repeat=6):
+    trial_key = list(top6) + new_key_tail
+    pt = long_to_bytes(decrypt(l2n(trial_key), flag_ct))
+    if b&#39;UMDCTF&#39; in pt:
+        print(&quot;Flag:&quot;, pt)
+        exit()
+
+# 如果仍有 1~2 位预测错误，尝试翻转 1 或 2 位后再枚举前 6 位
+for errors in (1, 2):
+    for bad in itertools.combinations(range(250), errors):
+        tail = new_key_tail.copy()
+        for idx in bad:
+            tail[idx] ^= 1
+        for top6 in itertools.product([0,1], repeat=6):
+            trial_key = list(top6) + tail
+            pt = long_to_bytes(decrypt(l2n(trial_key), flag_ct))
+            if b&#39;UMDCTF&#39; in pt:
+                print(&quot;Flag:&quot;, pt)
+                exit()
+print(&quot;Failed to recover flag.&quot;)
+</code></pre>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
