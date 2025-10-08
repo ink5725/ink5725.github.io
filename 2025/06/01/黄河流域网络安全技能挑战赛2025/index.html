@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>黄河流域网络安全技能挑战赛2025 | Ink&#39;s blog</title>
+    <meta name="author" content="Ink Lin" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+<script src="/js/lib/math.js"></script>
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Ink's blog" type="application/atom+xml">
+</head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>INK&#39;S BLOG</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;INK&#39;S BLOG</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>黄河流域网络安全技能挑战赛2025</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/1
+        </span>
+        
+        <span class="category">
+            <a href="/categories/CTF/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                CTF
+            </a>
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/CTF/" style="color: #ff7d73">
+                    CTF
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Crypto/" style="color: #ffa2c4">
+                    Crypto
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Writeup/" style="color: #03a9f4">
+                    Writeup
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="Ctypto"><a href="#Ctypto" class="headerlink" title="Ctypto"></a>Ctypto</h2><h3 id="Lattice"><a href="#Lattice" class="headerlink" title="Lattice"></a>Lattice</h3><p>task.py</p>
+<pre><code>from Crypto.Util.number import *
+
+from Crypto.Cipher import AES
+
+import os
+
+from secret import flag
+
+import numpy as np
+
+
+def gen(q, n, N, sigma):
+
+  t = np.random.randint(0, high=q // 2, size=n)
+
+  s = np.concatenate([np.ones(1, dtype=np.int32), t])
+
+  A = np.random.randint(0, high=q // 2, size=(N, n))
+
+  e = np.round(np.random.randn(N) * sigma**2).astype(np.int32) % q
+
+  b = ((np.dot(A, t) + e).reshape(-1, 1)) % q
+
+  P = np.hstack([b, -A])
+
+  return P, s
+
+def enc(P, M, q):
+
+  N = P.shape[0]
+
+  n = len(M)
+
+  r = np.random.randint(0, 2, (n, N))
+
+  Z = np.zeros((n, P.shape[1]), dtype=np.int32)
+
+  Z[:, 0] = 1
+
+  C = np.zeros((n, P.shape[1]), dtype=np.int32)
+
+  for i in range(n):
+
+​    C[i] = (np.dot(P.T, r[i]) + (np.floor(q / 2) * Z[i] * M[i])) % q
+
+  return C
+
+
+
+
+
+q = 127
+
+n = 3
+
+N = int(1.1 * n * np.log(q))
+
+sigma = 1.0
+
+P, s = gen(q, n, N, sigma)
+
+
+def prep(s):
+
+  return np.array([int(b) for char in s for b in f&quot;&#123;ord(char):08b&#125;&quot;], dtype=np.int32)
+
+C = enc(P, prep(hint), q)
+
+P = P.tolist()
+
+C = C.tolist()
+
+print(f&quot;&#123;P=&#125;&quot;)
+
+print(f&quot;&#123;C=&#125;&quot;)
+
+&#39;&#39;&#39;
+
+P=[...]
+
+C=[...]
+
+&#39;&#39;&#39;
+
+key = os.urandom(16)
+
+encrypted = AES.new(key=key, iv=iv, mode=AES.MODE_CBC).encrypt(b&quot;&quot;.join([pad(i.encode(), 16) for i in flag]))
+
+print(leak)
+
+print(key)
+
+print(encrypted)
+
+&#39;&#39;&#39;
+
+-3.257518803980229925210589904230583482986646342139415561576950148286382674434770529248486501793457710730252401258721482142654716015216299244487794967600132597049154513815052213387666360825101667524635777006510550117512116441539852315185793280311905620746025669520152068447372368293640072502196959919309286241
+
+b&#39;\x8fj\x94\x98-\x1fd\xd5\x89\xbe\xa9*Tu\x90\xb7&#39;
+
+b&#39;\x9fT@\xbc\x82\x8esQ\x1e\xd8\x1d\xdb\x9b\xb4\xf8rU\xc8\xa0\xcb\xaf H\xa9.\x04\x1e\xd2\x92\x1f\x0fBja-\x965x\xa8@\xc9x\xf9\xaf\x87\xd1\xa5&#125;\xfc\x1b\xe0#\xc3m\xc9\x8973\x1c\x1f\x13\x8f\xb2a\xae\xa9]\xb9\xc2\xe8\x83A\x80\x13g\xc9a\x1c&lt;\x8a\x9c&amp;\xd9\xbd\x06\xef\xba9\xb0\x03\x9f\x022\xc9\x13\x9a\xffXPG\xc6o\xc0\xeaV7)XG9L\x84N7U\xe3Wn0G\x8e\xd3\x04(\n\x08\xb9\x17\xe6\xf1\xaa\xb7\x8a@$\x16\x13\x06A\x00\xc9Z\xdf\x7fQ\xc9\x08\xb4\xf3P\xfcpe\xe2\xeb\x96\x0e(-\xde\x17\xd1\x01\x1c_\x82\x8b\x9fw\xc8\x86\xfbw\xb5\xf7\xd0\xc8\x1784\xe3?\x00\x0b.)\xb7\xbc\x8e&#123;\xe0\xae\x8d$\x0f\x19\&#39;\xb6\xee@d\x00\xd9\x84\x8c\x0e\xa3,\xc6a\xa3\xba*1\xfd&lt;\xfd\x18\xd6\x9e\x8c4\x8e#\xfd\xbd&amp;0R\xeddE,\xed\xb6\x1e\x00\x11\xa6K\xd3\x1dT\x8c5\x8e\x00\xea\x10\xe9\&#39;u&quot;B#\xa1#\xd8\xe3\xf5j\xbc\x94M\xda\xe3\xcb*\xf0W1\xa0\x80\x1d\xfc\xbfo\x01?(da\r\xb6\x86\xd0\x90\x88Z\xa1`B\x89\x89\x89\xb3v\xa5\xf0\xe0\x0c\x8e\xcc+P\xfc\xfd#\x83\xe9\x93\x96\n\xf2\xa5\xfb\xc3\xc5\xaa\x9e\x89\x93\xb6\xf5\xea\x8c%NY\xc3\x0eR\xfas\xa1\x13\xf2/*\xce\x8b_:_r\xeb\xbe\x0b\x8a\x8c\x97\x7f|m&#125;\xae\xa9I\x95\xcc\xe7\x80\xa5yC4\x1f5\xa4P\xc5\xbf.\xf9V\xe8|\xbb\xc3\xcb\x98&amp;\&#39;JB\x99\x94\xc0\r$\x0b\xbe48u\xeb\xca\xa1\xfbb\xd8_R\x97\x8e\xaeI\xfc\xc2\xb2\xd2#@\xec\x16\xf1\xd7eCQ\x1cO\x13\xca\xb5\xd3\x1a\xb1\xf1_D\x80\x06\xa5\xbe\xbev\xbd\xd6\xbb\x9a\xc9x\x9cf:\xcb&gt;\xa2\xe1\xcad\xde]aw\xa0\xdc\xb2\xb3&#123;+\x85\x8d\x8b\xc5\rT\xcc\xd9X\xd5\x9b\r&lt;\x99m\xb8b6s\xbfp\x0eo~\xe9&amp;\xb2&#123;\xbe\xee\x93\xd2N1\\\x94\x968IWO7\xcb\xb6e\x80\xf7\x9air\xb2~\x17\x1cF\x0f\x82T]RBX\xdex\x13\x85\xfa\xcd-\xce\xdc\xe4\xe5^\x99u\xb5\x01\xd0-\xc3C\xcd\xc4y6\xb7\x9d|L1\xe74\xf7\x8cH\xe9\xa9\xfav\n\xec;\xf2\xa2w\xfb\x13_b\r)z!\xa3\xc8\xa8\xc2\xd2\x10\x00\x11\x11\r\xb2&amp;\xfb\x04&amp;\x84&quot;&gt;x6l[\x06n&gt;\xa0\xbe\x9c`\xa7\x9e\xe0\xfb\x85\x91\xc4,\xcf\xac\xe11@a\xed3@\xfd&#125;\x8e\xfaTp\xcb7\xe7\xbf\xd4\xe0~b\xd9\xe0&lt;\xba\x81\xd4&quot;e\xfc\x939|j#0H\x86\xf8\x0b\x03\xd2\xe8\xf5\xe55\xdc\xc8\x06\\\xb7)\xcc\x9b\&#39;\xf12&#39;
+
+&#39;&#39;&#39;
+</code></pre><p>一大段都是迷惑人的，其实破解就是CBC模式求iv</p>
+<pre><code>encrypted = AES.new(key=key, iv=iv, mode=AES.MODE_CBC).encrypt(b&quot;&quot;.join([pad(i.encode(), 16) for i in flag]))
+</code></pre><p>我们知道初始16字节一定有flag{这个开头，然后和相应的密文异或，就可以得到iv</p>
+<pre><code>from Crypto.Util.number import *
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+
+key=b&#39;\x8fj\x94\x98-\x1fd\xd5\x89\xbe\xa9*Tu\x90\xb7&#39;
+encrypted=b&#39;\x9fT@\xbc\x82\x8esQ\x1e\xd8\x1d\xdb\x9b\xb4\xf8rU\xc8\xa0\xcb\xaf H\xa9.\x04\x1e\xd2\x92\x1f\x0fBja-\x965x\xa8@\xc9x\xf9\xaf\x87\xd1\xa5&#125;\xfc\x1b\xe0#\xc3m\xc9\x8973\x1c\x1f\x13\x8f\xb2a\xae\xa9]\xb9\xc2\xe8\x83A\x80\x13g\xc9a\x1c&lt;\x8a\x9c&amp;\xd9\xbd\x06\xef\xba9\xb0\x03\x9f\x022\xc9\x13\x9a\xffXPG\xc6o\xc0\xeaV7)XG9L\x84N7U\xe3Wn0G\x8e\xd3\x04(\n\x08\xb9\x17\xe6\xf1\xaa\xb7\x8a@$\x16\x13\x06A\x00\xc9Z\xdf\x7fQ\xc9\x08\xb4\xf3P\xfcpe\xe2\xeb\x96\x0e(-\xde\x17\xd1\x01\x1c_\x82\x8b\x9fw\xc8\x86\xfbw\xb5\xf7\xd0\xc8\x1784\xe3?\x00\x0b.)\xb7\xbc\x8e&#123;\xe0\xae\x8d$\x0f\x19\&#39;\xb6\xee@d\x00\xd9\x84\x8c\x0e\xa3,\xc6a\xa3\xba*1\xfd&lt;\xfd\x18\xd6\x9e\x8c4\x8e#\xfd\xbd&amp;0R\xeddE,\xed\xb6\x1e\x00\x11\xa6K\xd3\x1dT\x8c5\x8e\x00\xea\x10\xe9\&#39;u&quot;B#\xa1#\xd8\xe3\xf5j\xbc\x94M\xda\xe3\xcb*\xf0W1\xa0\x80\x1d\xfc\xbfo\x01?(da\r\xb6\x86\xd0\x90\x88Z\xa1`B\x89\x89\x89\xb3v\xa5\xf0\xe0\x0c\x8e\xcc+P\xfc\xfd#\x83\xe9\x93\x96\n\xf2\xa5\xfb\xc3\xc5\xaa\x9e\x89\x93\xb6\xf5\xea\x8c%NY\xc3\x0eR\xfas\xa1\x13\xf2/*\xce\x8b_:_r\xeb\xbe\x0b\x8a\x8c\x97\x7f|m&#125;\xae\xa9I\x95\xcc\xe7\x80\xa5yC4\x1f5\xa4P\xc5\xbf.\xf9V\xe8|\xbb\xc3\xcb\x98&amp;\&#39;JB\x99\x94\xc0\r$\x0b\xbe48u\xeb\xca\xa1\xfbb\xd8_R\x97\x8e\xaeI\xfc\xc2\xb2\xd2#@\xec\x16\xf1\xd7eCQ\x1cO\x13\xca\xb5\xd3\x1a\xb1\xf1_D\x80\x06\xa5\xbe\xbev\xbd\xd6\xbb\x9a\xc9x\x9cf:\xcb&gt;\xa2\xe1\xcad\xde]aw\xa0\xdc\xb2\xb3&#123;+\x85\x8d\x8b\xc5\rT\xcc\xd9X\xd5\x9b\r&lt;\x99m\xb8b6s\xbfp\x0eo~\xe9&amp;\xb2&#123;\xbe\xee\x93\xd2N1\\\x94\x968IWO7\xcb\xb6e\x80\xf7\x9air\xb2~\x17\x1cF\x0f\x82T]RBX\xdex\x13\x85\xfa\xcd-\xce\xdc\xe4\xe5^\x99u\xb5\x01\xd0-\xc3C\xcd\xc4y6\xb7\x9d|L1\xe74\xf7\x8cH\xe9\xa9\xfav\n\xec;\xf2\xa2w\xfb\x13_b\r)z!\xa3\xc8\xa8\xc2\xd2\x10\x00\x11\x11\r\xb2&amp;\xfb\x04&amp;\x84&quot;&gt;x6l[\x06n&gt;\xa0\xbe\x9c`\xa7\x9e\xe0\xfb\x85\x91\xc4,\xcf\xac\xe11@a\xed3@\xfd&#125;\x8e\xfaTp\xcb7\xe7\xbf\xd4\xe0~b\xd9\xe0&lt;\xba\x81\xd4&quot;e\xfc\x939|j#0H\x86\xf8\x0b\x03\xd2\xe8\xf5\xe55\xdc\xc8\x06\\\xb7)\xcc\x9b\&#39;\xf12&#39;
+flag=&quot;flag&#123;&quot;
+c = b&quot;&quot;.join([pad(i.encode(), 16) for i in flag])
+#b&#39;f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f&#39;
+print(c[:16])
+cipher = AES.new(key, AES.MODE_ECB)
+decrypted_c0 = cipher.decrypt(encrypted[:16])
+iv = bytes([a ^ b for a, b in zip(decrypted_c0, c[:16])])
+print(iv)
+#b&#39;?\xaa =t\xbc\xddQ\xac/yq\x13\xc3\x7f\xb9&#39;
+cipher = AES.new(key, AES.MODE_CBC, iv)
+flag = cipher.decrypt(encrypted)
+ans=&quot;&quot;
+for k in flag:
+    ans+=chr(k)
+print(ans)
+#flag&#123;6ef25d1e-bb76-8e53-dbc4-1e56585f9aa9&#125;
+</code></pre><h3 id="Sandwitch"><a href="#Sandwitch" class="headerlink" title="Sandwitch"></a>Sandwitch</h3><p>task.py</p>
+<pre><code>from Crypto.Util.number import *
+import gmpy2
+flag = b&#39;flag&#123;fake_flag&#125;&#39;
+assert len(flag) == 39
+p = getPrime(512)
+q = getPrime(512)
+n = p * q
+e = 0x3
+pad1 = b&#39;easy_problem&#39;
+pad2 = b&#39;How_to_solve_it&#39;
+c = pow(bytes_to_long(pad1 + flag + pad2),e,n)
+print(f&#39;n = &#123;n&#125;&#39;)
+print(f&#39;c = &#123;c&#125;&#39;)
+
+&#39;&#39;&#39;
+n = 130210658110511504736422597261591182174531847806532340762131145212035478695205314931974421838392310731226415266775095601890938846830080329061111533796518633011922277343217149648494987341818402753017296362015915834670450122261511337212801488239810623226740266516836721952886027130703886460578247562781194524199
+c = 58274335440051115211211273605191310114692293785750437685473044454042062899661976407492451518086227780147882738264722645944582899451063113444881286175099872016956825274378613983870549046907444680021237171113596116147511706486372974792692071549068969896395366667516390709069131700584308236332248449116109156503
+&#39;&#39;&#39;
+</code></pre><script type="math/tex; mode=display">
+c\equiv (256^{54}pad1+256^{15}flag+pad2)\ mod\ n</script><p>用copper打</p>
+<pre><code>from Crypto.Util.number import *
+e = 3
+n = 130210658110511504736422597261591182174531847806532340762131145212035478695205314931974421838392310731226415266775095601890938846830080329061111533796518633011922277343217149648494987341818402753017296362015915834670450122261511337212801488239810623226740266516836721952886027130703886460578247562781194524199
+c = 58274335440051115211211273605191310114692293785750437685473044454042062899661976407492451518086227780147882738264722645944582899451063113444881286175099872016956825274378613983870549046907444680021237171113596116147511706486372974792692071549068969896395366667516390709069131700584308236332248449116109156503
+
+pad1 = b&#39;easy_problem&#39;
+pad2 = b&#39;How_to_solve_it&#39;
+p1=bytes_to_long(pad1)
+p2=bytes_to_long(pad2)
+PR.&lt;x&gt; = PolynomialRing(Zmod(n))
+f=(p1*256**54+x*256**15+p2)^e-c
+f=f.monic()
+ans=f.small_roots(X=256^39,beta=1,epsilon=0.04)
+if(ans):
+    print(long_to_bytes(int(ans[0])))
+</code></pre><h3 id="因式分解"><a href="#因式分解" class="headerlink" title="因式分解"></a>因式分解</h3><p>tellasecret.py</p>
+<pre><code>import string
+from secret import hint
+from secret import encrypt
+import random
+dicts = string.ascii_lowercase +&quot;&#123;=&#125;&quot;
+key = (&#39;&#39;.join([random.choice(dicts) for i in range(4)])) * 8
+assert(len(hint) == 32)
+assert(len(key) == 32)
+
+cipher = encrypt(hint, key)    #Vigenere
+print(cipher)
+
+# cp=wmaunapgimjfpopeblvup=aywqygb
+</code></pre><p>因式分解.py</p>
+<pre><code>from Crypto.Util.number import *
+from gmpy2 import*
+from secret import flag,a,b,c
+
+m = bytes_to_long(flag)
+p = getPrime(256)
+q = getPrime(256)
+n = p * q
+e = 65537
+_q = int(bin(q)[2:][::-1] , 2)
+c = pow(m,e,n)
+
+print(&#39;n =&#39;,n)
+print(&#39;c =&#39;,c)
+
+&#39;&#39;&#39;
+n = 7688109450918412752403544831281002390909833419780604228031807748258766149305710928557842935597759373483911172486806200079137977020089610947423466744079981
+c = 6470273779347221033316093386019083111753019159457126878637258794718443144439812725263309232245307744208957171971247518708231996986359926490571921925899978
+&#39;&#39;&#39;
+
+assert a**3+b**3+c**3 == 3*a*b*c
+gift = secert**3 - 9*secert + 8
+print(gift)
+
+assert 3*(p ^ _q) == a + b + c
+
+#16174454302590604301534105361719250538317088773024913985896374029052621214070408075926265229111851489902642328975085914458074453963086159246933939207642987161923181946601656883349077418380372857072224674380642689142603970810010050
+</code></pre><p>应该是从tellasecret中获得secret</p>
+<p>给了我们提示是维吉尼亚，并且key长度是32位，而且key是以4字节为一组的</p>
+<p>但是我们不知道相应的明文，于是我们结合文件名脑洞一下，猜secret在里面</p>
+<p>让AI写一个脚本</p>
+<pre><code>import string
+
+# 已知字母表：26 个小写字母 + &#39;&#123;&#39; + &#39;=&#39; + &#39;&#125;&#39;
+dicts = string.ascii_lowercase + &quot;&#123;=&#125;&quot;
+
+# 给定的密文
+cipher_target = &quot;cp=wmaunapgimjfpopeblvup=aywqygb&quot;
+
+def vigenere_decrypt(ct: str, full_key: str) -&gt; str:
+    &quot;&quot;&quot;
+    对给定的 ciphertext ct 用完整的 full_key 做 Vigenère 解密，
+    字母表使用 dicts。如果字符不在 dicts 中，则原样保留。
+    &quot;&quot;&quot;
+    pt_chars = []
+    m = len(dicts)
+    for i, c in enumerate(ct):
+        if c not in dicts:
+            # 不在字母表中的字符直接保留（例如标点、数字等）
+            pt_chars.append(c)
+        else:
+            k = full_key[i]
+            # plaintext_index = (cipher_index - key_index) mod m
+            pi = (dicts.index(c) - dicts.index(k)) % m
+            pt_chars.append(dicts[pi])
+    return &quot;&quot;.join(pt_chars)
+
+# 开始枚举所有 4 字符子密钥
+for a in dicts:
+    for b in dicts:
+        for c in dicts:
+            for d in dicts:
+                key4 = a + b + c + d
+                full_key = key4 * 8  # 重复 8 次，得 32 字符完整密钥
+
+                # 用 full_key 解密密文
+                candidate_pt = vigenere_decrypt(cipher_target, full_key)
+
+                # 如果明文里包含 &quot;secret&quot;，就认为找到正确密钥
+                if &quot;secret&quot; in candidate_pt:
+                    print(f&quot;[+] 找到子密钥（4 字符）：&#123;key4&#125;&quot;)
+                    print(f&quot;[+] 完整密钥（32 字符）：&#123;full_key&#125;&quot;)
+                    print(f&quot;[+] 对应明文示例：&#123;candidate_pt&#125;&quot;)
+                    exit()
+
+print(&quot;[-] 未找到包含 &#39;secret&#39; 的明文对应的密钥。&quot;)
+‘’‘
+[+] 找到子密钥（4 字符）：mlql
+[+] 完整密钥（32 字符）：mlqlmlqlmlqlmlqlmlqlmlqlmlqlmlql
+[+] 对应明文示例：tellasecret&#123;a=secert&#125;keepsilentt
+’‘’
+</code></pre><p>告诉我们a=secret</p>
+<p>现在我们对式子进行因式分解</p>
+<script type="math/tex; mode=display">
+(a^3+b^3+c^3)-3abc=(a+b+c)(a^2+b^2+c^2-ab-ac-bc)=0</script><p>所以第二个括号等于0</p>
+<p>再因式分解一下</p>
+<script type="math/tex; mode=display">
+(a-b)^2+(b-c)^2+(c-a)^2=0</script><p>所以a=b=c</p>
+<p>看到p^q一眼鉴定为剪枝</p>
+<p>先用AI把secret求出来</p>
+<pre><code># 在 SageMath 环境（比如 SageCell、Notebook 或者 sage -c）中运行以下代码
+
+# 1. 声明符号变量
+var(&#39;secert&#39;)
+
+# 2. 给定 gift 的整数值；在 Sage 里，只要写成 Python 整数就会被自动当作任意精度整数处理
+gift_val = 16174454302590604301534105361719250538317088773024913985896374029052621214070408075926265229111851489902642328975085914458074453963086159246933939207642987161923181946601656883349077418380372857072224674380642689142603970810010050
+
+
+# 3. 构造多项式 P(secert) = secert^3 - 9*secert + 8 - gift_val
+P = secert^3 - 9*secert + 8 - gift_val
+
+# 4. 用 .roots(ring=ZZ) 找出所有在整数域 ZZ 上的根
+#    .roots(ZZ) 会返回一个列表，格式是 [(root1, multiplicity1), (root2, multiplicity2), …]
+int_roots = P.roots(ring=ZZ)
+
+# 5. 输出结果
+print(&quot;整数根及其重数：&quot;, int_roots)
+#25289672915296952421286820568694528489788342353673740247988495109991492893326
+</code></pre><p>然后采用一个剪枝</p>
+<pre><code>from Crypto.Util.number import *
+import sys
+sys.setrecursionlimit(1500)
+
+pxorq = 25289672915296952421286820568694528489788342353673740247988495109991492893326
+n = 7688109450918412752403544831281002390909833419780604228031807748258766149305710928557842935597759373483911172486806200079137977020089610947423466744079981
+c = 6470273779347221033316093386019083111753019159457126878637258794718443144439812725263309232245307744208957171971247518708231996986359926490571921925899978
+e = 65537
+pxorq = str(bin(pxorq)[2:]).zfill(256)
+
+def find(ph,qh,pl,ql):
+    l = len(ph)
+    tmp0 = ph + (256-2*l)*&quot;0&quot; + pl
+    tmp1 = ph + (256-2*l)*&quot;1&quot; + pl
+    tmq0 = qh + (256-2*l)*&quot;0&quot; + ql
+    tmq1 = qh + (256-2*l)*&quot;1&quot; + ql
+    if(int(tmp0,2)*int(tmq0,2) &gt; n):
+        return 
+    if(int(tmp1,2)*int(tmq1,2) &lt; n):
+        return
+    if(int(pl,2)*int(ql,2) % (2**(l-1)) != n % (2**(l-1))):
+        return
+
+    if(l == 128):
+        pp0 = int(tmp0,2)
+        if(n % pp0 == 0):
+            pf = pp0
+            qf = n//pp0
+            phi = (pf-1)*(qf-1)
+            d = inverse(e,phi)
+            m1 = pow(c,d,n)
+            print(long_to_bytes(m1))
+            exit()
+
+    else:
+        if(pxorq[l] == &quot;1&quot; and pxorq[255-l] == &quot;1&quot;):
+            find(ph+&quot;1&quot;,qh+&quot;0&quot;,&quot;1&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;0&quot;,&quot;1&quot;+pl,&quot;1&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;1&quot;,&quot;0&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;1&quot;,&quot;0&quot;+pl,&quot;1&quot;+ql)
+        elif(pxorq[l] == &quot;1&quot; and pxorq[255-l] == &quot;0&quot;):
+            find(ph+&quot;1&quot;,qh+&quot;0&quot;,&quot;0&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;0&quot;,&quot;0&quot;+pl,&quot;1&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;1&quot;,&quot;1&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;1&quot;,&quot;1&quot;+pl,&quot;1&quot;+ql)
+        elif(pxorq[l] == &quot;0&quot; and pxorq[255-l] == &quot;1&quot;):
+            find(ph+&quot;0&quot;,qh+&quot;0&quot;,&quot;1&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;1&quot;,&quot;0&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;0&quot;,&quot;1&quot;+pl,&quot;1&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;1&quot;,&quot;0&quot;+pl,&quot;1&quot;+ql)
+        elif(pxorq[l] == &quot;0&quot; and pxorq[255-l] == &quot;0&quot;):
+            find(ph+&quot;0&quot;,qh+&quot;0&quot;,&quot;0&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;0&quot;,&quot;0&quot;+pl,&quot;1&quot;+ql)
+            find(ph+&quot;0&quot;,qh+&quot;1&quot;,&quot;1&quot;+pl,&quot;0&quot;+ql)
+            find(ph+&quot;1&quot;,qh+&quot;1&quot;,&quot;1&quot;+pl,&quot;1&quot;+ql)
+
+find(&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;)
+#b&#39;flag&#123;80a59062-9bbf-99a3-6af0-a24e94032163&#125;&#39;
+</code></pre><h3 id="Happy"><a href="#Happy" class="headerlink" title="Happy"></a>Happy</h3><p>task.py</p>
+<pre><code>#!/usr/bin/env python
+# Simplify the problem by happy4321
+import os, utils
+from secret import flag
+assert flag.startswith(b&#39;flag&#123;&#39;) and flag.endswith(b&#39;&#125;&#39;)
+
+seed = int(os.urandom(16).hex(), 16)
+gen = utils.Gen(seed)
+msg = b&#39;Happy4321: &#39; + flag
+enc = bytes(m ^ next(gen) for m in msg).hex()
+print(enc)
+# cd1dd7c7a9cfe3c0067ff64694e64c38aa759c81d1c8f48cf6f7ee1df2d1e58584da52644ea56bd24dadca6bd5a6899a92b118f57de2529670264d48
+</code></pre><p>utils.py</p>
+<pre><code>class Gen:
+    def __init__(self, state):
+        self.nbits = 128
+        self.state = state &amp; ((1 &lt;&lt; self.nbits) - 1)
+        self.mask = 109908700282042807039366676242995409413
+
+
+    def func0(self, steps=1):
+        for _ in range(steps):
+            res = self.state &amp; self.mask
+            bit = sum([(res &gt;&gt; i) &amp; 1 for i in range(self.nbits)]) &amp; 1
+            self.state = ((self.state &lt;&lt; 1) ^ bit) &amp; ((1 &lt;&lt; self.nbits) - 1)
+        return bit
+
+    def __next__(self):
+        out = 0
+        for _ in range(8):
+            bit = self.func0(2023)
+            out = (out &lt;&lt; 1) ^ bit
+        return out
+</code></pre><p><a target="_blank" rel="noopener" href="https://sma11pi9.cn/article/example-1#e3807580fd5e4d1e843616629da5bb72">星盟crypto特训营week2题解 | Sma11pi9</a></p>
+<p>原题，已经写的很清楚了</p>
+<pre><code># SageMath
+class Gen:
+    def __init__(self, state):
+        self.nbits = 128
+        self.state = state &amp; ((1 &lt;&lt; self.nbits) - 1)
+        self.mask = 109908700282042807039366676242995409413
+
+
+    def func0(self, steps=1):
+        for _ in range(steps):
+            res = self.state &amp; self.mask
+            bit = sum([(res &gt;&gt; i) &amp; 1 for i in range(self.nbits)]) &amp; 1
+            self.state = ((self.state &lt;&lt; 1) ^ bit) &amp; ((1 &lt;&lt; self.nbits) - 1)
+        return bit
+
+    def __next__(self):
+        out = 0
+        for _ in range(8):
+            bit = self.func0(2023)
+            out = (out &lt;&lt; 1) ^ bit
+        return out
+
+n = 128
+msg = b&#39;Happy4321: flag&#123;&#39;
+mask = 109908700282042807039366676242995409413
+
+enc = &#39;cd1dd7c7a9cfe3c0067ff64694e64c38aa759c81d1c8f48cf6f7ee1df2d1e58584da52644ea56bd24dadca6bd5a6899a92b118f57de2529670264d48&#39;
+enc = bytes.fromhex(enc)
+Round = 2023
+
+# 构建M矩阵
+M = matrix(GF(2), n, n)
+for i in range(n):
+    if i+1&lt;n:
+        M[i+1, i] = 1
+    if mask&amp;(1&lt;&lt;(n-i-1)):
+        M[i, -1] = 1
+    else:
+        M[i, -1] = 0
+
+# seed * M2 = output_s
+M2 = matrix(GF(2), n, n)
+
+for i in range(n):
+    tmp = M^(Round*(i+1))
+    for y in range(n):
+        M2[y, i] = tmp[y, -1]
+
+# 构建output_s矩阵
+output_s = []
+
+for i in range(len(msg)):
+    tmp = msg[i]^^enc[i]
+    for x in range(8):
+        if tmp&amp;(1&lt;&lt;(8-x-1)):
+            output_s.append(1)
+        else:
+            output_s.append(0)
+
+output_s = vector(GF(2), output_s)
+
+S = M2.solve_left(output_s)
+seed = int(&#39;&#39;.join([str(each) for each in S]), 2)
+print(seed)
+# 16527323701539137374460041583215952894
+
+import os
+
+enc = &#39;cd1dd7c7a9cfe3c0067ff64694e64c38aa759c81d1c8f48cf6f7ee1df2d1e58584da52644ea56bd24dadca6bd5a6899a92b118f57de2529670264d48&#39;
+enc = bytes.fromhex(enc)
+seed = 16527323701539137374460041583215952894
+
+gen = Gen(seed)
+flag = bytes(c ^ next(gen) for c in enc)
+print(flag)  
+# flag&#123;The_matrix_is_as_charming_as_the_starry_sky&#125;
+</code></pre>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2023 - 2025 Ink&#39;s blog
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Ink Lin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
